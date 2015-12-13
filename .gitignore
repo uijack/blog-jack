@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+.deploy*/
+
+# user
+scaffolds
+.deploy_git
+/themes/*
+!themes/jacman/
+!source/*
+!.gitignore
+!package.json
