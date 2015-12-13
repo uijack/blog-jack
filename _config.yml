@@ -43,6 +43,17 @@ highlight:
   auto_detect: true
   tab_replace:
 
+clean_css:
+  exclude:
+    - "*.min.css"
+
+uglify:
+  mangle: true
+  output:
+  compress:
+  exclude: 
+    - "*.min.js"
+
 # Category & Tag
 default_category: uncategorized
 category_map:
