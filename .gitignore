@@ -9,8 +9,4 @@ public/
 # user
 scaffolds
 .deploy_git
-/themes/*
-!themes/jacman/
-!source/*
-!.gitignore
-!package.json
+
