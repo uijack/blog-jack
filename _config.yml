@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: "欢迎来到 Jack Chan 个人网站"
-subtitle: You love Jack Chan
+title: "千千哥"
+subtitle: "记录，成为更好的自己"
 description: "这是我的个人网站，分享技术，持续更新中......"
 author: Jack Chan
 language: zh-CN
@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://blog.uijack.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
