@@ -81,4 +81,4 @@ theme: jacman
 deploy:
   type: git
   repo:
-    github: git@github.com:uijack/ijack.git,gh-pages
+    github: git@github.com:uijack/blog-jack.git,gh-pages
