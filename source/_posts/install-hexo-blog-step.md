@@ -3,7 +3,7 @@ date: 2015-12-13 13:07:57
 description: "在Mac下怎么用Hexo 搭建属于自己的博客教程分享"
 tags:
 - Hexo
-- "有坑"
+- "Keng"
 ---
 
 ## 引言
