@@ -1,0 +1,528 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结一 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计》总结, 包括js简洁、版本、引入等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结一">
+<meta property="og:url" content="http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1-md/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计》总结, 包括js简洁、版本、引入等">
+<meta property="og:updated_time" content="2015-12-21T13:56:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结一">
+<meta name="twitter:description" content="读《JavaScript高级程序设计》总结, 包括js简洁、版本、引入等">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/21/js-high-level-programming-language-1-md/" title="读《JavaScript高级程序设计》总结一" itemprop="url">读《JavaScript高级程序设计》总结一</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-21T11:51:59.000Z" itemprop="datePublished"> 发表于 2015-12-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">第1章 JavaScript简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u7B80_u53F2"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u5B9E_u73B0"><span class="toc-number">1.2.</span> <span class="toc-text">JavaScript实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><span class="toc-number">2.</span> <span class="toc-text">第2章 在 HTML 中 使用 JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script_u5143_u7D20"><span class="toc-number">2.1.</span> <span class="toc-text">script元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">标签加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">2.3.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5143_u7D20"><span class="toc-number">2.4.</span> <span class="toc-text"> 元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">3.</span> <span class="toc-text">参考文档</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><a href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB" class="headerlink" title="第1章 JavaScript简介"></a>第1章 JavaScript简介</h2><p><code>JavaScript</code>诞生于1995年，</p>
+<p>在电话拨号上网年代（js问世之前），必须把表单数据发送到服务器才能确定用户是否填写某个必填域，是否输入无效值。数据交换慢。</p>
+<p><code>JS</code>出现的目的：处理由服务器语言（如Perl）负责的一些输入验证操作。后来具备与浏览器窗口及其内容交互能力。</p>
+<p><code>当前局势</code>：已成为一门功能全面的编程语言，能够处理复杂的计算和交互，拥有了闭包、匿名（lamda）函数、元编程等特性。总之一句话，<code>JavaScript</code>是一门简单而又复杂的语言。</p>
+<h3 id="JavaScript_u7B80_u53F2"><a href="#JavaScript_u7B80_u53F2" class="headerlink" title="JavaScript简史"></a>JavaScript简史</h3><p>由于Web日益流行，网速为28.8kbit/s的猫（调制解调器）上网外加网页大小和复杂性不断增加，和服务器交互频繁。就职于Netscape的布兰登.艾奇（Brendan Eich）计划1995年2月发布了名为LiveScript的脚本语言。为了搭上媒体热炒<code>JaVA</code>的顺风车，临时改名为<code>JavaScript</code>.</p>
+<p>后来微软也推出JScript（名字避开有关授权）3个不同版本的脚本语言，双方竞争激励，差异较大。JavaScript标准化被提上日程。</p>
+<p>1997年，以JavaScript 1.1为蓝本的建议被提交给<code>欧洲计算机制造商协会（ECMA，European Computer Manufacturers Association）</code>。该协会指定39号技术委员会（TC39，Technical Committee #39）负责“标准化、跨平台、供应商中立的脚本语言的语法和语义”。TC39由来自NetScape、Sun、微软等的程序员组成。经过数月完成<code>ECMA-262(定义一种名为ECMAScript[发音“ek-ma-script”])</code>的新脚本语言的标准。</p>
+<p>第二年，ISO/IEC(国际标准化组织和国际电工委员会)也采用ECMAScript作为标准（ISO/IEC-16262）。自此，浏览器开发商就开始致力于将ECMASCript作为各自JavsaScript实现的基础。</p>
+<h3 id="JavaScript_u5B9E_u73B0"><a href="#JavaScript_u5B9E_u73B0" class="headerlink" title="JavaScript实现"></a>JavaScript实现</h3><p>虽然JavaScript 和 ECMAScript通常表达相同含义。但JavaScript的含义比ECMA-262中规定的多。一个完整的JavaScript实现有三部分组成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">核心（ECMAScript）</span><br><span class="line">文档对象模型（DOM）</span><br><span class="line">浏览器对象模型（BOM）</span><br></pre></td></tr></table></figure>
+<p><code>ECMAScript</code>：ECMA-262与Web浏览器没有依赖关系，Web浏览器只是ECMAScript实现可能的<code>宿主环境之一</code>，Node（服务端JavaScript平台）和 Adobe Flash也是其宿主环境。到2008年五大主流浏览器（IE、Firefox、Safari、Chrome、Opera）全部做到了与ECMA-262兼容。</p>
+<p><code>DOM</code>：Document Object Model。由负责制定通信标准的W3C（World Wide Web Consortium 万维网联盟）规划。DOM1主要是映射文档结构。DOM2增加DOM视图、DOM事件、DOM样式、DOM遍历和范围。DOM3对DOM核心进行扩展，开始支持XML 1.0规范。</p>
+<p><code>BOM</code>：Brower Object Model。包括：弹出新浏览器窗口、移动缩放关闭浏览器、提供浏览器详细信息（Navigator）对象、浏览器加载页面详细信息（location）对象、用户显示器分分辨率（screen）对象、Cookie、XMLHttpRequest和IE的ActiveXObject对象。</p>
+<h2 id="u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><a href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript" class="headerlink" title="第2章 在 HTML 中 使用 JavaScript"></a>第2章 在 HTML 中 使用 JavaScript</h2><h3 id="script_u5143_u7D20"><a href="#script_u5143_u7D20" class="headerlink" title="script元素"></a>script元素</h3><p>HTML4.01 为 script 定义六个属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#12289;async&#65306;&#21487;&#36873;&#12290;&#34920;&#31034;&#31435;&#21363;&#19979;&#36733;&#65292;&#19981;&#22952;&#30861;&#39029;&#38754;&#20013;&#30340;&#20854;&#20182;&#25805;&#20316;&#12290;&#22914;&#32487;&#32493;&#21152;&#36733;&#33050;&#26412;&#21644;&#19979;&#36733;&#36164;&#28304;&#12290;&#21482;&#23545;&#22806;&#37096;&#26377;&#25928;&#10;&#10;2&#12289;charset&#65306;&#21487;&#36873;&#12290;&#24456;&#23569;&#29992;&#10;&#10;3&#12289;defer&#65306;&#21487;&#36873;&#12290;&#33050;&#26412;&#25512;&#36831;&#21040;&#25991;&#26723;&#23436;&#20840;&#34987;&#35299;&#26512;&#21644;&#26174;&#31034;&#20043;&#21518;&#20877;&#25191;&#34892;&#12290;&#21482;&#23545;&#22806;&#37096;&#25991;&#20214;&#26377;&#25928;&#10;&#10;4&#12289;language&#65306;&#24050;&#24223;&#24323;&#10;&#10;5&#12289;src&#65306;&#21487;&#36873;&#12290;&#21253;&#21547;&#35201;&#25191;&#34892;&#20195;&#30721;&#30340;&#22806;&#37096;&#25991;&#20214;&#10;&#10;6&#12289;type&#65306; &#21487;&#36873;&#65292;&#19968;&#33324;&#20026;text/javascript.&#26381;&#21153;&#22120;&#20256;&#36865;JavaScript&#25991;&#20214;&#26102;MIME&#31867;&#22411;&#36890;&#24120;&#20026;&#65306;application/x-javascript.&#38750;IE&#21487;&#29992;&#65306;</span><br></pre></td></tr></table></figure>
+<p>注意：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;script type=&#34;text/javascript&#34;&#62;&#10;  function sayScript() &#123;&#10;    alert(&#34;&#60;/script&#62;&#34;);&#10;  &#125;&#10;&#60;/script&#62;</span><br></pre></td></tr></table></figure></p>
+<p>以上会报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;script type=&#34;text/javascript&#34;&#62;&#10;  function sayScript() &#123;&#10;    alert(&#34;&#60;\/script&#62;&#34;);&#10;  &#125;&#10;&#60;/script&#62;</span><br></pre></td></tr></table></figure>
+<p>以上才是正确，在代码中任何地方都不要出现</p>
+<h3 id="u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><a href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F" class="headerlink" title="标签加载方式"></a>标签加载方式</h3><p>将js放在head标签中的坏处：一位置必须等到全部js代码被下载解析和执行后才开始呈现页面内容及遇到<body>标签。会导致页面出现明显延迟。窗口一片空白。</body></p>
+<p>正确做法：放在<body>元素页面的内容后面。</body></p>
+<p>如果想要放在head又希望最后加载可用添加<code>defer=“defer”</code>属性。</p>
+<p>而<code>sync</code>并不能保证依照先后顺序执行。</p>
+<p>在XHTML中CData片段是文档的一个特殊区域。为了兼容XHTML的浏览器。<br>应该这样做：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="comment">//&lt;![CDATA[</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sayScript</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"&lt;\/script&gt;"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//]]&gt;</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>保证HTML和XHTML都正常执行。</p>
+<h3 id="u6587_u6863_u6A21_u5F0F"><a href="#u6587_u6863_u6A21_u5F0F" class="headerlink" title="文档模式"></a>文档模式</h3><p>IE5.5 引入 混杂模式（quirks mode，包含非ECMA-262标准特性）和 标准模式（sytandard mode）</p>
+<p><code>标准模式</code>可以通过使用下面任何一种文档类型来开启：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  HTML 4.01 &#20005;&#26684;&#22411; --&#62;&#10;&#60;! DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01//EN&#34; &#34;http://www.w3.org/TR/html4/strict.dtd&#34;&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  XHTML 1.0 &#20005;&#26684;&#22411; --&#62;&#10;&#60;! DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 1.0 Strict//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&#34;&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  HTML 5 --&#62;&#10;&#60;! DOCTYPE html5&#62;</span><br></pre></td></tr></table></figure>
+<p>而对于准标准模式，可以通过渡型（transitional）和框架集型（frameset）文档类型来触发，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  HTML 4.01 &#36807;&#28193;&#22411; --&#62;&#10;&#60;! DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01 Transitional//EN&#34; &#34;http://www.w3.org/TR/html4/loose.dtd&#34;&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  HTML 4.01 &#26694;&#26550;&#38598;&#22411; --&#62;&#10;&#60;! DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01 Frameset//EN&#34; &#34;http://www.w3.org/TR/html4/frameset.dtd&#34;&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  XHTML 1.0 &#36807;&#28193;&#22411; --&#62;&#10;&#60;! DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 1.0 Transitional//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&#34;&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!--  XHTML 1.0 &#26694;&#26550;&#38598;&#22411; --&#62;&#10;&#60;! DOCTYPE html PUBLIC &#34;-//W3C//DTD HTML 1.0 Frameset//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&#34;&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="u5143_u7D20"><a href="#u5143_u7D20" class="headerlink" title="<noscript> 元素"></a><noscript> 元素</noscript></h3><p>一下两种情况：<br>1、浏览器不支持脚本<br>2、浏览器支持，但脚本被禁用</p>
+<p>出现以上一种情况，<noscript>标签的内容才会出现。</noscript></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body&#62;&#10;  &#60;noscript&#62;&#10;    &#60;p&#62;&#26412;&#39029;&#38754;&#38656;&#35201;&#27983;&#35272;&#22120;&#25903;&#25345;&#65288;&#21551;&#29992;&#65289;JavaScript&#12290;&#60;/p&#62;&#10;  &#60;/noscript&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>文章若有纰漏，请大家补充指正，谢谢！<br>如有疑问可留言，我会在第一时间回复。<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/js/">js</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1-md/" data-title="读《JavaScript高级程序设计》总结一 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/12/13/install-hexo-blog-step/"  title="Hexo 搭建 Blog 新手教程">
+ <strong>下一篇：</strong><br/> 
+ <span>Hexo 搭建 Blog 新手教程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/21/js-high-level-programming-language-1-md/" data-title="读《JavaScript高级程序设计》总结一" data-url="http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1-md/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">第1章 JavaScript简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u7B80_u53F2"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u5B9E_u73B0"><span class="toc-number">1.2.</span> <span class="toc-text">JavaScript实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><span class="toc-number">2.</span> <span class="toc-text">第2章 在 HTML 中 使用 JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script_u5143_u7D20"><span class="toc-number">2.1.</span> <span class="toc-text">script元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">标签加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">2.3.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5143_u7D20"><span class="toc-number">2.4.</span> <span class="toc-text"> 元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">3.</span> <span class="toc-text">参考文档</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack Chan <br/>
+			This is my blog</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
