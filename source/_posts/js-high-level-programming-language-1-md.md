@@ -19,7 +19,7 @@ tags:
 
 ### JavaScript简史
 
-由于Web日益流行，网速为28.8kbit/s的猫（调制解调器）上网外加网页大小和复杂性不断增加，和服务器交互频繁。就职于Netscape的布兰登.艾奇（Brendan Eich）计划1995年2月发布了名为LiveScript的脚本语言。为了搭上媒体热炒`JaVA`的顺风车，临时改名为`JavaScript`.
+由于Web日益流行，网速为28.8kbit/s的猫（调制解调器）上网外加网页大小和复杂性不断增加，和服务器交互频繁。就职于Netscape的布兰登.艾奇（Brendan Eich）计划1995年2月发布了名为LiveScript的脚本语言。为了搭上媒体热炒`Java`的顺风车，临时改名为`JavaScript`.
 
 后来微软也推出JScript（名字避开有关授权）3个不同版本的脚本语言，双方竞争激励，差异较大。JavaScript标准化被提上日程。
 
@@ -45,10 +45,10 @@ tags:
 
 ## 第2章 在 HTML 中 使用 JavaScript
 
-###  script元素
+###  script 元素
 
 
-HTML4.01 为 script 定义六个属性：
+HTML4.01 为 `script` 定义六个属性：
 
 ```plain
 1、async：可选。表示立即下载，不妨碍页面中的其他操作。如继续加载脚本和下载资源。只对外部有效
@@ -61,7 +61,8 @@ HTML4.01 为 script 定义六个属性：
 
 5、src：可选。包含要执行代码的外部文件
 
-6、type： 可选，一般为text/javascript.服务器传送JavaScript文件时MIME类型通常为：application/x-javascript.非IE可用：
+6、type： 可选，一般为text/javascript.
+服务器传送JavaScript文件时MIME类型通常为：application/x-javascript.
 ```
 
 注意：
@@ -82,17 +83,15 @@ HTML4.01 为 script 定义六个属性：
   }
 </script>
 ```
-以上才是正确，在代码中任何地方都不要出现</script>
+以上才是正确，在代码中任何地方都不要出现`</script>`
 
 ### 标签加载方式
 
-将js放在head标签中的坏处：一位置必须等到全部js代码被下载解析和执行后才开始呈现页面内容及遇到<body>标签。会导致页面出现明显延迟。窗口一片空白。
+将js放在`head`标签中的坏处：一位置必须等到全部js代码被下载解析和执行后才开始呈现页面内容及遇到`body`标签。会导致页面出现明显延迟。窗口一片空白。
 
-正确做法：放在<body>元素页面的内容后面。
+正确做法：放在`body`元素页面的内容后面。
 
-如果想要放在head又希望最后加载可用添加`defer=“defer”`属性。
-
-而`sync`并不能保证依照先后顺序执行。
+如果想要放在head又希望最后加载可用添加`defer=“defer”`属性。而`sync`并不能保证依照先后顺序执行。
 
 在XHTML中CData片段是文档的一个特殊区域。为了兼容XHTML的浏览器。
 应该这样做：
@@ -157,7 +156,7 @@ IE5.5 引入 混杂模式（quirks mode，包含非ECMA-262标准特性）和 �
 1、浏览器不支持脚本
 2、浏览器支持，但脚本被禁用
 
-出现以上一种情况，<noscript>标签的内容才会出现。
+出现以上一种情况，`noscript`标签的内容才会出现。
 
 ```plain
 <body>
