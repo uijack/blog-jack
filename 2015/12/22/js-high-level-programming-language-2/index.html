@@ -1,0 +1,693 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结二 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结二">
+<meta property="og:url" content="http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
+<meta property="og:updated_time" content="2015-12-22T12:52:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结二">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/22/js-high-level-programming-language-2/" title="读《JavaScript高级程序设计》总结二" itemprop="url">读《JavaScript高级程序设计》总结二</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-22T01:01:09.000Z" itemprop="datePublished"> 发表于 2015-12-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BED_u6CD5"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5173_u952E_u5B57_u548C_u4FDD_u7559_u5B57"><span class="toc-number">2.</span> <span class="toc-text">关键字和保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53D8_u91CF"><span class="toc-number">3.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6570_u636E_u7C7B_u578B"><span class="toc-number">4.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof__u64CD_u4F5C_u7B26"><span class="toc-number">4.1.</span> <span class="toc-text">typeof 操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Undefined__u7C7B_u578B"><span class="toc-number">4.2.</span> <span class="toc-text">Undefined 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null__u7C7B_u578B"><span class="toc-number">4.3.</span> <span class="toc-text">Null 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean__u7C7B_u578B"><span class="toc-number">4.4.</span> <span class="toc-text">Boolean 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number__u7C7B_u578B"><span class="toc-number">4.5.</span> <span class="toc-text">Number 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String__u7C7B_u578B"><span class="toc-number">4.6.</span> <span class="toc-text">String 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object__u7C7B_u578B"><span class="toc-number">4.7.</span> <span class="toc-text">Object 类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u64CD_u4F5C_u7B26"><span class="toc-number">5.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E00_u5143_u64CD_u4F5C"><span class="toc-number">5.1.</span> <span class="toc-text">一元操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F4D_u64CD_u4F5C"><span class="toc-number">5.2.</span> <span class="toc-text">位操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E03_u5C14_u503C_u64CD_u4F5C"><span class="toc-number">5.3.</span> <span class="toc-text">布尔值操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E58_u6027_u64CD_u4F5C"><span class="toc-number">5.4.</span> <span class="toc-text">乘性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u52A0_u6027_u64CD_u4F5C"><span class="toc-number">5.5.</span> <span class="toc-text">加性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5173_u7CFB_u64CD_u4F5C"><span class="toc-number">5.6.</span> <span class="toc-text">关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76F8_u7B49_u64CD_u4F5C"><span class="toc-number">5.7.</span> <span class="toc-text">相等操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6761_u4EF6_u64CD_u4F5C"><span class="toc-number">5.8.</span> <span class="toc-text">条件操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8D4B_u503C_u64CD_u4F5C"><span class="toc-number">5.9.</span> <span class="toc-text">赋值操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9017_u53F7_u64CD_u4F5C"><span class="toc-number">5.10.</span> <span class="toc-text">逗号操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BED_u53E5"><span class="toc-number">6.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if__u8BED_u53E5"><span class="toc-number">6.1.</span> <span class="toc-text">if 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while__u8BED_u53E5"><span class="toc-number">6.2.</span> <span class="toc-text">do-while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while__u8BED_u53E5"><span class="toc-number">6.3.</span> <span class="toc-text">while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for__u8BED_u53E5"><span class="toc-number">6.4.</span> <span class="toc-text">for 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for_in__u8BED_u53E5"><span class="toc-number">6.5.</span> <span class="toc-text">for in 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label__u8BED_u53E5"><span class="toc-number">6.6.</span> <span class="toc-text">label 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break__u548C_continue__u8BED_u53E5"><span class="toc-number">6.7.</span> <span class="toc-text">break 和 continue 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with__u8BED_u53E5"><span class="toc-number">6.8.</span> <span class="toc-text">with 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch__u8BED_u53E5"><span class="toc-number">6.9.</span> <span class="toc-text">switch 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51FD_u6570"><span class="toc-number">7.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7406_u89E3_u53C2_u6570"><span class="toc-number">7.1.</span> <span class="toc-text">理解参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CA1_u6709_u91CD_u8F7D"><span class="toc-number">7.2.</span> <span class="toc-text">没有重载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">8.</span> <span class="toc-text">参考文档</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u8BED_u6CD5"><a href="#u8BED_u6CD5" class="headerlink" title="语法"></a>语法</h2><ul>
+<li><p>区分大小写</p>
+<blockquote>
+<p><code>ECMAScript</code> 中的一切（变量、函数名和操作符）都区分大小写。</p>
+</blockquote>
+</li>
+<li><p>标示符</p>
+<blockquote>
+<p>所谓<code>标识符</code>，就是指<code>变量</code>，<code>函数</code>，<code>属性</code>的名字，或者函数的参数。<br>命名规则：<br>1、第一个字符必须是一个字母、下划线（_）或者一个美元符（$）;<br>2、其他字符可以是字母、数字、下划线或美元符。<br>3、命名推荐采用<code>驼峰式</code>规则。</p>
+</blockquote>
+</li>
+<li><p>注释</p>
+<blockquote>
+<p>单行注释 和 多行（块级）注释</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> *  这是一个多行</span><br><span class="line"> *  （块级）注释</span><br><span class="line"> *  企业级提高注释可读性</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>严格模式<blockquote>
+<p>ECMAScript 5 引入了严格模式，即在js文件首行或者函数内部第一行添加：</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br></pre></td></tr></table></figure>
+<p>这是一个编译指示（Pragram）,告诉支持的JS引擎切换到严格模式，<br>支持的浏览器版本：IE10+, Firefox4+, Safari5.1+,  Opera 12+ 和Chrome。</p>
+<ul>
+<li>语句<blockquote>
+<p>推荐语句以一个分号<code>;</code>结尾, 可以 <code>减少代码压缩错误</code> 和 <code>降低提高解析器推测插入分号时间</code>，<br>控制语句哪怕只有一行也要添加{}，降低修改代码出错率。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="u5173_u952E_u5B57_u548C_u4FDD_u7559_u5B57"><a href="#u5173_u952E_u5B57_u548C_u4FDD_u7559_u5B57" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h2><blockquote>
+<p>此处不做展示</p>
+</blockquote>
+<h2 id="u53D8_u91CF"><a href="#u53D8_u91CF" class="headerlink" title="变量"></a>变量</h2><p>ECMAScript 变量是<code>松散类型</code>，可以用来保存任何类型数据，仅仅是一个<code>占位符</code>而已，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> essage;  <span class="comment">//该值为 undefined</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>省略var操作符声明的变量直接赋值，该变量则会变成<code>全局变量</code></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> essage;  <span class="comment">//该值为 undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  message = <span class="string">'hi'</span>;  <span class="comment">// 全局变量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line">alert(message);  <span class="comment">// 'hi'</span></span><br></pre></td></tr></table></figure>
+<p>调用过一次test()函数后，这个变量就有了定义，就可以在函数外访问到。</p>
+<h2 id="u6570_u636E_u7C7B_u578B"><a href="#u6570_u636E_u7C7B_u578B" class="headerlink" title="数据类型"></a>数据类型</h2><p>ECMAScript 中的五中简单数据类型（基本数据类型）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Undefined&#10;Null&#10;Boolean&#10;Number&#10;String</span><br></pre></td></tr></table></figure></p>
+<p>还有一种复杂数据类型<code>Object</code>,本质是由一组<code>无序的名值对</code>组成。</p>
+<h3 id="typeof__u64CD_u4F5C_u7B26"><a href="#typeof__u64CD_u4F5C_u7B26" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h3><p>用来检测给定变量的数据类型</p>
+<ul>
+<li>“undefined”  –  值未定义</li>
+<li>“boolean”    –  值是布尔型</li>
+<li>“string”     –  值是字符串</li>
+<li>“number”     –  值是数值</li>
+<li>“object”     –  值是对象或者<code>null</code></li>
+<li>“funciton”     –  值是函数</li>
+</ul>
+<blockquote>
+<p>Test</p>
+</blockquote>
+<p>var ms = ‘message’;<br>alert(typeof ms) // ‘string’<br>alert(typeof(ms)) // ‘string’<br>alert(typeof 95) // ‘number’</p>
+<h3 id="Undefined__u7C7B_u578B"><a href="#Undefined__u7C7B_u578B" class="headerlink" title="Undefined 类型"></a>Undefined 类型</h3><blockquote>
+<p>只有唯一值 <code>undefined</code> ECMA-262第三版才引入，是为了正确区<code>空对象指针(null)</code>与<code>未初始化变量</code>。<br>不用显示声明 var ms = undefined; 默认就是<code>undefined</code>.</p>
+</blockquote>
+<p>使用var 声明变量但对其初始化赋值，这个变量就是<code>undefined</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ms;</span><br><span class="line">alert(ms == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>注意：包含undefined值的变量与还未定义的变量不一样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ms;  <span class="comment">// </span></span><br><span class="line"><span class="comment">// age 未声明</span></span><br><span class="line"></span><br><span class="line">alert(ms)   <span class="comment">// 'undefined'</span></span><br><span class="line">alert(age)  <span class="comment">// 产生错误</span></span><br></pre></td></tr></table></figure>
+<p>令人困惑是的是，使用<code>typeof</code>操作符的时候，都会返回<code>undefined</code>.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ms;  <span class="comment">// </span></span><br><span class="line"><span class="comment">// age 未声明</span></span><br><span class="line"></span><br><span class="line">alert(<span class="keyword">typeof</span> ms)   <span class="comment">// 'undefined'</span></span><br><span class="line">alert(<span class="keyword">typeof</span> age)  <span class="comment">// 'undefined'</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>这个结果逻辑之上是合理的，因为实际上无论对哪一种变量也不可能执行真正的操作。</li>
+</ul>
+<h3 id="Null__u7C7B_u578B"><a href="#Null__u7C7B_u578B" class="headerlink" title="Null 类型"></a>Null 类型</h3><blockquote>
+<p>只有唯一值 <code>null</code>，表示空对象指针</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> car = <span class="literal">null</span>;</span><br><span class="line">alert(<span class="keyword">typeof</span> car); <span class="comment">// 'object'</span></span><br></pre></td></tr></table></figure>
+<p>如果定义变量准备用来保存对象，推荐初始化为null,而不是其他值。<br>只要直接检查null值就可以知道变量是否已经保存对象的引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> car = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span> (car != <span class="literal">null</span>) &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实际上，<code>undefined值是派生自null值的</code>，So,ECMA-262 规定对他们相等性测试要返回 <code>true</code>:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="literal">null</span> == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Boolean__u7C7B_u578B"><a href="#Boolean__u7C7B_u578B" class="headerlink" title="Boolean 类型"></a>Boolean 类型</h3><ul>
+<li>值只有<code>true</code> 和 <code>false</code>;</li>
+</ul>
+<p>各种数据类型转化为boolean规则:</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>转化为 true 值</th>
+<th>转化为 false 值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boolean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>String</td>
+<td>任何非空字</td>
+<td>“”(空字符串)</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>任何非零数字</td>
+<td>0 和 NaN</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任何对象</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>n/a</td>
+<td>undefined</td>
+</tr>
+</tbody>
+</table>
+<p>注：n/a (N/A) not application 缩写， 意思是”不适用”。</p>
+<h3 id="Number__u7C7B_u578B"><a href="#Number__u7C7B_u578B" class="headerlink" title="Number 类型"></a>Number 类型</h3><ul>
+<li>采用IEEE754 格式表示整数和浮点数，<blockquote>
+<p>8进制第一位必须是零(0), 数字序列为0~7<br>字面值中的数值超过范围，那么前导零将被忽略，后面数值当做10进制解析。<br>八进制在严格模式下是无效的，会导致支持的JS引擎抛出错误。<br>16进制前两位必须是 0x, 数字序列为0~9 及A ~ F，字母支持大小写。<br>算术计算都将转化为10进制计算， +0和-0被认为相等。</p>
+</blockquote>
+</li>
+</ul>
+<p>Number.MIN_VALUE –&gt; 5e-324<br>Number.MAX_VALUE –&gt; 1.7976931348623157e+308<br>如果超过以上范围，自动转化为负无穷或者正无穷<br>Number.NEGATIVE_INFINITY = -Infinity;<br>Number.POSITIVE_INFINITY = Infinity;</p>
+<p><code>NaN</code>即非数值，是一个特殊的值。任何数除以0会返回NaN,涉及NaN的操作都会返回NaN.<br>NaN与任何数值都不想等，包括本身。alert(NaN == NaN); // 返回false;</p>
+<p><code>API: isNaN(任何类型参数)</code> 该函数会帮我们确定这个参数是否是“不是数值”。先转化成数值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">NaN</span>))    <span class="comment">// true</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="number">10</span>))     <span class="comment">// false 10是一个数值</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">'10'</span>))   <span class="comment">// false 可以被转化成数值10</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">'blue'</span>))  <span class="comment">// true 不能转化成数值</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">true</span>))  <span class="comment">// false 可以被转化成1</span></span><br></pre></td></tr></table></figure></p>
+<p>注：基于对象调用isNaN(),首先会调用对象valueOf(),不能转化则基于这个值在调用toString()在测试返回值。</p>
+<p>数值转化函数： Number() parseInt() parseFloat() 转化规则详情官网。很重要</p>
+<h3 id="String__u7C7B_u578B"><a href="#String__u7C7B_u578B" class="headerlink" title="String 类型"></a>String 类型</h3><p>由零或多位16位Unicode字符串组成的字符序列，即字符串。</p>
+<p>数值、布尔值、对象和字符串值都有toString()方法，但<code>null</code>和<code>undefined</code>值没有这个方法。<br>数值调用toString()方法默认以10进制格式返回数值的字符串表示。可以用过传递基数参数，转化为其他格式字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">alert(num.toString())    <span class="comment">// "10"</span></span><br><span class="line">alert(num.toString(<span class="number">2</span>))   <span class="comment">// "1010"</span></span><br><span class="line">alert(num.toString(<span class="number">8</span>))   <span class="comment">// "12"</span></span><br><span class="line">alert(num.toString(<span class="number">10</span>))  <span class="comment">// "10"</span></span><br><span class="line">alert(num.toString(<span class="number">16</span>))  <span class="comment">// "a"</span></span><br></pre></td></tr></table></figure>
+<p>String()转化，会先调用改参数的toString()并返回相应结果<br>如果值是null  String(null)  ,则返回”null”，<br>如果是undefined  String(undefined)  ,则返回”undefined”，</p>
+<h3 id="Object__u7C7B_u578B"><a href="#Object__u7C7B_u578B" class="headerlink" title="Object 类型"></a>Object 类型</h3><p>var o = new Object();<br>var o = new Object;  //无参，不推荐</p>
+<h2 id="u64CD_u4F5C_u7B26"><a href="#u64CD_u4F5C_u7B26" class="headerlink" title="操作符"></a>操作符</h2><h3 id="u4E00_u5143_u64CD_u4F5C"><a href="#u4E00_u5143_u64CD_u4F5C" class="headerlink" title="一元操作"></a>一元操作</h3><ul>
+<li><p>“++” 和 “–”</p>
+<h3 id="u4F4D_u64CD_u4F5C"><a href="#u4F4D_u64CD_u4F5C" class="headerlink" title="位操作"></a>位操作</h3></li>
+<li><p>NOT AND OR XOR &lt;&lt; &gt;&gt; &gt;&gt;&gt;</p>
+<h3 id="u5E03_u5C14_u503C_u64CD_u4F5C"><a href="#u5E03_u5C14_u503C_u64CD_u4F5C" class="headerlink" title="布尔值操作"></a>布尔值操作</h3></li>
+<li><p>! &amp;&amp;  ||</p>
+<h3 id="u4E58_u6027_u64CD_u4F5C"><a href="#u4E58_u6027_u64CD_u4F5C" class="headerlink" title="乘性操作"></a>乘性操作</h3></li>
+<li><ul>
+<li>/ % <h3 id="u52A0_u6027_u64CD_u4F5C"><a href="#u52A0_u6027_u64CD_u4F5C" class="headerlink" title="加性操作"></a>加性操作</h3></li>
+</ul>
+</li>
+<li><p>“+”  “-“ </p>
+<h3 id="u5173_u7CFB_u64CD_u4F5C"><a href="#u5173_u7CFB_u64CD_u4F5C" class="headerlink" title="关系操作"></a>关系操作</h3></li>
+<li><p>“&lt;” “&gt;” “&lt;=” “&gt;=”</p>
+<h3 id="u76F8_u7B49_u64CD_u4F5C"><a href="#u76F8_u7B49_u64CD_u4F5C" class="headerlink" title="相等操作"></a>相等操作</h3></li>
+<li><p>“==” “===” “!==”</p>
+<blockquote>
+<p>相等和不相等（强制转换） – 先转化在比较<br>全等和不全等 – 仅比较而不转换</p>
+</blockquote>
+</li>
+</ul>
+<p>在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[x] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为.</span><br><span class="line">[x] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。</span><br><span class="line">[x] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。</span><br><span class="line">null 和 undefined比较遵循下列原则：</span><br><span class="line">[x] null 和 undefined 是相等的。</span><br><span class="line">[x] 要比较相等性之前，不能将null和undefined转化成其他任何值。</span><br><span class="line">[x] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.</span><br><span class="line">[x] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。</span><br></pre></td></tr></table></figure></p>
+<p>下列列出一些特殊的情况集结果：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="code">       表达式        |    值     </span></span><br><span class="line"><span class="horizontal_rule">------------------- | --------  </span></span><br><span class="line">null == undefined   |   true    </span><br><span class="line"><span class="code">     "NaN" == NaN   |   false  </span></span><br><span class="line"><span class="code">         5 == NaN   |   false  </span></span><br><span class="line"><span class="code">       NaN == NaN   |   false  </span></span><br><span class="line"><span class="code">       NaN != NaN   |   true </span></span><br><span class="line"><span class="code">       false == 0   |   true </span></span><br><span class="line"><span class="code">        true == 1   |   true </span></span><br><span class="line"><span class="code">        true == 2   |   false </span></span><br><span class="line">   undefined == 0   |   false </span><br><span class="line"><span class="code">        null == 0   |   false </span></span><br><span class="line"><span class="code">         "5" == 5   |   true</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>全等和全不等在比较之前不转换操作数</p>
+</blockquote>
+<p>null === undefined ; // false,不同类型 </p>
+<h3 id="u6761_u4EF6_u64CD_u4F5C"><a href="#u6761_u4EF6_u64CD_u4F5C" class="headerlink" title="条件操作"></a>条件操作</h3><ul>
+<li><p>expression ? v1 : v2;</p>
+<h3 id="u8D4B_u503C_u64CD_u4F5C"><a href="#u8D4B_u503C_u64CD_u4F5C" class="headerlink" title="赋值操作"></a>赋值操作</h3></li>
+<li><p>“=”  “*=”  “/=”  “%=”  “+=”  “-+”  “&lt;&lt;=”  “&gt;&gt;=”  “&gt;&gt;&gt;=” </p>
+<h3 id="u9017_u53F7_u64CD_u4F5C"><a href="#u9017_u53F7_u64CD_u4F5C" class="headerlink" title="逗号操作"></a>逗号操作</h3></li>
+<li><p>var num, num2, num3;</p>
+</li>
+</ul>
+<h2 id="u8BED_u53E5"><a href="#u8BED_u53E5" class="headerlink" title="语句"></a>语句</h2><h3 id="if__u8BED_u53E5"><a href="#if__u8BED_u53E5" class="headerlink" title="if 语句"></a>if 语句</h3><ul>
+<li>if else if else 推荐添加{}</li>
+</ul>
+<h3 id="do-while__u8BED_u53E5"><a href="#do-while__u8BED_u53E5" class="headerlink" title="do-while 语句"></a>do-while 语句</h3><ul>
+<li>后测试循环语句。先执行循环体一次后才会测试出口</li>
+</ul>
+<h3 id="while__u8BED_u53E5"><a href="#while__u8BED_u53E5" class="headerlink" title="while 语句"></a>while 语句</h3><ul>
+<li>前测试循环语句。</li>
+</ul>
+<h3 id="for__u8BED_u53E5"><a href="#for__u8BED_u53E5" class="headerlink" title="for 语句"></a>for 语句</h3><ul>
+<li>前测试循环语句。<br>使用while循环做不到的，使用for循环也做不到。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  alert(i);</span><br><span class="line">&#125;</span><br><span class="line">alert(i);  <span class="comment">// 结果为 10；因为不存在块级作用域，循环内部定义的变量外部也可以访问</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">  <span class="comment">// 无限循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="for_in__u8BED_u53E5"><a href="#for_in__u8BED_u53E5" class="headerlink" title="for in 语句"></a>for in 语句</h3><ul>
+<li>一般用来枚举对象属性 如window<blockquote>
+<p>如果要迭代的对象变量值为<code>null</code>或<code>undefined</code>, for-in 语句会抛出错误，ECMAScript 5 更正了，不抛出错误，<br>而只是不执行循环体，为了兼容性，在使用之前，先检测确认该对象的值不是<code>null</code>或<code>undefined</code>。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="label__u8BED_u53E5"><a href="#label__u8BED_u53E5" class="headerlink" title="label 语句"></a>label 语句</h3><h3 id="break__u548C_continue__u8BED_u53E5"><a href="#break__u548C_continue__u8BED_u53E5" class="headerlink" title="break 和 continue 语句"></a>break 和 continue 语句</h3><h3 id="with__u8BED_u53E5"><a href="#with__u8BED_u53E5" class="headerlink" title="with 语句"></a>with 语句</h3><ul>
+<li>严格模式下不允许使用with语句，<blockquote>
+<p>with是将代码的作用域设置到一个特定的对象中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> qs = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> hostName = location.hostname;</span><br><span class="line"><span class="keyword">var</span> url = location.url;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span>(location) &#123;</span><br><span class="line">  <span class="keyword">var</span> qs = search.substring(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">var</span> hostName = hostname;</span><br><span class="line">  <span class="keyword">var</span> url = url;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<h3 id="switch__u8BED_u53E5"><a href="#switch__u8BED_u53E5" class="headerlink" title="switch 语句"></a>switch 语句</h3><h2 id="u51FD_u6570"><a href="#u51FD_u6570" class="headerlink" title="函数"></a>函数</h2><ul>
+<li>对任何语言来说都是核心，使用<code>function</code>声明</li>
+</ul>
+<h3 id="u7406_u89E3_u53C2_u6570"><a href="#u7406_u89E3_u53C2_u6570" class="headerlink" title="理解参数"></a>理解参数</h3><p>ECMAScript 函数不介意传递进来多少个参数, 也不在乎传进来什么数据类型,<code>即便定义的函数只接收两个参数，
+在调用函数的也未必一定要传递两个参数，可以是一个、三个甚至不传递</code>。<br><code>因为ECMAScript中的参数在内部是用一个数组来表示的，函数接收到的始终是一个数组，而不关心包含哪些参数</code>。<br>函数内部通过<code>arguments对象</code>来访问这个参数数组，从而获取传递给函数的每一个参数。<br>在<code>严格模式</code>下对如何使用arguments对象做出了限制，</p>
+<h3 id="u6CA1_u6709_u91CD_u8F7D"><a href="#u6CA1_u6709_u91CD_u8F7D" class="headerlink" title="没有重载"></a>没有重载</h3><p>不存在函数签名（参数的类型和数量）的特性, ECMAScript函数不能重载。</p>
+<ul>
+<li>未指定返回值的函数返回的是一个特殊的undefined值。</li>
+</ul>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>文章若有纰漏，请大家补充指正，谢谢！<br>如有疑问可留言，我会在第一时间回复。<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/js/">js</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/" data-title="读《JavaScript高级程序设计》总结二 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/12/21/js-high-level-programming-language-1/"  title="读《JavaScript高级程序设计》总结一">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结一
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/22/js-high-level-programming-language-2/" data-title="读《JavaScript高级程序设计》总结二" data-url="http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BED_u6CD5"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5173_u952E_u5B57_u548C_u4FDD_u7559_u5B57"><span class="toc-number">2.</span> <span class="toc-text">关键字和保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53D8_u91CF"><span class="toc-number">3.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6570_u636E_u7C7B_u578B"><span class="toc-number">4.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof__u64CD_u4F5C_u7B26"><span class="toc-number">4.1.</span> <span class="toc-text">typeof 操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Undefined__u7C7B_u578B"><span class="toc-number">4.2.</span> <span class="toc-text">Undefined 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null__u7C7B_u578B"><span class="toc-number">4.3.</span> <span class="toc-text">Null 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean__u7C7B_u578B"><span class="toc-number">4.4.</span> <span class="toc-text">Boolean 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number__u7C7B_u578B"><span class="toc-number">4.5.</span> <span class="toc-text">Number 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String__u7C7B_u578B"><span class="toc-number">4.6.</span> <span class="toc-text">String 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object__u7C7B_u578B"><span class="toc-number">4.7.</span> <span class="toc-text">Object 类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u64CD_u4F5C_u7B26"><span class="toc-number">5.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E00_u5143_u64CD_u4F5C"><span class="toc-number">5.1.</span> <span class="toc-text">一元操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F4D_u64CD_u4F5C"><span class="toc-number">5.2.</span> <span class="toc-text">位操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E03_u5C14_u503C_u64CD_u4F5C"><span class="toc-number">5.3.</span> <span class="toc-text">布尔值操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E58_u6027_u64CD_u4F5C"><span class="toc-number">5.4.</span> <span class="toc-text">乘性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u52A0_u6027_u64CD_u4F5C"><span class="toc-number">5.5.</span> <span class="toc-text">加性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5173_u7CFB_u64CD_u4F5C"><span class="toc-number">5.6.</span> <span class="toc-text">关系操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u76F8_u7B49_u64CD_u4F5C"><span class="toc-number">5.7.</span> <span class="toc-text">相等操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6761_u4EF6_u64CD_u4F5C"><span class="toc-number">5.8.</span> <span class="toc-text">条件操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8D4B_u503C_u64CD_u4F5C"><span class="toc-number">5.9.</span> <span class="toc-text">赋值操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9017_u53F7_u64CD_u4F5C"><span class="toc-number">5.10.</span> <span class="toc-text">逗号操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BED_u53E5"><span class="toc-number">6.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if__u8BED_u53E5"><span class="toc-number">6.1.</span> <span class="toc-text">if 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while__u8BED_u53E5"><span class="toc-number">6.2.</span> <span class="toc-text">do-while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while__u8BED_u53E5"><span class="toc-number">6.3.</span> <span class="toc-text">while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for__u8BED_u53E5"><span class="toc-number">6.4.</span> <span class="toc-text">for 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for_in__u8BED_u53E5"><span class="toc-number">6.5.</span> <span class="toc-text">for in 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label__u8BED_u53E5"><span class="toc-number">6.6.</span> <span class="toc-text">label 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break__u548C_continue__u8BED_u53E5"><span class="toc-number">6.7.</span> <span class="toc-text">break 和 continue 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with__u8BED_u53E5"><span class="toc-number">6.8.</span> <span class="toc-text">with 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch__u8BED_u53E5"><span class="toc-number">6.9.</span> <span class="toc-text">switch 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u51FD_u6570"><span class="toc-number">7.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7406_u89E3_u53C2_u6570"><span class="toc-number">7.1.</span> <span class="toc-text">理解参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6CA1_u6709_u91CD_u8F7D"><span class="toc-number">7.2.</span> <span class="toc-text">没有重载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">8.</span> <span class="toc-text">参考文档</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack Chan <br/>
+			This is my blog</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
