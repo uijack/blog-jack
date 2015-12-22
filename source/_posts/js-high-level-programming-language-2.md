@@ -42,7 +42,7 @@ tags:
 支持的浏览器版本：IE10+, Firefox4+, Safari5.1+,  Opera 12+ 和Chrome。
 
 - 语句
-> 推荐语句以一个分号`;`结尾, 可以 `减少代码压缩错误` 和 `降低提高解析器推测插入分号时间`，
+> 推荐语句以一个分号`;`结尾, 可以 `减少代码压缩错误` 和 `降低解析器推测插入分号位置的时间`，
 > 控制语句哪怕只有一行也要添加{}，降低修改代码出错率。
 
 ## 关键字和保留字
@@ -58,10 +58,6 @@ var essage;  //该值为 undefined
 > 省略var操作符声明的变量直接赋值，该变量则会变成`全局变量`
 
 ```js
-var essage;  //该值为 undefined
-```
-
-```js
   function test() {
     message = 'hi';  // 全局变量
   }
@@ -74,7 +70,7 @@ var essage;  //该值为 undefined
 
 ## 数据类型
 
-ECMAScript 中的五中简单数据类型（基本数据类型）
+ECMAScript 中的五种简单数据类型（基本数据类型）
 ```plain
 Undefined
 Null
@@ -96,11 +92,12 @@ String
 - "funciton"     --  值是函数
 
 > Test
-
+```js
 var ms = 'message';
 alert(typeof ms) // 'string'
 alert(typeof(ms)) // 'string'
 alert(typeof 95) // 'number'
+```
 
 ### Undefined 类型
 
@@ -199,7 +196,7 @@ alert(isNaN(true))  // false 可以被转化成1
 
 注：基于对象调用isNaN(),首先会调用对象valueOf(),不能转化则基于这个值在调用toString()在测试返回值。
 
-数值转化函数： Number() parseInt() parseFloat() 转化规则详情官网。很重要
+数值转化函数： `Number()` `parseInt()` `parseFloat()` 转化规则详情官网。`很重要`
 
 ### String 类型
 
@@ -253,15 +250,16 @@ var o = new Object;  //无参，不推荐
 
 在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：
 ```markdown
-[x] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为.
-[x] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。
-[x] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。
+[ ] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为1.
+[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。
+[ ] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。
 null 和 undefined比较遵循下列原则：
-[x] null 和 undefined 是相等的。
-[x] 要比较相等性之前，不能将null和undefined转化成其他任何值。
-[x] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.
-[x] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。
+[ ] null 和 undefined 是相等的。
+[ ] 要比较相等性之前，不能将null和undefined转化成其他任何值。
+[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.
+[ ] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。
 ```
+
 下列列出一些特殊的情况集结果：
 ```markdown
 
@@ -349,7 +347,7 @@ with(location) {
 ### switch 语句
 
 ## 函数
-- 对任何语言来说都是核心，使用`function`声明
+- 对任何语言来说函数都是核心，使用`function`声明
 
 ### 理解参数
 
