@@ -1,4 +1,4 @@
-title: 读《JavaScript高级程序设计》总结3
+title: 读《JavaScript高级程序设计》总结4
 date: 2015-12-23 17:08:55
 description: "读《JavaScript高级程序设计 -- 第4章 变量、作用域和内存问题》总结,本章主要介绍基本类型、引用类型、执行环境、作用域、垃圾收集等"
 tags:
@@ -91,7 +91,7 @@ So,可以将ECMAScript函数的参数想象成局部变量。
 ECMAScript在检测引用类型的值用 `instanceof`操作符，基本类型不是对象，用`instanceof`检测会始终返回`false`
 规定所有引用类型的值都是`Object`的实例，用instanceof检测始终返回`true`.
 
-![Test](/img/js-high-level-4.png)
+![typeof注意事项](/img/js-high-level-4.png)
 
 ## 执行环境及作用域
 
