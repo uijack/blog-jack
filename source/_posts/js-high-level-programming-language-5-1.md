@@ -1,4 +1,4 @@
-title: 读《JavaScript高级程序设计》总结5-1
+title: "读《JavaScript高级程序设计》总结5-1"
 date: 2015-12-23 20:52:11
 description: "读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Object、Array"
 tags:
