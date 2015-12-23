@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>读《JavaScript高级程序设计》总结3 | 千千哥</title>
+    <title>读《JavaScript高级程序设计》总结4 | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
@@ -13,14 +13,14 @@
     
     <meta name="description" content="读《JavaScript高级程序设计 -- 第4章 变量、作用域和内存问题》总结,本章主要介绍基本类型、引用类型、执行环境、作用域、垃圾收集等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计》总结3">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结4">
 <meta property="og:url" content="http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/index.html">
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="读《JavaScript高级程序设计 -- 第4章 变量、作用域和内存问题》总结,本章主要介绍基本类型、引用类型、执行环境、作用域、垃圾收集等">
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-4.png">
-<meta property="og:updated_time" content="2015-12-23T11:13:00.000Z">
+<meta property="og:updated_time" content="2015-12-23T13:12:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计》总结3">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结4">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第4章 变量、作用域和内存问题》总结,本章主要介绍基本类型、引用类型、执行环境、作用域、垃圾收集等">
 
     
@@ -76,7 +76,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/23/js-high-level-programming-language-4/" title="读《JavaScript高级程序设计》总结3" itemprop="url">读《JavaScript高级程序设计》总结3</a>
+      <a href="/2015/12/23/js-high-level-programming-language-4/" title="读《JavaScript高级程序设计》总结4" itemprop="url">读《JavaScript高级程序设计》总结4</a>
   </h1>
   <p class="article-author">By
        
@@ -111,7 +111,7 @@
 <p>如果参数是按引用传递，那么person.name 的值应该是Chan<br>So,可以将ECMAScript函数的参数想象成局部变量。</p>
 <h3 id="u68C0_u6D4B_u7C7B_u578B"><a href="#u68C0_u6D4B_u7C7B_u578B" class="headerlink" title="检测类型"></a>检测类型</h3><p>检测变量是不是基本数据类型，可以使用<code>typeof</code>操作符是最好的工具。如果变量是对象或者null, 会返回<code>object</code><br>检测函数会返回<code>function</code>。</p>
 <p>ECMAScript在检测引用类型的值用 <code>instanceof</code>操作符，基本类型不是对象，用<code>instanceof</code>检测会始终返回<code>false</code><br>规定所有引用类型的值都是<code>Object</code>的实例，用instanceof检测始终返回<code>true</code>.</p>
-<p><img src="/img/js-high-level-4.png" alt="Test"></p>
+<p><img src="/img/js-high-level-4.png" alt="typeof注意事项"></p>
 <h2 id="u6267_u884C_u73AF_u5883_u53CA_u4F5C_u7528_u57DF"><a href="#u6267_u884C_u73AF_u5883_u53CA_u4F5C_u7528_u57DF" class="headerlink" title="执行环境及作用域"></a>执行环境及作用域</h2><p>执行环境定义了变量或函数有权访问其他的数据。每一个执行环境都有一个与之关联的变量对象，<br>环境中定义的所有变量和函数都保存在这个对象中。我们编写的的代码无法访问这个对象，但解析器在处理数据时会在后台使用它。</p>
 <h3 id="u5EF6_u957F_u4F5C_u7528_u57DF_u94FE"><a href="#u5EF6_u957F_u4F5C_u7528_u57DF_u94FE" class="headerlink" title="延长作用域链"></a>延长作用域链</h3><p>1、try-catch语句中的catch块<br>2、with语句</p>
 <h3 id="u6CA1_u6709_u5757_u7EA7_u4F5C_u7528_u57DF"><a href="#u6CA1_u6709_u5757_u7EA7_u4F5C_u7528_u57DF" class="headerlink" title="没有块级作用域"></a>没有块级作用域</h3><p>在js中，<code>if</code>语句中的变量声明会将变量添加到当前的执行环境中。</p>
@@ -145,7 +145,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/" data-title="读《JavaScript高级程序设计》总结3 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/" data-title="读《JavaScript高级程序设计》总结4 | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -158,6 +158,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/12/23/js-high-level-programming-language-5-1/" title="读《JavaScript高级程序设计》总结5-1">
+  <strong>上一篇：</strong><br/>
+  <span>
+  读《JavaScript高级程序设计》总结5-1</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/12/22/js-high-level-programming-language-2/"  title="读《JavaScript高级程序设计》总结2">
@@ -171,7 +179,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/23/js-high-level-programming-language-4/" data-title="读《JavaScript高级程序设计》总结3" data-url="http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/23/js-high-level-programming-language-4/" data-title="读《JavaScript高级程序设计》总结4" data-url="http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/"></div>
 </section>
 
 
@@ -197,15 +205,15 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+				<li><a href="/tags/js/" title="js">js<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>3</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>4</sup></a></li>
 			
 		
 			
