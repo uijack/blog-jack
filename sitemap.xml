@@ -2,28 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-5-1/</loc>
-    <lastmod>2015-12-23T15:34:54.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/</loc>
-    <lastmod>2015-12-23T13:12:17.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
-    <lastmod>2015-12-23T09:10:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/</loc>
-    <lastmod>2015-12-23T09:10:19.000Z</lastmod>
+    <loc>http://blog.uijack.com/2015/12/24/js-high-level-programming-language-5-2/</loc>
+    <lastmod>2015-12-23T15:38:19.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.uijack.com/2015/12/13/install-hexo-blog-step/</loc>
-    <lastmod>2015-12-21T13:57:25.000Z</lastmod>
+    <lastmod>2015-12-23T15:38:03.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
+    <lastmod>2015-12-23T15:38:01.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/</loc>
+    <lastmod>2015-12-23T15:37:56.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/</loc>
+    <lastmod>2015-12-23T15:37:49.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-5-1/</loc>
+    <lastmod>2015-12-23T15:37:39.000Z</lastmod>
   </url>
   
   <url>
