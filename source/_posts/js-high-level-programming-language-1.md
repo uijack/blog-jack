@@ -1,4 +1,4 @@
-title: 读《JavaScript高级程序设计》总结一
+title: 读《JavaScript高级程序设计》总结1
 date: 2015-12-21 19:51:59
 description: "读《JavaScript高级程序设计 -- 第1、2章 JavaScript和HTML》总结, 包括js简洁、版本、引入等"
 tags:
