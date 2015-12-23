@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-1.png">
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-2.png">
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-3.png">
-<meta property="og:updated_time" content="2015-12-23T15:37:39.000Z">
+<meta property="og:updated_time" content="2015-12-23T23:57:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《JavaScript高级程序设计》总结5-1">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Object、Array">
@@ -162,8 +162,9 @@
 </ul>
 <p>比较函数(arg1, arg2)参数规则:<br>1、arg1 应该在 arg2 之前 则返回一个负数(一般为-1);<br>2、相等返回0;<br>3、arg1 应该位于 arg2 之后,则返回一个正数(一般为1);</p>
 <blockquote>
-<p>对于数值类型或者valueOf()方法会返回数值类型的对象类型.可以使用更简单的比较函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">value1, value2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value1 - value2;  <span class="comment">//降序,如果想要升序则 return value2-value1;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于数值类型或者valueOf()方法会返回数值类型的对象类型.可以使用更简单的比较函数</p>
 </blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">value1, value2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value1 - value2;  <span class="comment">//降序,如果想要升序则 return value2-value1;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="u64CD_u4F5C_u65B9_u6CD5_concat_28_29_slice_28_29_splice_28_29"><a href="#u64CD_u4F5C_u65B9_u6CD5_concat_28_29_slice_28_29_splice_28_29" class="headerlink" title="操作方法 concat() slice() splice()"></a>操作方法 concat() slice() splice()</h3><ul>
 <li><p>concat() 基于当前数组创建新的数组,将接收到的参数(单项或者数组(将被一项一项拆分添加))添加到这个新数组,最后返回新的数组.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v1 = [<span class="string">'a'</span>];</span><br><span class="line"><span class="keyword">var</span> v2 = v1.concat(<span class="string">'b'</span>, [<span class="string">'c'</span>, <span class="string">'d'</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(v2);  <span class="comment">// ['a', 'b', 'c', 'd'];</span></span><br></pre></td></tr></table></figure>
@@ -178,7 +179,7 @@
 <ul>
 <li>indexOf() 从头0开始查找</li>
 <li>lastIndexOf() 数组的尾开始查找</li>
-<li>接受两个参数(查找项, 可选的查找起点位置的索引)</li>
+<li>接受两个参数(查找项, 可选的查找起点位置的索引),如果第二个参数为负数,将转化为数组长度的整数倍加上改负数,变成最小的正数为止.</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">2</span>, <span class="number">5</span>, <span class="number">9</span>];</span><br><span class="line">array.indexOf(<span class="number">2</span>);     <span class="comment">// 0</span></span><br><span class="line">array.indexOf(<span class="number">7</span>);     <span class="comment">// -1</span></span><br><span class="line">array.indexOf(<span class="number">9</span>, <span class="number">2</span>);  <span class="comment">// 2</span></span><br><span class="line">array.indexOf(<span class="number">2</span>, -<span class="number">1</span>); <span class="comment">// -1</span></span><br><span class="line">array.indexOf(<span class="number">2</span>, -<span class="number">3</span>); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">2</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">2</span>];</span><br><span class="line">array.lastIndexOf(<span class="number">2</span>);     <span class="comment">// 3</span></span><br><span class="line">array.lastIndexOf(<span class="number">7</span>);     <span class="comment">// -1</span></span><br><span class="line">array.lastIndexOf(<span class="number">2</span>, <span class="number">3</span>);  <span class="comment">// 3</span></span><br><span class="line">array.lastIndexOf(<span class="number">2</span>, <span class="number">2</span>);  <span class="comment">// 0</span></span><br><span class="line">array.lastIndexOf(<span class="number">2</span>, -<span class="number">2</span>); <span class="comment">// 0</span></span><br><span class="line">array.lastIndexOf(<span class="number">2</span>, -<span class="number">1</span>); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
