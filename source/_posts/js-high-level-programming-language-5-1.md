@@ -136,7 +136,9 @@ alert( col.lenght ); // 0
 1、arg1 应该在 arg2 之前 则返回一个负数(一般为-1);
 2、相等返回0;
 3、arg1 应该位于 arg2 之后,则返回一个正数(一般为1);
+
 > 对于数值类型或者valueOf()方法会返回数值类型的对象类型.可以使用更简单的比较函数
+
 ```js
 function compare(value1, value2) {
   return value1 - value2;  //降序,如果想要升序则 return value2-value1;
@@ -170,7 +172,7 @@ var v3 = v1.slice(1, 3);  // [b', 'c'];
 ECMAScript 5 添加
 - indexOf() 从头0开始查找
 - lastIndexOf() 数组的尾开始查找
-- 接受两个参数(查找项, 可选的查找起点位置的索引)
+- 接受两个参数(查找项, 可选的查找起点位置的索引),如果第二个参数为负数,将转化为数组长度的整数倍加上改负数,变成最小的正数为止.
 
 ```js
 var array = [2, 5, 9];
