@@ -2,7 +2,6 @@ title: "读《JavaScript高级程序设计》总结4"
 date: 2015-12-23 17:08:55
 description: "读《JavaScript高级程序设计 -- 第4章 变量、作用域和内存问题》总结,本章主要介绍基本类型、引用类型、执行环境、作用域、垃圾收集等"
 tags:
-- JavaScript
 - "js"
 - "随笔"
 ---

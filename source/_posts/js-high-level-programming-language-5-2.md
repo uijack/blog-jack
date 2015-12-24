@@ -2,8 +2,8 @@ title: "读《JavaScript高级程序设计》总结5-2"
 date: 2015-12-24 9:35:56
 description: "读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Date、RegExp、Function、基本包装类型、单体内置对象等"
 tags:
-- JavaScript
-- "js"
+- "js.Function"
+- "js.window"
 - "随笔"
 ---
 
@@ -376,40 +376,3 @@ isNaN(), parseInt(),
 > 文章若有纰漏，请大家补充指正，谢谢！
 > 如有疑问可留言，我会在第一时间回复。
 > [转载请注明出处: http://blog.uijack.com/](http://blog.uijack.com/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
