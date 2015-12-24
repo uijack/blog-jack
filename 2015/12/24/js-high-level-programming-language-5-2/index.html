@@ -17,7 +17,12 @@
 <meta property="og:url" content="http://blog.uijack.com/2015/12/24/js-high-level-programming-language-5-2/index.html">
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Date、RegExp、Function、基本包装类型、单体内置对象等">
-<meta property="og:updated_time" content="2015-12-23T15:38:19.000Z">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-4.png">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-5.png">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-6.png">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-7.png">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-7.png">
+<meta property="og:updated_time" content="2015-12-24T14:12:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《JavaScript高级程序设计》总结5-2">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Date、RegExp、Function、基本包装类型、单体内置对象等">
@@ -82,7 +87,7 @@
 		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-24T12:35:56.000Z" itemprop="datePublished"> 发表于 2015-12-24 20:35:56</time>
+    <time datetime="2015-12-24T01:35:56.000Z" itemprop="datePublished"> 发表于 2015-12-24 09:35:56</time>
     
   </p>
 </header>
@@ -91,11 +96,170 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date__u7C7B_u578B"><span class="toc-number">1.</span> <span class="toc-text">Date 类型</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date__u7C7B_u578B"><span class="toc-number">1.</span> <span class="toc-text">Date 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7EE7_u627F_u65B9_u6CD5"><span class="toc-number">1.1.</span> <span class="toc-text">继承方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u65E5_u671F_u683C_u5F0F_u5316_u548C_u65B9_u6CD5"><span class="toc-number">1.2.</span> <span class="toc-text">日期格式化和方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u65E5_u671F_u548C_u65F6_u95F4_u7EC4_u4EF6_u65B9_u6CD5"><span class="toc-number">1.3.</span> <span class="toc-text">日期和时间组件方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RegExp__u7C7B_u578B"><span class="toc-number">2.</span> <span class="toc-text">RegExp 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RegExp__u5B9E_u4F8B_u5C5E_u6027"><span class="toc-number">2.1.</span> <span class="toc-text">RegExp 实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RegExp__u5B9E_u4F8B_u65B9_u6CD5"><span class="toc-number">2.2.</span> <span class="toc-text">RegExp 实例方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RegExp__u6784_u9020_u51FD_u6570_u5C5E_u6027"><span class="toc-number">2.3.</span> <span class="toc-text">RegExp 构造函数属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6A21_u5F0F_u7684_u5C40_u9650_u6027"><span class="toc-number">2.4.</span> <span class="toc-text">模式的局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Functon__u7C7B_u578B"><span class="toc-number">3.</span> <span class="toc-text">Functon 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u51FD_u6570_u58F0_u660E_u4E0E_u51FD_u6570_u8868_u8FBE_u5F0F"><span class="toc-number">3.1.</span> <span class="toc-text">函数声明与函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F5C_u4E3A_u503C_u7684_u51FD_u6570"><span class="toc-number">3.2.</span> <span class="toc-text">作为值的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u51FD_u6570_u5185_u90E8_u5C5E_u6027"><span class="toc-number">3.3.</span> <span class="toc-text">函数内部属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5C5E_u6027_u548C_u65B9_u6CD5_length_2C_property_2C_apply_2Ccall_2Cbind"><span class="toc-number">3.4.</span> <span class="toc-text">属性和方法 length, property, apply,call,bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u57FA_u672C_u5305_u88C5_u7C7B"><span class="toc-number">4.</span> <span class="toc-text">基本包装类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean__u5BF9_u8C61"><span class="toc-number">4.1.</span> <span class="toc-text">Boolean 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number__u5BF9_u8C61"><span class="toc-number">4.2.</span> <span class="toc-text">Number 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String_u7C7B_u578B"><span class="toc-number">4.3.</span> <span class="toc-text">String类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5355_u4F53_u5185_u7F6E_u5BF9_u8C61"><span class="toc-number">5.</span> <span class="toc-text">单体内置对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Global__u5BF9_u8C61"><span class="toc-number">5.1.</span> <span class="toc-text">Global 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Math__u5BF9_u8C61"><span class="toc-number">5.2.</span> <span class="toc-text">Math 对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">6.</span> <span class="toc-text">参考文档</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="Date__u7C7B_u578B"><a href="#Date__u7C7B_u578B" class="headerlink" title="Date 类型"></a>Date 类型</h2>  
+		<h2 id="Date__u7C7B_u578B"><a href="#Date__u7C7B_u578B" class="headerlink" title="Date 类型"></a>Date 类型</h2><p>Date类型使用自UTC(Coordinated Universial Time, 国际协调时间)1970年1月1日午夜(0时)开始经过的毫秒数来保存<br>Date类型保存的日期能够精确到1970年1月1日之前或之后285 616年.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();       <span class="comment">// 创建当前时间和日期</span></span><br></pre></td></tr></table></figure>
+<p>ECMAScript5新增Date.now()方法.返回日期毫秒数,可以用于分析代码运行时间.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="built_in">Date</span>.now(); <span class="comment">// 不支持它的浏览器中使用+操作符把Date对象转化成字符串,可以达到同样目的</span></span><br><span class="line"><span class="comment">//  dosomething();      // var start = +Date.now();</span></span><br><span class="line"><span class="keyword">var</span> stop = <span class="built_in">Date</span>.now();  <span class="comment">// var stop  = +Date.now();</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> rs = stop - start;</span><br></pre></td></tr></table></figure>
+<h3 id="u7EE7_u627F_u65B9_u6CD5"><a href="#u7EE7_u627F_u65B9_u6CD5" class="headerlink" title="继承方法"></a>继承方法</h3><p>Date重写了toString(),toLocaleString(),valueOf()方法<br>toString() 和 toLocaleString() 差别仅在调试代码时比较有用<br>valueOf()方法不返回字符串,而是<code>返回日期的毫秒数</code>.可用于比较日期大小<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> da1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2007</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> da2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2007</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">da1 &lt; da2 <span class="comment">// true    比较毫秒数;</span></span><br><span class="line">da1 &gt; da2 <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="u65E5_u671F_u683C_u5F0F_u5316_u548C_u65B9_u6CD5"><a href="#u65E5_u671F_u683C_u5F0F_u5316_u548C_u65B9_u6CD5" class="headerlink" title="日期格式化和方法"></a>日期格式化和方法</h3><p><img src="/img/js-high-level-5-4.png" alt="日期格式化"></p>
+<h3 id="u65E5_u671F_u548C_u65F6_u95F4_u7EC4_u4EF6_u65B9_u6CD5"><a href="#u65E5_u671F_u548C_u65F6_u95F4_u7EC4_u4EF6_u65B9_u6CD5" class="headerlink" title="日期和时间组件方法"></a>日期和时间组件方法</h3><ul>
+<li>getTime()  返回日期毫秒数</li>
+<li>getFullYear() 得到四位数年份 2007</li>
+<li>getMonth()  返回日期月份 0~11 11表示12月份</li>
+<li>getDate()   返回日期的天数 1~31</li>
+<li>getDay()    返回日期属于星期几 0~6 0表示星期日</li>
+<li>getHours()  返回日期小时数 0~23</li>
+<li>getMinutes()  返回日期分钟数 0~59</li>
+<li>getSeconds()  返回日期毫秒数 0~59</li>
+<li>getMilliseeconds() 返回日期中的毫秒数</li>
+</ul>
+<h2 id="RegExp__u7C7B_u578B"><a href="#RegExp__u7C7B_u578B" class="headerlink" title="RegExp 类型"></a>RegExp 类型</h2><p>var expression = / pattern / flags;</p>
+<blockquote>
+<p>pattern 简单或复杂正则表达式,包含字符类型,限定符,分组,向前查找或者反向引用<br>每个正则可带一个或多个标志(flags), 标明正则表达式的行为</p>
+</blockquote>
+<p>flags支持三种:</p>
+<ul>
+<li>g 表示全局模式,用于所有字符串,而非第一个匹配时立即结束</li>
+<li>i 表示不区分大小写,忽略大小写情况</li>
+<li>m 表示多行模式,一行文本结束继续查找下一行</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/\w+/</span>;  <span class="comment">// 表达式字面量</span></span><br><span class="line"><span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\w+'</span>);  <span class="comment">// 构造函数创建</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/(\w+)\s(\w+)/</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'John Smith'</span>;</span><br><span class="line"><span class="keyword">var</span> newstr = str.replace(re, <span class="string">'$2, $1'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newstr); <span class="comment">// "Smith John"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>正则表达式字面量始终会共享同一个RegExp实例<br>使用构造函数创建的每一个新RegExp实例都是新的实例</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="literal">null</span>,</span><br><span class="line">    i, j;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  re = <span class="regexp">/cat/g</span>;</span><br><span class="line">  re.test(<span class="string">'catastrophe'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">  re = <span class="regexp">/cat/g</span>;</span><br><span class="line">  re.test(<span class="string">'catastrophe'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="RegExp__u5B9E_u4F8B_u5C5E_u6027"><a href="#RegExp__u5B9E_u4F8B_u5C5E_u6027" class="headerlink" title="RegExp 实例属性"></a>RegExp 实例属性</h3><p><img src="/img/js-high-level-5-5.png" alt="RegExp 属性"></p>
+<p>两种模式的source属性是相同的.</p>
+<h3 id="RegExp__u5B9E_u4F8B_u65B9_u6CD5"><a href="#RegExp__u5B9E_u4F8B_u65B9_u6CD5" class="headerlink" title="RegExp 实例方法"></a>RegExp 实例方法</h3><ul>
+<li>exec() (index, input)</li>
+<li>test()</li>
+<li>valueOf() // 返回正则表达式本身</li>
+</ul>
+<h3 id="RegExp__u6784_u9020_u51FD_u6570_u5C5E_u6027"><a href="#RegExp__u6784_u9020_u51FD_u6570_u5C5E_u6027" class="headerlink" title="RegExp 构造函数属性"></a>RegExp 构造函数属性</h3><p>省略…</p>
+<h3 id="u6A21_u5F0F_u7684_u5C40_u9650_u6027"><a href="#u6A21_u5F0F_u7684_u5C40_u9650_u6027" class="headerlink" title="模式的局限性"></a>模式的局限性</h3><p>省略…</p>
+<h2 id="Functon__u7C7B_u578B"><a href="#Functon__u7C7B_u578B" class="headerlink" title="Functon 类型"></a>Functon 类型</h2><p>每一个函数都是Function类型的实例, 函数名实际实际上也是一个指向函数对象的指针.<br>声明方式:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sum1 = <span class="keyword">new</span> Functon(<span class="string">'num1'</span>, <span class="string">'num2'</span>, <span class="string">"return num1 + num2"</span>); <span class="comment">// 不推荐,</span></span><br><span class="line"><span class="comment">// 会导致两次解析,第一次是解析常规ECMAScript代码,第二次是解析传入构造函数中的字符串.</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="u51FD_u6570_u58F0_u660E_u4E0E_u51FD_u6570_u8868_u8FBE_u5F0F"><a href="#u51FD_u6570_u58F0_u660E_u4E0E_u51FD_u6570_u8868_u8FBE_u5F0F" class="headerlink" title="函数声明与函数表达式"></a>函数声明与函数表达式</h3><blockquote>
+<p>解析器在向执行环境中加载数据时,解析器会率先读取函数声明,并使其在执行任何代码之前可用(可用访问);<br>至于函数表达式,则必须等到解析器执行到它所在的代码行才会真正被解释执行.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 函数声明 末尾不用加分号 */</span></span><br><span class="line">alert(sum(<span class="number">10</span>, <span class="number">10</span>));  <span class="comment">// 20</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> num1, num2 </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 函数表达式 末尾最好加分号 */</span></span><br><span class="line">alert(sum(<span class="number">10</span>, <span class="number">10</span>));  <span class="comment">// 意外标识符错误</span></span><br><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params"> num1, num2 </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>var sum = function sum(){} 其他可以,但是Saf会导致错误.</p>
+<h3 id="u4F5C_u4E3A_u503C_u7684_u51FD_u6570"><a href="#u4F5C_u4E3A_u503C_u7684_u51FD_u6570" class="headerlink" title="作为值的函数"></a>作为值的函数</h3><p>函数名本身就是变量,函数也可以当做参数来使用.<code>也可以从函数中返回一个函数</code>,这是一种极为有用的技术.</p>
+<p>有一个对象数组,要根据某个对象属性对数组进行排序</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComparisonFunction</span>(<span class="params"> propertyName </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> fucntion( obj1, obj2 ) &#123;</span><br><span class="line">    <span class="keyword">var</span> v1 = obj1[propertyName];</span><br><span class="line">    <span class="keyword">var</span> v2 = obj2[propertyName];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ( v1 &lt; v2 ) &#123;</span><br><span class="line">      <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( v1 &gt; v2 ) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> data = [&#123;name: <span class="string">'Zachary'</span>, age: <span class="number">28</span>&#125;, &#123;name: <span class="string">'Nicholas'</span>, age: <span class="number">29</span>&#125;];</span><br><span class="line">data.sort(createComparisonFunction(<span class="string">'name'</span>));</span><br><span class="line">alert(data[<span class="number">0</span>].name);  <span class="comment">// Nicholas</span></span><br><span class="line"></span><br><span class="line">data.sort(createComparisonFunction(<span class="string">'age'</span>));</span><br><span class="line">alert(data[<span class="number">0</span>].name);  <span class="comment">// Zachary</span></span><br></pre></td></tr></table></figure>
+<h3 id="u51FD_u6570_u5185_u90E8_u5C5E_u6027"><a href="#u51FD_u6570_u5185_u90E8_u5C5E_u6027" class="headerlink" title="函数内部属性"></a>函数内部属性</h3><p>函数内部有两个特殊属性: <code>this</code>和<code>arguments</code>.</p>
+<ul>
+<li>arguments 主要用途是保存函数数组,但是这个对象还有一个叫callee的属性,是一个指针,</li>
+<li>指向拥有这个arguments对象的函数.</li>
+</ul>
+<p>经典的阶乘:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fucntion factorial( num ) &#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> num * factorial(num - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fucntion factorial( num ) &#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> num * <span class="built_in">arguments</span>.callee(num - <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>内部没引用函数名factorial,不管函数使用什么名字,都可以保证正常完成递归.<br>这种方式可以解除函数体的代码和函数名的耦合状态.</p>
+</blockquote>
+<ul>
+<li><p>this引用的是函数执行的环境对象, 当网页的全局作用域中调用函数时,this对象引用window</p>
+</li>
+<li><p>caller ECMAScript5中的,这个属性保存着调用当前函数的函数的引用,在全局作用域中调用当前函数,caller的值为<code>null</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>) </span>&#123; inner(); &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>) </span>&#123; alert(inner.caller);&#125;</span><br><span class="line">outer(); <span class="comment">// 会显示outer()函数的源代码.</span></span><br></pre></td></tr></table></figure>
+<p>为了实现更散松的耦合,也可以通过改写</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  alert(<span class="built_in">arguments</span>.callee.caller);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>IE,Ff,Chrome,Saf所有版本都支持,Opera9.6都支持<code>caller</code>属性<br>当函数<code>严格模式</code>下访问<code>arguents.callee</code>会导致错误,<br>ECMAScript5还定义了arguments.caller属性,严格模式下访问也会出错.非严格模式下这个属性始终是<code>undefined</code>.严格模式不能为函数的caller属性赋值.</p>
+<h3 id="u5C5E_u6027_u548C_u65B9_u6CD5_length_2C_property_2C_apply_2Ccall_2Cbind"><a href="#u5C5E_u6027_u548C_u65B9_u6CD5_length_2C_property_2C_apply_2Ccall_2Cbind" class="headerlink" title="属性和方法 length, property, apply,call,bind"></a>属性和方法 length, property, apply,call,bind</h3><p>函数也是对象,因此有属性和方法,每个函数都包含两个属性:</p>
+<ul>
+<li>length : 表示函数希望接收的命名参数的个数</li>
+<li>property : 保存所有实例方法.toString和valueOf等方法都保存在property名下.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params">name</span>) </span>&#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(sayName,length); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>property属性是不可枚举的,因此for-in无法发现.</p>
+<p>每个函数都包含两个非继承而来的方法<code>apply()</code>和<code>call()</code>;<br>这个两个方法的用途都是在特定的作用域中调用函数.<br>实际上等于设置函数体的<code>this</code>对象值.</p>
+<ul>
+<li>apply(运行函数作用域, [参数数组]), 接收两个参数,this,[];</li>
+<li>call(运行函数作用域, arg1, arg2,…);</li>
+<li>可以不传递参数.只传递作用域.(没参数用谁都可以)</li>
+</ul>
+<p><img src="/img/js-high-level-5-6.png" alt="注意事项"></p>
+<blockquote>
+<p>实际上,<code>apply()</code>和<code>call()</code>强大的地方是能够<code>扩充函数懒以运行的作用域</code>.<code>改变函数的执行环境</code>.<br>使用<code>apply()</code>和<code>call()</code>来扩充作用域的最大好处就是:<code>对象不需要与方法有任何耦合关系</code>.<br>即不需要将方法(函数)绑定在对象上,在通过对象来调用它.</p>
+</blockquote>
+<p>ECMAScript5还定义了一个方法 <code>bind()</code>.这个方法会创建一个函数的实例,其<code>this</code>值会绑定到传给bind()<br>函数的值.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.color = <span class="string">'red'</span>;</span><br><span class="line"><span class="keyword">var</span> o = &#123; color: <span class="string">'blue'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayColor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> objSayColor = sayColor.bind(o); <span class="comment">// sayColor函数的this会绑定o对象上.</span></span><br><span class="line">objSayColor(); <span class="comment">// blue</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这种技巧的优点请参考<code>第22章</code></p>
+</blockquote>
+<h2 id="u57FA_u672C_u5305_u88C5_u7C7B"><a href="#u57FA_u672C_u5305_u88C5_u7C7B" class="headerlink" title="基本包装类"></a>基本包装类</h2><p>为了便于操作<code>基本类型值</code>,ECMAScript还提供了3个特殊的引用类型Boolean,Number,String.<br><code>每当读取一个基本类型值的时候,后台就会创建一个对应的基本包装类型的对象</code>.从而让我们能够调用对应方法来操作这些数据.</p>
+<p><img src="/img/js-high-level-5-7.png" alt="注意事项"></p>
+<h3 id="Boolean__u5BF9_u8C61"><a href="#Boolean__u5BF9_u8C61" class="headerlink" title="Boolean 对象"></a>Boolean 对象</h3><p>声明调用Boolean构造函数并传入true或flase</p>
+<p>不推荐使用,<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> falseObj = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>); <span class="comment">// 此时falseObj是对象</span></span><br><span class="line"><span class="keyword">var</span> rs = falseObj1 &amp;&amp; <span class="literal">true</span>; <span class="comment">// 此时rs是true, 因为布尔表达式所有对象都会被转化为true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> falseValue = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> rs = falseValue &amp;&amp; <span class="literal">true</span>; <span class="comment">// rs为 false</span></span><br><span class="line"></span><br><span class="line">alert(<span class="keyword">typeof</span> falseObj); <span class="comment">// object</span></span><br><span class="line">alert(<span class="keyword">typeof</span> falseValue); <span class="comment">// boolean</span></span><br><span class="line"></span><br><span class="line">alert(falseObj <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>); <span class="comment">// ture;</span></span><br><span class="line">alert(falseValue <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>); <span class="comment">// false;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Number__u5BF9_u8C61"><a href="#Number__u5BF9_u8C61" class="headerlink" title="Number 对象"></a>Number 对象</h3><p>var numberObj = new Number(10);</p>
+<ul>
+<li>toString()可以传递一个表示基数参数,告诉它返回几进制数值的字符串.</li>
+</ul>
+<p>var num = 10;<br>alert(num.toFixed(2)); // “10.00” 按照指定位的小数位数返回数值的字符串 </p>
+<ul>
+<li>toExponential()</li>
+<li>toPrecision()</li>
+</ul>
+<h3 id="String_u7C7B_u578B"><a href="#String_u7C7B_u578B" class="headerlink" title="String类型"></a>String类型</h3><p>var stringObj = new String(‘hello world’);</p>
+<ul>
+<li>String类型的实例都包含一个length属性,表示字符串中有多少个字符.</li>
+<li>即使字符串中包含<code>双字节字符</code>(不是占一个字节的ASCII字符),每个字符也仍算<code>一个字符</code>.</li>
+</ul>
+<ol>
+<li><p>字符方法, <code>charAt()</code>,<code>charCodeAt()</code>, 都接受一个基于0的字符位置. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringV = <span class="string">"hello world"</span>;</span><br><span class="line">alert( stringV.charAt(<span class="number">1</span>)); <span class="comment">// 单个字符串"e"</span></span><br><span class="line">alert( stringV.charCodeAt(<span class="number">1</span>)); <span class="comment">// 输出字符编码"101"</span></span><br><span class="line"><span class="comment">// 个别浏览器还支持alert(stringV[1]) "e"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符串操作方法. concat(),接收任意多个字符串,返回拼接的新字符串.实践中使用<code>+</code>操作符拼接.</p>
+</li>
+</ol>
+<ul>
+<li>slice()</li>
+<li>substr()</li>
+<li>substring()</li>
+</ul>
+<p>第一个参数:表示指定子字符串的开始位置.<br>第二个参数(在指定情况下),slice()和substring()第二个参数指定的是子字符串最后一个字符后面的位置.<br>而substr()指的是返回的字符个数.</p>
+<ul>
+<li>indexOf()</li>
+<li>lastIndexOf()</li>
+<li>trim() 创建字符串副本,删除前置和后缀所有空格,然后返回结果.部分浏览器支持trimLeft(),trimRight()</li>
+</ul>
+<ol>
+<li>字符串大小写转化</li>
+</ol>
+<ul>
+<li>toLowerCase()</li>
+<li>toUpperCase()</li>
+</ul>
+<ol>
+<li>字符串匹配(值得看)</li>
+</ol>
+<ul>
+<li><code>match()</code> 参数要么是正则表达式,要么是RegExp对象.</li>
+<li>search()</li>
+<li><code>replace()</code></li>
+<li><code>split()</code> 字符串分割.</li>
+</ul>
+<h2 id="u5355_u4F53_u5185_u7F6E_u5BF9_u8C61"><a href="#u5355_u4F53_u5185_u7F6E_u5BF9_u8C61" class="headerlink" title="单体内置对象"></a>单体内置对象</h2><h3 id="Global__u5BF9_u8C61"><a href="#Global__u5BF9_u8C61" class="headerlink" title="Global 对象"></a>Global 对象</h3><p>isNaN(), parseInt(),<br><code>encodeURL</code>, <code>decodeURL</code>,<br><code>encodeURLComponet()</code>, <code>decodeURLComponet()</code>,</p>
+<p><img src="/img/js-high-level-5-7.png" alt="URL编码"></p>
+<p><code>eval()</code>, <code>window</code></p>
+<h3 id="Math__u5BF9_u8C61"><a href="#Math__u5BF9_u8C61" class="headerlink" title="Math 对象"></a>Math 对象</h3><blockquote>
+<p>min(), max()<br>Math.ceil() 向上取整<br>Math.floor() 向下取整<br>Math.round() 执行标准四舍五入<br>random() 返回(0, 1)之间的数.<br>selectFrom()</p>
+</blockquote>
+<p><code>5 完结</code></p>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>文章若有纰漏，请大家补充指正，谢谢！<br>如有疑问可留言，我会在第一时间回复。<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -148,7 +312,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date__u7C7B_u578B"><span class="toc-number">1.</span> <span class="toc-text">Date 类型</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Date__u7C7B_u578B"><span class="toc-number">1.</span> <span class="toc-text">Date 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7EE7_u627F_u65B9_u6CD5"><span class="toc-number">1.1.</span> <span class="toc-text">继承方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u65E5_u671F_u683C_u5F0F_u5316_u548C_u65B9_u6CD5"><span class="toc-number">1.2.</span> <span class="toc-text">日期格式化和方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u65E5_u671F_u548C_u65F6_u95F4_u7EC4_u4EF6_u65B9_u6CD5"><span class="toc-number">1.3.</span> <span class="toc-text">日期和时间组件方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RegExp__u7C7B_u578B"><span class="toc-number">2.</span> <span class="toc-text">RegExp 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RegExp__u5B9E_u4F8B_u5C5E_u6027"><span class="toc-number">2.1.</span> <span class="toc-text">RegExp 实例属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RegExp__u5B9E_u4F8B_u65B9_u6CD5"><span class="toc-number">2.2.</span> <span class="toc-text">RegExp 实例方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RegExp__u6784_u9020_u51FD_u6570_u5C5E_u6027"><span class="toc-number">2.3.</span> <span class="toc-text">RegExp 构造函数属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6A21_u5F0F_u7684_u5C40_u9650_u6027"><span class="toc-number">2.4.</span> <span class="toc-text">模式的局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Functon__u7C7B_u578B"><span class="toc-number">3.</span> <span class="toc-text">Functon 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u51FD_u6570_u58F0_u660E_u4E0E_u51FD_u6570_u8868_u8FBE_u5F0F"><span class="toc-number">3.1.</span> <span class="toc-text">函数声明与函数表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F5C_u4E3A_u503C_u7684_u51FD_u6570"><span class="toc-number">3.2.</span> <span class="toc-text">作为值的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u51FD_u6570_u5185_u90E8_u5C5E_u6027"><span class="toc-number">3.3.</span> <span class="toc-text">函数内部属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5C5E_u6027_u548C_u65B9_u6CD5_length_2C_property_2C_apply_2Ccall_2Cbind"><span class="toc-number">3.4.</span> <span class="toc-text">属性和方法 length, property, apply,call,bind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u57FA_u672C_u5305_u88C5_u7C7B"><span class="toc-number">4.</span> <span class="toc-text">基本包装类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean__u5BF9_u8C61"><span class="toc-number">4.1.</span> <span class="toc-text">Boolean 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number__u5BF9_u8C61"><span class="toc-number">4.2.</span> <span class="toc-text">Number 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String_u7C7B_u578B"><span class="toc-number">4.3.</span> <span class="toc-text">String类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5355_u4F53_u5185_u7F6E_u5BF9_u8C61"><span class="toc-number">5.</span> <span class="toc-text">单体内置对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Global__u5BF9_u8C61"><span class="toc-number">5.1.</span> <span class="toc-text">Global 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Math__u5BF9_u8C61"><span class="toc-number">5.2.</span> <span class="toc-text">Math 对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">6.</span> <span class="toc-text">参考文档</span></a></li></ol>
  
   </div>
 
