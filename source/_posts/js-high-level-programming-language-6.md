@@ -3,7 +3,7 @@ date: 2015-12-26 20:47:31
 description: "读《JavaScript高级程序设计 -- 第6章 面向对象的程序设计》总结,详细介绍对象属性特征、创建对象以及继承等"
 tags:
 - "js.Property"
-- "js.window"
+- "js.继承模式"
 - "随笔"
 ---
 
