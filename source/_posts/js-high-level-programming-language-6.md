@@ -39,7 +39,8 @@ person.name = 'Chan';
 console.log(person.name); // 'Jack'
 ```
 
-`一旦将configurable设置为false,就不能在把它变回可配置,此时再调用Object.defineProperty()修改除writable之外的特性,都会导致错误.`
+`一旦将configurable设置为false,就不能在把它变回可配置`,
+`此时再调用Object.defineProperty()修改除writable之外的特性,都会导致错误.`
 在调用Object.defineProperty()时不设置除Value之外的三个值,默认都为false.
 
 
@@ -257,7 +258,7 @@ p1.sayName == p2.sayName; // false
 function Person() {};
 Person.property.name = 'Jack';
 Person.property.age = 24;
-Person.property.job = 'JS;
+Person.property.job = 'JS';
 Person.property.sayName = function() {
   console.log(this.name);
 };
@@ -265,7 +266,7 @@ Person.property.sayName = function() {
 var p1 = new Peroson();
 p1.sayName(); // 'Jack'
 var p2 = new Person();
-p2.sayName(); 'Jack'
+p2.sayName(); // 'Jack'
 
 p1.sayName == p2.sayName; // true
 ```
