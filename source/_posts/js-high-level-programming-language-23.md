@@ -1,6 +1,6 @@
 title: "读《JavaScript高级程序设计》总结23"
 date: 2015-12-29 19:47:27
-description: "读《JavaScript高级程序设计 -- 第23章 离线应用及客户端存储,主要讲述离线检测,应用缓存,以及数据存储(Cookie,Web,IndexedDB)"
+description: "读《JavaScript高级程序设计 -- 第23章 离线应用及客户端存储》主要讲述离线检测,应用缓存,以及数据存储(Cookie,Web,IndexedDB)"
 tags:
 - "JavaScript"
 - "随笔"
