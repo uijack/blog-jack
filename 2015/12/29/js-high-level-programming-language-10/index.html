@@ -1,0 +1,657 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结10 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第10章 DOM,主要各种节点类型和DOM操作技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结10">
+<meta property="og:url" content="http://blog.uijack.com/2015/12/29/js-high-level-programming-language-10/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第10章 DOM,主要各种节点类型和DOM操作技术">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-10-1.png">
+<meta property="og:updated_time" content="2015-12-29T09:50:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结10">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第10章 DOM,主要各种节点类型和DOM操作技术">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/29/js-high-level-programming-language-10/" title="读《JavaScript高级程序设计》总结10" itemprop="url">读《JavaScript高级程序设计》总结10</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-29T01:14:43.000Z" itemprop="datePublished"> 发表于 2015-12-29 09:14:43</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8282_u70B9_u5C42_u6B21"><span class="toc-number">1.</span> <span class="toc-text">节点层次</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node__u7C7B_u578B"><span class="toc-number">1.1.</span> <span class="toc-text">Node 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Document__u7C7B_u578B"><span class="toc-number">1.2.</span> <span class="toc-text">Document 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Element__u7C7B_u578B"><span class="toc-number">1.3.</span> <span class="toc-text">Element 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text__u7C7B_u578B_28_u91CD_u8981_29"><span class="toc-number">1.4.</span> <span class="toc-text">Text 类型(重要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comment__u7C7B_u578B"><span class="toc-number">1.5.</span> <span class="toc-text">Comment 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDATASection__u7C7B_u578B"><span class="toc-number">1.6.</span> <span class="toc-text">CDATASection 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DocumentType__u7C7B_u578B"><span class="toc-number">1.7.</span> <span class="toc-text">DocumentType 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DocumentFragment__u7C7B_u578B_28_u5F88_u6709_u7528_29"><span class="toc-number">1.8.</span> <span class="toc-text">DocumentFragment 类型(很有用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attr__u7C7B_u578B"><span class="toc-number">1.9.</span> <span class="toc-text">Attr 类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM__u64CD_u4F5C_u6280_u672F"><span class="toc-number">2.</span> <span class="toc-text">DOM 操作技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u52A8_u6001_u811A_u672C_28*_29"><span class="toc-number">2.1.</span> <span class="toc-text">动态脚本(*)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u52A8_u6001_u6837_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">动态样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u64CD_u4F5C_u8868_u683C"><span class="toc-number">2.3.</span> <span class="toc-text">操作表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528NodeList"><span class="toc-number">2.4.</span> <span class="toc-text">使用NodeList</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">3.</span> <span class="toc-text">参考文档</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u8282_u70B9_u5C42_u6B21"><a href="#u8282_u70B9_u5C42_u6B21" class="headerlink" title="节点层次"></a>节点层次</h2><p>DOM是针对HTML和XML文档的一个API(应用程序编程接口),描述的是一个层次化的节点树.<br>IE中的所有对象都是以COM对象的形式实现,这意味着IE中的DOM对象与原生JavaScript对象的行为或活动特点并不一致.<br>总共有<code>12种节点类型</code>,都继承自一个<code>基类Node</code>.</p>
+<h3 id="Node__u7C7B_u578B"><a href="#Node__u7C7B_u578B" class="headerlink" title="Node 类型"></a>Node 类型</h3><p><code>DOM1级</code>定义了一个<code>Node接口</code>,由DOM中的所有节点类型实现.这个Node除了IE之外, 其他浏览器都可以访问到这个类型.<br>所有节点类型都共享相同的属性和方法.</p>
+<p>每个节点都有一个<code>nodeType</code>属性,用于表明节点类型.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1,  Node.ELEMENT_NODE(1);&#10;2,  Node.ATTRIBUTE_NODE(2);&#10;3,  Node.TEXT_NODE(3);&#10;4,  Node.CDATA_SECTION_NODE(4);&#10;5,  Node.ENTITY_REFERENCE_NODE(5);&#10;6,  Node.ENTITY_NODE(6);&#10;7,  Node.PROCESSING_INSTRUCTION_NODE(7);&#10;8,  Node.COMMENT_NODE(8);&#10;9,  Node.DOCUMENT_NODE(9);&#10;10, Node.DOCUMENT_TYPE_NODE(10);&#10;11, Node.DOCUMENT_FRAGMENT_NODE(11);&#10;12, Node.NOTATION_NODE(12);</span><br></pre></td></tr></table></figure>
+<p>比较这12种类型,可以确定节点类型:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (someNode.nodeType == Node.ELEMENT_NODE) &#123; <span class="comment">//在IE中不能访问Node, 所以在IE中无效</span></span><br><span class="line">  alert(<span class="string">'Node is an element.'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以进行数值比较 推荐</span></span><br><span class="line"><span class="keyword">if</span> (someNode.nodeType == <span class="number">1</span>) &#123;  <span class="comment">// 使用所有浏览器</span></span><br><span class="line">  alert(<span class="string">'Node is an element.'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用下面两个属性前,先确定类型: 是元素节点,nodeName保存的是元素的标签名,而nodeValue始终为null.</p>
+<blockquote>
+<p>nodeName<br>nodeValue</p>
+</blockquote>
+<p>每个节点都有一个childNodes属性.保存着NodeList对象.<br>访问方法:<br>1, 通过方括号访问,<br>2, 使用item()方法.<br>NodeList也有length属性,但它不是Array的实例.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> firstChild  = someNode.childNodes[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> secondChild = someNode.childNodes.item(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> count       = someNode.childNodes.length;</span><br></pre></td></tr></table></figure>
+<p><code>arguments</code>对象使用Array.prototype.slice()将其转化为数组;<code>NodeList</code>也可以.<br>var arrayNodes = Array.prototype.slice.call(someNode.childNodes, 0); // IE8及之前版本都无效</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">converToArray</span>(<span class="params"> nodes </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> array = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    array = <span class="built_in">Array</span>.prototype.slice.call(someNode.childNodes, <span class="number">0</span>);<span class="comment">// 针对非IE浏览器</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">    array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>, len=nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">      array.push(nodes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个节点都有一个<code>parentNode</code>属性.改属性指向文档树中的父亲节点.包含在childNodes列表中的所有节点都具有相同的父节点.</p>
+<blockquote>
+<p>parentNode属性: 父节点<br>previousSibling属性: 同级的上一个节点,没有为null<br>nextSibling属性: 同级的下一个节点,没有为null<br>hasChildNodes(): 有机返回true.<br>ownerDocument属性: 该属性指向表示整个文档的文档节点.</p>
+</blockquote>
+<p><img src="/img/js-high-level-10-1.png" alt="节点类型关系图"></p>
+<ul>
+<li>操作节点:</li>
+</ul>
+<blockquote>
+<p>appendChild()<br>insertBefore()<br>replaceChild()<br>removeChild()</p>
+</blockquote>
+<ul>
+<li>其他方法:</li>
+</ul>
+<blockquote>
+<p>cloneNode(); 不会复制添加到DOM节点中的JavaScript属性,如事件处理,<br>normalize();</p>
+</blockquote>
+<h3 id="Document__u7C7B_u578B"><a href="#Document__u7C7B_u578B" class="headerlink" title="Document 类型"></a>Document 类型</h3><p>在浏览器中,document对象是HTMLDocument(继承自Document)的一个实例,表示整个html页面,documen对象也是window对象的一个属性.<br>Document节点特征:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType:9&#10;nodeName: &#39;#document&#39;&#10;nodeValue: null&#10;parentNode: null&#10;ownerDocument: null&#10;&#20854;&#23376;&#33410;&#28857;&#21487;&#33021;&#26159;&#19968;&#20010;DocumentType(&#26368;&#22810;&#19968;&#20010;),Element(&#26368;&#22810;&#19968;&#20010;),ProcessingInstruction&#25110;Comment.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>文档的子节点</li>
+</ul>
+<p>内置2个访问其子节点的快捷方式:</p>
+<blockquote>
+<p>documentElement属性: 始终指向页面中的<html>元素<br>childNodes列表访问文档元素<br>body属性<br>doctype属性:用处有限,因为浏览器支持不一.</html></p>
+</blockquote>
+<p>documentElement,firstChild,childNodes[0]都指向<code>&lt;html&gt;</code>元素</p>
+<ul>
+<li>文档信息</li>
+</ul>
+<blockquote>
+<p>docuemnt.title;  // 取得标题<br>document.URL;    // 取得完整的URL<br>document.domain; // 取得域名<br>document.referrer; // 取得来源页面的URL</p>
+</blockquote>
+<ul>
+<li>查找元素</li>
+</ul>
+<blockquote>
+<p>getElementById()<br>getElementByTagName()<br>getElementByName() // 单选按钮</p>
+</blockquote>
+<ul>
+<li>特殊集合</li>
+</ul>
+<blockquote>
+<p>document.anchors<br>document.applets<br>document.forms;<br>document.images;<br>document.links;</p>
+</blockquote>
+<ul>
+<li>DOM一致性检测</li>
+</ul>
+<p>检测浏览器实现了DOM的那些部分就十分必要. document.implementation属性</p>
+<ul>
+<li><p>hasFeature(要检测的DOM功能名称, 版本号);</p>
+</li>
+<li><p>文档写入</p>
+</li>
+</ul>
+<blockquote>
+<p>write()<br>writeln()<br>open()<br>close()</p>
+</blockquote>
+<h3 id="Element__u7C7B_u578B"><a href="#Element__u7C7B_u578B" class="headerlink" title="Element 类型"></a>Element 类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType:1&#10;nodeName: &#20803;&#32032;&#26631;&#31614;&#21517;(&#20840;&#26159;&#22823;&#20889;)&#10;nodeValue: null&#10;parentNode: Document&#25110;Element&#10;&#20854;&#23376;&#33410;&#28857;&#21487;&#33021;&#26159;: Element,Text,Comment,ProcessingInstruction,CDATASection&#25110;EntityReference.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HTML元素</li>
+</ul>
+<p>所有HTML元素都是由HTMLElementl类型表示,不是直接通过这个类型,而是通过它的子类型来表示.HTMLElement类型直接继承Element并添加了一些属性.</p>
+<blockquote>
+<p>id<br>title<br>lang<br>dir: 语言方向,值为’ltr’,(left-to-right) 或 rtl (right-to-left)<br>className</p>
+</blockquote>
+<ul>
+<li>取得特性与设置特性</li>
+</ul>
+<p><code>getAttribute</code>, <code>setAttribute</code>.<code>removeAttribute</code></p>
+<p>var div = document.getElementById(‘myDiv’);<br>div.getAttribute(‘id’);<br>div.getAttribute(‘class’);<br>div.getAttribute(‘title’);<br>div.getAttribute(‘dir’);</p>
+<p>不存在则返回null;</p>
+<ul>
+<li>attribute属性</li>
+</ul>
+<p>Element类型是使用attribute属性的唯一一个DOM节点类型,包含以下属性:</p>
+<blockquote>
+<p>getNamedItem(name)<br>setNamedItem(name)<br>removeNamedItem(name)<br>item(pos)</p>
+</blockquote>
+<ul>
+<li>创建元素:</li>
+</ul>
+<blockquote>
+<p>createElement();<br>appendChild();</p>
+</blockquote>
+<h3 id="Text__u7C7B_u578B_28_u91CD_u8981_29"><a href="#Text__u7C7B_u578B_28_u91CD_u8981_29" class="headerlink" title="Text 类型(重要)"></a>Text 类型(重要)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType:3&#10;nodeName: &#39;#text&#39;&#10;nodeValue: &#33410;&#28857;&#25152;&#21253;&#21547;&#30340;&#25991;&#26412;&#10;parentNode: Element&#10;&#19981;&#25903;&#25345;(&#27809;&#26377;)&#23376;&#33410;&#28857;</span><br></pre></td></tr></table></figure>
+<p>可以通过nodeValue属性或者datas属性访问Text节点中包含的文本.这两个属性值中包含的值相同,<br>修改其中之一反映到另外一个.</p>
+<blockquote>
+<p>appendData(text)<br>deleteData(offset, count)<br>insertData(offset, text)<br>replaceData(offset, count, text)<br>splitText(offset)<br>substringData(offset, count)<br>length属性,保存节点字符的数目 nodeValue和data也有length属性</p>
+</blockquote>
+<p>创建文本节点:document.createTextNode(‘文本内容’);</p>
+<h3 id="Comment__u7C7B_u578B"><a href="#Comment__u7C7B_u578B" class="headerlink" title="Comment 类型"></a>Comment 类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType:8&#10;nodeName: &#39;#commnet&#39;&#10;nodeValue: &#27880;&#37322;&#30340;&#20869;&#23481;&#10;parentNode: Document&#25110;Element&#10;&#19981;&#25903;&#25345;(&#27809;&#26377;)&#23376;&#20803;&#32032;</span><br></pre></td></tr></table></figure>
+<p><code>Commnet</code> 和  <code>Text</code>继承自相同的基类.</p>
+<p>document.createComment(‘A Comment’);</p>
+<h3 id="CDATASection__u7C7B_u578B"><a href="#CDATASection__u7C7B_u578B" class="headerlink" title="CDATASection 类型"></a>CDATASection 类型</h3><p>只针对基于XML的文档</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType: 4&#10;nodeName: &#39;#cdata-section&#39;&#10;nodeValue: CDATA&#21306;&#22495;&#30340;&#20869;&#23481;&#10;parentNode: Document&#25110;Element&#10;&#19981;&#25903;&#25345;(&#27809;&#26377;)&#23376;&#20803;&#32032;</span><br></pre></td></tr></table></figure>
+<h3 id="DocumentType__u7C7B_u578B"><a href="#DocumentType__u7C7B_u578B" class="headerlink" title="DocumentType 类型"></a>DocumentType 类型</h3><p>并不常用仅有Firefox,Safari,Opera支持.Chrome4.0才支持</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType: 10&#10;nodeName: doctype&#30340;&#21517;&#31216;&#10;nodeValue: null&#10;parentNode: Document&#10;&#19981;&#25903;&#25345;(&#27809;&#26377;)&#23376;&#20803;&#32032;</span><br></pre></td></tr></table></figure>
+<h3 id="DocumentFragment__u7C7B_u578B_28_u5F88_u6709_u7528_29"><a href="#DocumentFragment__u7C7B_u578B_28_u5F88_u6709_u7528_29" class="headerlink" title="DocumentFragment 类型(很有用)"></a>DocumentFragment 类型(很有用)</h3><p>在文档中没有对应的标记,DOM规定文档片段是一种’轻量级’的文档,可以包含和控制节点.不会像完整文档那样占用资源.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType: 11&#10;nodeName: &#39;#document-fragment&#39;&#10;nodeValue: null&#10;parentNode: null&#10;&#23376;&#33410;&#28857;: Element, ProcessingInstruction, Comment, Text, CDATASection, EntityReference</span><br></pre></td></tr></table></figure>
+<p>可以作为一个仓库,保存可能会添加到文档中的节点.</p>
+<p>var gragment = document.createDocumentFragment();</p>
+<p>设想我们想为ul元素添加3个列表项.逐个添加会导致浏览器反复渲染新信息,为避免问题.可以先将每一个li创建预存在fragment对象上,一次性添加到ul中即可.</p>
+<h3 id="Attr__u7C7B_u578B"><a href="#Attr__u7C7B_u578B" class="headerlink" title="Attr 类型"></a>Attr 类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodeType: 11&#10;nodeName: &#29305;&#24615;&#30340;&#21517;&#31216;&#10;nodeValue: &#29305;&#24615;&#30340;&#20540;&#10;parentNode: null&#10;specified: &#24067;&#23572;&#20540;&#10;&#23376;&#33410;&#28857;: &#22312;HTML&#20013;&#19981;&#25903;&#25345;(&#27809;&#26377;)&#23376;&#33410;&#28857;,&#22312;XML&#20013;&#23376;&#33410;&#28857;&#21487;&#20197;&#26159;Text, EntityReference.</span><br></pre></td></tr></table></figure>
+<p>尽管是节点,但特性却不被认为是DOM文档树德一部分.常用方法:</p>
+<blockquote>
+<p>getAttribute()<br>setAttribute()<br>removeAttribute()</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> attr = <span class="built_in">document</span>.createAttribute(<span class="string">'align'</span>);</span><br><span class="line">attr.value = <span class="string">'left'</span>;</span><br><span class="line">element.setAttribute(attr);</span><br><span class="line"></span><br><span class="line">cosole.log(element.attributes[<span class="string">'align'</span>].value); <span class="comment">// 'left'</span></span><br><span class="line">cosole.log(element.getAttributeNode(<span class="string">'align'</span>).value); <span class="comment">// 'left'</span></span><br><span class="line">cosole.log(element.getAttribute(<span class="string">'align'</span>)); <span class="comment">// 'left'</span></span><br></pre></td></tr></table></figure>
+<h2 id="DOM__u64CD_u4F5C_u6280_u672F"><a href="#DOM__u64CD_u4F5C_u6280_u672F" class="headerlink" title="DOM 操作技术"></a>DOM 操作技术</h2><p>因为浏览器隐藏着陷阱和不兼容问题.</p>
+<h3 id="u52A8_u6001_u811A_u672C_28*_29"><a href="#u52A8_u6001_u811A_u672C_28*_29" class="headerlink" title="动态脚本(<strong>*</strong>)"></a>动态脚本(<strong>*</strong>)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 &lt;!-- &lt;script type="text/javascript" src="client.js"&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">script.src = <span class="string">'client.js'</span>;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(script);</span><br></pre></td></tr></table></figure>
+<p>封装上面的代码成函数;</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fucntion loadScript( url ) &#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">  script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">  script.src = url;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加载内部js片段:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScriptString</span>(<span class="params">code</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">  script.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// IE将script视为特殊的元素,不允许DOM访问其子节点,不过可以用text属性来指定js片段</span></span><br><span class="line">    script.appendChild(<span class="built_in">document</span>.createTextNode(code));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex)&#123;</span><br><span class="line">    script.text = code;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addScript</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  loadScriptString(<span class="string">"function sayHi()&#123;alert('hi');&#125;"</span>);</span><br><span class="line">  sayHi();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u52A8_u6001_u6837_u5F0F"><a href="#u52A8_u6001_u6837_u5F0F" class="headerlink" title="动态样式"></a>动态样式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addStyle</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadStyleString</span>(<span class="params">css</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> style = <span class="built_in">document</span>.createElement(<span class="string">"style"</span>);</span><br><span class="line">  style.type = <span class="string">"text/css"</span>;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    style.appendChild(<span class="built_in">document</span>.createTextNode(css)); <span class="comment">// //error in IE</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex)&#123;</span><br><span class="line">    style.styleSheet.cssText = css;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> head = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>];</span><br><span class="line">  head.appendChild(style);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addStyle</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  loadStyleString(<span class="string">"body&#123;background-color:red&#125;"</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u64CD_u4F5C_u8868_u683C"><a href="#u64CD_u4F5C_u8868_u683C" class="headerlink" title="操作表格"></a>操作表格</h3><p>省略…</p>
+<h3 id="u4F7F_u7528NodeList"><a href="#u4F7F_u7528NodeList" class="headerlink" title="使用NodeList"></a>使用NodeList</h3><p>应该尽量减少访问NodeList的次数,因为每次访问NodeList,都会运行一次基于文档的查询, 所以,可以考虑将从NodeList中取得的值缓存起来.</p>
+<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>文章若有纰漏，请大家补充指正，谢谢！<br>如有疑问可留言，我会在第一时间回复。<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2015/12/29/js-high-level-programming-language-10/" data-title="读《JavaScript高级程序设计》总结10 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/12/29/js-high-level-programming-language-23/" title="读《JavaScript高级程序设计》总结23">
+  <strong>上一篇：</strong><br/>
+  <span>
+  读《JavaScript高级程序设计》总结23</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/12/28/js-high-level-programming-language-9/"  title="读《JavaScript高级程序设计》总结9">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结9
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/29/js-high-level-programming-language-10/" data-title="读《JavaScript高级程序设计》总结10" data-url="http://blog.uijack.com/2015/12/29/js-high-level-programming-language-10/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8282_u70B9_u5C42_u6B21"><span class="toc-number">1.</span> <span class="toc-text">节点层次</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node__u7C7B_u578B"><span class="toc-number">1.1.</span> <span class="toc-text">Node 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Document__u7C7B_u578B"><span class="toc-number">1.2.</span> <span class="toc-text">Document 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Element__u7C7B_u578B"><span class="toc-number">1.3.</span> <span class="toc-text">Element 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Text__u7C7B_u578B_28_u91CD_u8981_29"><span class="toc-number">1.4.</span> <span class="toc-text">Text 类型(重要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comment__u7C7B_u578B"><span class="toc-number">1.5.</span> <span class="toc-text">Comment 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDATASection__u7C7B_u578B"><span class="toc-number">1.6.</span> <span class="toc-text">CDATASection 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DocumentType__u7C7B_u578B"><span class="toc-number">1.7.</span> <span class="toc-text">DocumentType 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DocumentFragment__u7C7B_u578B_28_u5F88_u6709_u7528_29"><span class="toc-number">1.8.</span> <span class="toc-text">DocumentFragment 类型(很有用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attr__u7C7B_u578B"><span class="toc-number">1.9.</span> <span class="toc-text">Attr 类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM__u64CD_u4F5C_u6280_u672F"><span class="toc-number">2.</span> <span class="toc-text">DOM 操作技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u52A8_u6001_u811A_u672C_28*_29"><span class="toc-number">2.1.</span> <span class="toc-text">动态脚本(*)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u52A8_u6001_u6837_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">动态样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u64CD_u4F5C_u8868_u683C"><span class="toc-number">2.3.</span> <span class="toc-text">操作表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528NodeList"><span class="toc-number">2.4.</span> <span class="toc-text">使用NodeList</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">3.</span> <span class="toc-text">参考文档</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
