@@ -137,12 +137,11 @@ function problem() {
 在IE中，调用window.CollectGarbage()方法会立即执行垃圾收集
 Opera 7及以上高版本中，调用window.opera.collect()也会启动垃圾收集例程。
 
-## 参考文档
 
-- [JavaScript高级程序设计（第三版）](http://www.ituring.com.cn/book/946)
 
 -----------------------
 
-> 文章若有纰漏，请大家补充指正，谢谢！
-> 如有疑问可留言，我会在第一时间回复。
+> 参考文档: [JavaScript高级程序设计（第三版）](http://www.ituring.com.cn/book/946)
+> 文章若有纰漏，请大家补充指正.
+> 仅作为学习交流所用,不与商用.违者必究.
 > [转载请注明出处: http://blog.uijack.com/](http://blog.uijack.com/)
