@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/</loc>
+    <lastmod>2015-12-30T09:54:01.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/</loc>
+    <lastmod>2015-12-30T09:52:53.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.uijack.com/2015/12/28/js-high-level-programming-language-9/</loc>
     <lastmod>2015-12-30T03:00:41.000Z</lastmod>
   </url>
@@ -54,11 +64,6 @@
   <url>
     <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
     <lastmod>2015-12-30T02:58:47.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/</loc>
-    <lastmod>2015-12-30T02:58:17.000Z</lastmod>
   </url>
   
   <url>
