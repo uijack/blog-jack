@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/index.html">
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="读《JavaScript高级程序设计 -- 第1、2章 JavaScript和HTML》总结, 包括js简洁、版本、引入等">
-<meta property="og:updated_time" content="2015-12-24T14:17:22.000Z">
+<meta property="og:updated_time" content="2015-12-30T02:58:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《JavaScript高级程序设计》总结1">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第1、2章 JavaScript和HTML》总结, 包括js简洁、版本、引入等">
@@ -91,7 +91,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">第1章 JavaScript简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u7B80_u53F2"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u5B9E_u73B0"><span class="toc-number">1.2.</span> <span class="toc-text">JavaScript实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><span class="toc-number">2.</span> <span class="toc-text">第2章 在 HTML 中 使用 JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script__u5143_u7D20"><span class="toc-number">2.1.</span> <span class="toc-text">script 元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">标签加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">2.3.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5143_u7D20"><span class="toc-number">2.4.</span> <span class="toc-text"> 元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">3.</span> <span class="toc-text">参考文档</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">第1章 JavaScript简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u7B80_u53F2"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u5B9E_u73B0"><span class="toc-number">1.2.</span> <span class="toc-text">JavaScript实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><span class="toc-number">2.</span> <span class="toc-text">第2章 在 HTML 中 使用 JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script__u5143_u7D20"><span class="toc-number">2.1.</span> <span class="toc-text">script 元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">标签加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">2.3.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5143_u7D20"><span class="toc-number">2.4.</span> <span class="toc-text"> 元素</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -132,12 +132,9 @@
 <h3 id="u5143_u7D20"><a href="#u5143_u7D20" class="headerlink" title="<noscript> 元素"></a><noscript> 元素</noscript></h3><p>一下两种情况：<br>1、浏览器不支持脚本<br>2、浏览器支持，但脚本被禁用</p>
 <p>出现以上一种情况，<code>noscript</code>标签的内容才会出现。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body&#62;&#10;  &#60;noscript&#62;&#10;    &#60;p&#62;&#26412;&#39029;&#38754;&#38656;&#35201;&#27983;&#35272;&#22120;&#25903;&#25345;&#65288;&#21551;&#29992;&#65289;JavaScript&#12290;&#60;/p&#62;&#10;  &#60;/noscript&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
-<h2 id="u53C2_u8003_u6587_u6863"><a href="#u53C2_u8003_u6587_u6863" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
-<li><a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a></li>
-</ul>
 <hr>
 <blockquote>
-<p>文章若有纰漏，请大家补充指正，谢谢！<br>如有疑问可留言，我会在第一时间回复。<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
 </blockquote>
   
 	</div>
@@ -200,7 +197,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">第1章 JavaScript简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u7B80_u53F2"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u5B9E_u73B0"><span class="toc-number">1.2.</span> <span class="toc-text">JavaScript实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><span class="toc-number">2.</span> <span class="toc-text">第2章 在 HTML 中 使用 JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script__u5143_u7D20"><span class="toc-number">2.1.</span> <span class="toc-text">script 元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">标签加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">2.3.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5143_u7D20"><span class="toc-number">2.4.</span> <span class="toc-text"> 元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u6587_u6863"><span class="toc-number">3.</span> <span class="toc-text">参考文档</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C1_u7AE0_JavaScript_u7B80_u4ECB"><span class="toc-number">1.</span> <span class="toc-text">第1章 JavaScript简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u7B80_u53F2"><span class="toc-number">1.1.</span> <span class="toc-text">JavaScript简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript_u5B9E_u73B0"><span class="toc-number">1.2.</span> <span class="toc-text">JavaScript实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u7B2C2_u7AE0__u5728_HTML__u4E2D__u4F7F_u7528_JavaScript"><span class="toc-number">2.</span> <span class="toc-text">第2章 在 HTML 中 使用 JavaScript</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script__u5143_u7D20"><span class="toc-number">2.1.</span> <span class="toc-text">script 元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u52A0_u8F7D_u65B9_u5F0F"><span class="toc-number">2.2.</span> <span class="toc-text">标签加载方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">2.3.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5143_u7D20"><span class="toc-number">2.4.</span> <span class="toc-text"> 元素</span></a></li></ol></li></ol>
  
   </div>
 
@@ -216,11 +213,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>11</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>12</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>5</sup></a></li>
 			
 		
 			

@@ -1,0 +1,588 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结11 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第11章 DOM扩展》主要介绍选择符API,元素遍历，HTML5以及专有扩展">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结11">
+<meta property="og:url" content="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第11章 DOM扩展》主要介绍选择符API,元素遍历，HTML5以及专有扩展">
+<meta property="og:updated_time" content="2015-12-30T02:58:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结11">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第11章 DOM扩展》主要介绍选择符API,元素遍历，HTML5以及专有扩展">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/30/js-high-level-programming-language-11/" title="读《JavaScript高级程序设计》总结11" itemprop="url">读《JavaScript高级程序设计》总结11</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-29T23:11:58.000Z" itemprop="datePublished"> 发表于 2015-12-30 07:11:58</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u9009_u62E9_u7B26API"><span class="toc-number">1.</span> <span class="toc-text">选择符API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#querySelector_28_29_u65B9_u6CD5"><span class="toc-number">1.1.</span> <span class="toc-text">querySelector()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#querySelectorAll_28_29__u65B9_u6CD5"><span class="toc-number">1.2.</span> <span class="toc-text">querySelectorAll() 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matchesSelector_28_29__u65B9_u6CD5"><span class="toc-number">1.3.</span> <span class="toc-text">matchesSelector() 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5143_u7D20_u904D_u5386"><span class="toc-number">2.</span> <span class="toc-text">元素遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML5"><span class="toc-number">3.</span> <span class="toc-text">HTML5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7126_u70B9_u7BA1_u7406"><span class="toc-number">3.1.</span> <span class="toc-text">焦点管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTMLDocument__u7684_u53D8_u5316"><span class="toc-number">3.2.</span> <span class="toc-text">HTMLDocument 的变化.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u63D2_u5165_u6807_u8BB0"><span class="toc-number">3.3.</span> <span class="toc-text">插入标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scrollIntoView_28_29_28_29__u65B9_u6CD5"><span class="toc-number">3.4.</span> <span class="toc-text">scrollIntoView()() 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E13_u6709_u5C5E_u6027"><span class="toc-number">4.</span> <span class="toc-text">专有属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">4.1.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6EDA_u52A8"><span class="toc-number">4.2.</span> <span class="toc-text">滚动</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u9009_u62E9_u7B26API"><a href="#u9009_u62E9_u7B26API" class="headerlink" title="选择符API"></a>选择符API</h2><p>jQuery的核心就是同通过CSS选择符查询DOM文档取得元素的引用。从而抛开<code>getElementById()</code>和<code>getElementByTagName()</code><br>Selectors API Level1 的两个核心方法： <code>querySelector()</code>和<code>querySelectorAll()</code>.<br>在兼容浏览器中可以通过<code>Document</code>及<code>Element</code>类型实例调用。IE8+,Ff3.5+,Chroem,Opera10+支持。</p>
+<h3 id="querySelector_28_29_u65B9_u6CD5"><a href="#querySelector_28_29_u65B9_u6CD5" class="headerlink" title="querySelector()方法"></a>querySelector()方法</h3><p>接收一个css选择符（id, 元素, class名）。返回与该模式匹配的第一个元素，没有则返回<code>null</code>.如果传入不支持的选择符会抛错。</p>
+<h3 id="querySelectorAll_28_29__u65B9_u6CD5"><a href="#querySelectorAll_28_29__u65B9_u6CD5" class="headerlink" title="querySelectorAll() 方法"></a>querySelectorAll() 方法</h3><p>同querySelector()一样接受一个css选择符,返回一个<code>NodeList</code>的实例。没有就为空。</p>
+<p>访问NodeList实例可以用item()方法或者使用方括号语法。</p>
+<h3 id="matchesSelector_28_29__u65B9_u6CD5"><a href="#matchesSelector_28_29__u65B9_u6CD5" class="headerlink" title="matchesSelector() 方法"></a>matchesSelector() 方法</h3><p>Selector API Level 2 规范为Element类型新增了一个方法<code>matchesSelector(css选择符)</code>匹配返回true,否则返回false.<br>该方法各大浏览器支持性不是很好.</p>
+<h2 id="u5143_u7D20_u904D_u5386"><a href="#u5143_u7D20_u904D_u5386" class="headerlink" title="元素遍历"></a>元素遍历</h2><p>Element Traversal 规范 IE9+ Ff3.5 Saf4+ Chrome Opera10+支持。</p>
+<ul>
+<li>childElementCount: 返回子元素(不包括文本节点和注释)的个数</li>
+<li>firstElementChild: 指向第一个子元素, firstChild的元素版</li>
+<li>lastElementChild: 指向最后一个子元素</li>
+<li>previousElementSibling: 指向前一个同辈元素</li>
+<li>nextElementSibling: 指向后一个同辈元素</li>
+</ul>
+<p>利用这些元素不必担心空白文本节点.</p>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><ul>
+<li>getElementsByClassName(). 最受欢迎的</li>
+</ul>
+<h3 id="u7126_u70B9_u7BA1_u7406"><a href="#u7126_u70B9_u7BA1_u7406" class="headerlink" title="焦点管理"></a>焦点管理</h3><p>document.activeElement属性;</p>
+<h3 id="HTMLDocument__u7684_u53D8_u5316"><a href="#HTMLDocument__u7684_u53D8_u5316" class="headerlink" title="HTMLDocument 的变化."></a>HTMLDocument 的变化.</h3><ul>
+<li>readyState 属性</li>
+</ul>
+<p>两个值: 1. loading 正在加载文档. 2. complete, 已经加载完文档.</p>
+<ul>
+<li>兼容模式</li>
+</ul>
+<p>标准模式下: document.compatMode == ‘CSS1Compat’<br>混杂模式下: document.compatMode == ‘BackCompat’</p>
+<ul>
+<li>head 属性</li>
+</ul>
+<p>H5新增document.head属性.</p>
+<p>var head = document.head || document.getElementByTagName(‘head’)[0];</p>
+<ul>
+<li>字符集属性</li>
+</ul>
+<p>默认为: UTF-16.</p>
+<blockquote>
+<p>document.charset = ‘UTF-8’; //IE, Safari, Chrome, Firefox, Opera.<br>document.defaultCharset属性.文档默认字符集. // IE, Safari, Chrome</p>
+</blockquote>
+<ul>
+<li>自定义数据属性 (很重要)</li>
+</ul>
+<p>HTML5规定可以为元素添加非标准属性,但要添加<code>前缀data-</code>.目的是为元素提供与渲染无关的信息.或者语义信息.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div id=&#34;myDiv&#34; data-appId=&#34;12345&#34; data-myname=&#34;Jack&#34;&#62;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">'myDiv'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得自定义属性的值</span></span><br><span class="line"><span class="keyword">var</span> appId = div.dataset.appId;</span><br><span class="line"><span class="keyword">var</span> myName = div.dataset.myname;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置值</span></span><br><span class="line">div.dataset.appId = <span class="number">23456</span>;</span><br><span class="line">div.dataset.myname = <span class="string">'Chan'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 没有为空</span></span><br></pre></td></tr></table></figure>
+<p>可以通过元素的<code>dataset</code>属性来访问自定义属性值.dataset属性的值是<code>DOMStringMap</code>的一个实例.也就是<code>键值对</code>的映射.<br>每个data-name形式的属性都会对应一个属性,只不过属性名没有<code>data-前缀</code>.</p>
+<h3 id="u63D2_u5165_u6807_u8BB0"><a href="#u63D2_u5165_u6807_u8BB0" class="headerlink" title="插入标记"></a>插入标记</h3><ul>
+<li>innerHTML 属性 (IE下注意script)</li>
+</ul>
+<p>最好先把所有的html代码拼接成字符串,在一次性插入,避免单次插入影响性能损失.</p>
+<ul>
+<li>outerHTML 属性</li>
+</ul>
+<h3 id="scrollIntoView_28_29_28_29__u65B9_u6CD5"><a href="#scrollIntoView_28_29_28_29__u65B9_u6CD5" class="headerlink" title="scrollIntoView()() 方法"></a>scrollIntoView()() 方法</h3><p>HTML5最终选择<code>scrollIntoView()</code>作为标准方法. document.forms[0].scrollIntoView(). 支持的有IE,Firefox,Safsri,Opera.</p>
+<h2 id="u4E13_u6709_u5C5E_u6027"><a href="#u4E13_u6709_u5C5E_u6027" class="headerlink" title="专有属性"></a>专有属性</h2><h3 id="u6587_u6863_u6A21_u5F0F"><a href="#u6587_u6863_u6A21_u5F0F" class="headerlink" title="文档模式"></a>文档模式</h3><p>IE8引入一个新的概念叫<code>文档模式</code>.页面的文档模式决定可以使用什么功能.即决定你使用那个级别的CSS,在JS中可以使用那些API,<br>以及如何对待文档类型(doctype).</p>
+<ol>
+<li>IE5,混杂模式渲染页面.IE8及更高版本新功能都无法使用</li>
+<li>IE7, 以IE7标准模式渲染页面,IE8及更高版本新功能都无法使用</li>
+<li>IE8,以IE8标准模式渲染页面, 可以使用更过的CSS2和某些CSS3功能.一些HTML5功能</li>
+<li>IE9,以IE9标准模式渲染页面,支持ECMAScript 5,完整CSS3.</li>
+</ol>
+<p>强制浏览器以某种模式渲染页面,可以使用HTTP头部信息<code>X-UA-Compatible</code>,通过meta标签设置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;meta http-equiv=&#34;X-UA-Compatible&#34; content=&#34;IE=IEVersion&#34; /&#62;</span><br></pre></td></tr></table></figure>
+<p><code>IEVersion</code>的值有些不同:</p>
+<ol>
+<li>Edge: 始终以最新文档模式渲染页面</li>
+<li>9, 8, 7, 5</li>
+</ol>
+<p>想知道页面采取的是什么文档模式,有助于理解页面的行为.无论什么文档模式下都可以访问这个属性:</p>
+<p><code>var mode = document.documentMode</code>;</p>
+<blockquote>
+<p>children 属性<br>contains()<br>插入文本: innerTEXT,outerText 属性</p>
+</blockquote>
+<h3 id="u6EDA_u52A8"><a href="#u6EDA_u52A8" class="headerlink" title="滚动"></a>滚动</h3><blockquote>
+<p>scrollIntoViewIfNeeded(alignCenter);<br>scrollByLines(lineCount);<br>scrollByPages(pagesCount);</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/" data-title="读《JavaScript高级程序设计》总结11 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/12/29/js-high-level-programming-language-23/"  title="读《JavaScript高级程序设计》总结23">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结23
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/30/js-high-level-programming-language-11/" data-title="读《JavaScript高级程序设计》总结11" data-url="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u9009_u62E9_u7B26API"><span class="toc-number">1.</span> <span class="toc-text">选择符API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#querySelector_28_29_u65B9_u6CD5"><span class="toc-number">1.1.</span> <span class="toc-text">querySelector()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#querySelectorAll_28_29__u65B9_u6CD5"><span class="toc-number">1.2.</span> <span class="toc-text">querySelectorAll() 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matchesSelector_28_29__u65B9_u6CD5"><span class="toc-number">1.3.</span> <span class="toc-text">matchesSelector() 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5143_u7D20_u904D_u5386"><span class="toc-number">2.</span> <span class="toc-text">元素遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML5"><span class="toc-number">3.</span> <span class="toc-text">HTML5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7126_u70B9_u7BA1_u7406"><span class="toc-number">3.1.</span> <span class="toc-text">焦点管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTMLDocument__u7684_u53D8_u5316"><span class="toc-number">3.2.</span> <span class="toc-text">HTMLDocument 的变化.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u63D2_u5165_u6807_u8BB0"><span class="toc-number">3.3.</span> <span class="toc-text">插入标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scrollIntoView_28_29_28_29__u65B9_u6CD5"><span class="toc-number">3.4.</span> <span class="toc-text">scrollIntoView()() 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E13_u6709_u5C5E_u6027"><span class="toc-number">4.</span> <span class="toc-text">专有属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6587_u6863_u6A21_u5F0F"><span class="toc-number">4.1.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6EDA_u52A8"><span class="toc-number">4.2.</span> <span class="toc-text">滚动</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>12</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
