@@ -1,0 +1,637 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结13 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第12章 事件》主要介绍事件流,事件处理程序,事件对象,事件类型,内存和性能以及模拟事件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结13">
+<meta property="og:url" content="http://blog.uijack.com/2015/12/31/js-high-level-programming-language-13/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第12章 事件》主要介绍事件流,事件处理程序,事件对象,事件类型,内存和性能以及模拟事件">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-13-1.png">
+<meta property="og:updated_time" content="2015-12-31T09:41:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结13">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第12章 事件》主要介绍事件流,事件处理程序,事件对象,事件类型,内存和性能以及模拟事件">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/12/31/js-high-level-programming-language-13/" title="读《JavaScript高级程序设计》总结13" itemprop="url">读《JavaScript高级程序设计》总结13</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-30T23:27:59.000Z" itemprop="datePublished"> 发表于 2015-12-31 07:27:59</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u6D41"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u5192_u6CE1_u6D41"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u6355_u83B7"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM_u4E8B_u4EF6_u6D41"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.1.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.2.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.3.</span> <span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u4E8B_u4EF6_u5904_u7406"><span class="toc-number">2.4.</span> <span class="toc-text">跨浏览器事件处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u5904_u7406"><span class="toc-number">3.</span> <span class="toc-text">事件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61"><span class="toc-number">3.1.</span> <span class="toc-text">DOM中的事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61"><span class="toc-number">3.2.</span> <span class="toc-text">IE中的事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u7684_u4E8B_u4EF6_u5BF9_u8C61"><span class="toc-number">3.3.</span> <span class="toc-text">跨浏览器的事件对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u7C7B_u578B"><span class="toc-number">4.</span> <span class="toc-text">事件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UI_u4E8B_u4EF6"><span class="toc-number">4.1.</span> <span class="toc-text">UI事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7126_u70B9_u4E8B_u4EF6"><span class="toc-number">4.2.</span> <span class="toc-text">焦点事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9F20_u6807_u4E0E_u6EDA_u8F6E_u4E8B_u4EF6"><span class="toc-number">4.3.</span> <span class="toc-text">鼠标与滚轮事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u952E_u76D8_u4E0E_u6587_u672C_u4E8B_u4EF6"><span class="toc-number">4.4.</span> <span class="toc-text">键盘与文本事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u590D_u5408_u4E8B_u4EF6"><span class="toc-number">4.5.</span> <span class="toc-text">复合事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53D8_u52A8_u4E8B_u4EF6"><span class="toc-number">4.6.</span> <span class="toc-text">变动事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5_u4E8B_u4EF6"><span class="toc-number">4.7.</span> <span class="toc-text">HTML5事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BBE_u5907_u4E8B_u4EF6"><span class="toc-number">4.8.</span> <span class="toc-text">设备事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u89E6_u6478_u4E0E_u624B_u52BF"><span class="toc-number">4.9.</span> <span class="toc-text">触摸与手势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5185_u5B58_u548C_u6027_u80FD"><span class="toc-number">5.</span> <span class="toc-text">内存和性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u59D4_u6258"><span class="toc-number">5.1.</span> <span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u79FB_u9664"><span class="toc-number">5.2.</span> <span class="toc-text">事件移除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6A21_u62DF_u4E8B_u4EF6"><span class="toc-number">6.</span> <span class="toc-text">模拟事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF"><span class="toc-number">6.1.</span> <span class="toc-text">DOM中的事件模拟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF"><span class="toc-number">6.2.</span> <span class="toc-text">IE中的事件模拟</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u4E8B_u4EF6_u6D41"><a href="#u4E8B_u4EF6_u6D41" class="headerlink" title="事件流"></a>事件流</h2><p>JavaScript与HTML之间交互是通过事件流.</p>
+<p>问题: 可以想象画在一张纸上的一组同心圆.如果你把手指放在圆心,那么你的手指指向的不是一个圆,而是纸上的所有圆.</p>
+<h3 id="u4E8B_u4EF6_u5192_u6CE1_u6D41"><a href="#u4E8B_u4EF6_u5192_u6CE1_u6D41" class="headerlink" title="事件冒泡流"></a>事件冒泡流</h3><p>IE事件流叫做<code>事件冒泡(event bubbling)</code>.即事件开始时由最具体的元素(文档中嵌套层次最深的那个节点)接收.然后逐级向上传播到较为不具体的接节点(文档).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!DOCTYPE html&#62;&#10;&#60;html&#62;&#10;  &#60;head&#62;&#10;    &#60;title&#62;&#60;/title&#62;&#10;  &#60;/head&#62;&#10;  &#60;body&#62;&#10;    &#60;div id=&#34;myDiv&#34;&#62;Click Me!&#60;/div&#62;&#10;  &#60;/body&#62;&#10;&#60;/html&#62;</span><br></pre></td></tr></table></figure>
+<p>单击div元素,clic事件会按照如下顺序传播:div -&gt; body -&gt; html -&gt; document.</p>
+<h3 id="u4E8B_u4EF6_u6355_u83B7"><a href="#u4E8B_u4EF6_u6355_u83B7" class="headerlink" title="事件捕获"></a>事件捕获</h3><p>Netscape 团队提出另一种事件流叫做<code>事件捕获</code>.思想是:不太具体的节点应该更早接收到事件,而最具体的节点应该最后接收到事件.事件捕获的用意在于<code>事件达到预定目标之前捕获它</code>.以前面例子为例: document &gt; html -&gt; body -&gt; div.目前IE9,Safari,Chrome,Opera和Firefox都支持这种事件流模型.<code>DOM2级事件</code>规范要求事件应该从document对象开始,但这些浏览器都是从window对象开始捕获事件的.由于老版本浏览器不支持,建议使用<code>事件冒泡</code>,在特殊时候在使用<code>事件捕捉</code>.</p>
+<h3 id="DOM_u4E8B_u4EF6_u6D41"><a href="#DOM_u4E8B_u4EF6_u6D41" class="headerlink" title="DOM事件流"></a>DOM事件流</h3><p><code>DOM2级事件</code>规定事件流包含三个阶段:</p>
+<blockquote>
+<ol>
+<li>事件捕捉</li>
+<li>处于目标阶段</li>
+<li>事件冒泡阶段</li>
+</ol>
+</blockquote>
+<p>首先发生的是事件捕获,为截获事件提供机会.然后是实际的目标接收到事件.最后一个阶段是冒泡阶段,可以在这个阶段对事件做出响应.<code>DOM2级事件</code>规定明确要求在捕获阶段不会涉及事件目标.但IE9+,Sa,CH,Ff,Op9.5+更高版本都会在捕获阶段触发事件对象上的事件,结果就有两个机会在目标是对象上操作事件.</p>
+<h2 id="u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><a href="#u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F" class="headerlink" title="事件处理程序"></a>事件处理程序</h2><h3 id="DOM0_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><a href="#DOM0_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'myBtn'</span>);</span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">'Clicked'</span>);</span><br><span class="line">  alert(<span class="keyword">this</span>.id); <span class="comment">//'myBtn' 可以在事件处理程序中通过`this`访问元素的任何属性和方法.</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">btn.onclick = <span class="literal">null</span>; <span class="comment">// 删除事件处理程序.</span></span><br></pre></td></tr></table></figure>
+<p>响应某个事件的函数就叫做<code>事件处理程序(事件侦听器)</code>.事件处理程序的名字以<code>on</code>开头.</p>
+<h3 id="DOM2_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><a href="#DOM2_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h3><ul>
+<li>addEventListener()</li>
+<li>removeEventListener()</li>
+</ul>
+<p>第三个参数是boolean值,如果为true,表示在捕获阶段调用事件处理程序. false表示在事件冒泡阶段调用事件处理程序.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'myBtn'</span>);</span><br><span class="line">btn.onaddEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'Clicked'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">btn.onaddEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id); <span class="comment">//'myBtn'</span></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>removeEventListener不能移除匿名函数.</p>
+<h3 id="IE_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><a href="#IE_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F" class="headerlink" title="IE事件处理程序"></a>IE事件处理程序</h3><ul>
+<li>attachEvent()</li>
+<li>detachEvent()</li>
+</ul>
+<p>此时的this就是window,因为事件处理程序会在全局作用域中运行.</p>
+<h3 id="u8DE8_u6D4F_u89C8_u5668_u4E8B_u4EF6_u5904_u7406"><a href="#u8DE8_u6D4F_u89C8_u5668_u4E8B_u4EF6_u5904_u7406" class="headerlink" title="跨浏览器事件处理"></a>跨浏览器事件处理</h3><p>EventUtil.js <code>源码还有很多兼容扩展方法</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventUtil = &#123;</span><br><span class="line">  addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (element.addEventListener)&#123;  <span class="comment">// DOM2级方法</span></span><br><span class="line">      element.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent)&#123; <span class="comment">// IE</span></span><br><span class="line">      element.attachEvent(<span class="string">"on"</span> + type, handler);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      element[<span class="string">"on"</span> + type] = handler;  <span class="comment">// DOM0级方法</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (element.removeEventListener)&#123;</span><br><span class="line">      element.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent)&#123;</span><br><span class="line">      element.detachEvent(<span class="string">"on"</span> + type, handler);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      element[<span class="string">"on"</span> + type] = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="u4E8B_u4EF6_u5904_u7406"><a href="#u4E8B_u4EF6_u5904_u7406" class="headerlink" title="事件处理"></a>事件处理</h2><h3 id="DOM_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61"><a href="#DOM_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61" class="headerlink" title="DOM中的事件对象"></a>DOM中的事件对象</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">  <span class="keyword">var</span> handler = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(event.type)&#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"click"</span>:</span><br><span class="line">        alert(<span class="string">"Clicked"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">          </span><br><span class="line">      <span class="keyword">case</span> <span class="string">"mouseover"</span>:</span><br><span class="line">        event.target.style.backgroundColor = <span class="string">"red"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">          </span><br><span class="line">      <span class="keyword">case</span> <span class="string">"mouseout"</span>:</span><br><span class="line">        event.target.style.backgroundColor = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">break</span>;                        </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  btn.onclick = handler;</span><br><span class="line">  btn.onmouseover = handler;</span><br><span class="line">  btn.onmouseout = handler;</span><br></pre></td></tr></table></figure>
+<p>只有设置event的<code>cancelable</code>属性值为true的事件,才可以使用<code>preventDefault()</code>来取消其默认行为,<br><code>stopPropagation()</code>方法用于立即停止事件在DOM层中传播.即取消进一步的事件捕获或冒泡.</p>
+<ul>
+<li>event.eventPhase: 1捕获阶段, 2目标对象, 3事件冒泡. 表明事件处于那个流</li>
+</ul>
+<h3 id="IE_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61"><a href="#IE_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61" class="headerlink" title="IE中的事件对象"></a>IE中的事件对象</h3><ul>
+<li>cancelBubble</li>
+</ul>
+<h3 id="u8DE8_u6D4F_u89C8_u5668_u7684_u4E8B_u4EF6_u5BF9_u8C61"><a href="#u8DE8_u6D4F_u89C8_u5668_u7684_u4E8B_u4EF6_u5BF9_u8C61" class="headerlink" title="跨浏览器的事件对象"></a>跨浏览器的事件对象</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventUtil = &#123;</span><br><span class="line"></span><br><span class="line">  addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (element.addEventListener)&#123;</span><br><span class="line">      element.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent)&#123;</span><br><span class="line">      element.attachEvent(<span class="string">"on"</span> + type, handler);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      element[<span class="string">"on"</span> + type] = handler;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getButton: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.implementation.hasFeature(<span class="string">"MouseEvents"</span>, <span class="string">"2.0"</span>))&#123;</span><br><span class="line">      <span class="keyword">return</span> event.button;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">switch</span>(event.button)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">          <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>: </span><br><span class="line">          <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getCharCode: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> event.charCode == <span class="string">"number"</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> event.charCode;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> event.keyCode;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getClipboardText: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> clipboardData =  (event.clipboardData || <span class="built_in">window</span>.clipboardData);</span><br><span class="line">    <span class="keyword">return</span> clipboardData.getData(<span class="string">"text"</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getEvent: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> event ? event : <span class="built_in">window</span>.event;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getRelatedTarget: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.relatedTarget)&#123;</span><br><span class="line">      <span class="keyword">return</span> event.relatedTarget;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.toElement)&#123;</span><br><span class="line">      <span class="keyword">return</span> event.toElement;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event.fromElement)&#123;</span><br><span class="line">      <span class="keyword">return</span> event.fromElement;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getTarget: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> event.target || event.srcElement;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  getWheelDelta: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.wheelDelta)&#123;</span><br><span class="line">      <span class="keyword">return</span> (client.engine.opera &amp;&amp; client.engine.opera &lt; <span class="number">9.5</span> ? -event.wheelDelta : event.wheelDelta);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> -event.detail * <span class="number">40</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  preventDefault: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.preventDefault)&#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      event.returnValue = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (element.removeEventListener)&#123;</span><br><span class="line">      element.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent)&#123;</span><br><span class="line">      element.detachEvent(<span class="string">"on"</span> + type, handler);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      element[<span class="string">"on"</span> + type] = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  setClipboardText: <span class="function"><span class="keyword">function</span>(<span class="params">event, value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.clipboardData)&#123;</span><br><span class="line">      event.clipboardData.setData(<span class="string">"text/plain"</span>, value);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.clipboardData)&#123;</span><br><span class="line">      <span class="built_in">window</span>.clipboardData.setData(<span class="string">"text"</span>, value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  stopPropagation: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.stopPropagation)&#123;</span><br><span class="line">      event.stopPropagation();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      event.cancelBubble = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="u4E8B_u4EF6_u7C7B_u578B"><a href="#u4E8B_u4EF6_u7C7B_u578B" class="headerlink" title="事件类型"></a>事件类型</h2><p>DOM3级事件:</p>
+<ol>
+<li>UI(User Interface用户界面)事件.用户与页面元素交互是触发.</li>
+<li>焦点事件</li>
+<li>鼠标事件</li>
+<li>滚动事件</li>
+<li>文本事件(输入文本触发)</li>
+<li>键盘事件</li>
+<li>合成事件</li>
+<li>变动事件</li>
+</ol>
+<h3 id="UI_u4E8B_u4EF6"><a href="#UI_u4E8B_u4EF6" class="headerlink" title="UI事件"></a>UI事件</h3><ul>
+<li>load: 当页面加载完成后在window上面触发.图片加载完赋值给src.(重要)</li>
+<li>unload: 当页面完全卸载后再window上触发</li>
+<li>abort:用户停止下载过程中</li>
+<li>error</li>
+<li>select</li>
+<li>resize</li>
+<li>scroll</li>
+</ul>
+<h3 id="u7126_u70B9_u4E8B_u4EF6"><a href="#u7126_u70B9_u4E8B_u4EF6" class="headerlink" title="焦点事件"></a>焦点事件</h3><ul>
+<li>blur :失去焦点触发,不会冒泡,所有浏览器都支持.</li>
+<li>focus: 获得焦点出发,不会冒泡,所有浏览器都支持.</li>
+<li>focusin: 获得焦点出发,会冒泡. (支持有限)</li>
+<li>focusout: 失去焦点触发.会冒泡.(支持有限)</li>
+</ul>
+<p>确定浏览器是否支持,可以使用如下代码检测:<br>var isSupported = document.implementation.hasFeature(“FocusEvents”, “3.0”);</p>
+<h3 id="u9F20_u6807_u4E0E_u6EDA_u8F6E_u4E8B_u4EF6"><a href="#u9F20_u6807_u4E0E_u6EDA_u8F6E_u4E8B_u4EF6" class="headerlink" title="鼠标与滚轮事件"></a>鼠标与滚轮事件</h3><ul>
+<li>click</li>
+<li>dblclick</li>
+<li>mousedown</li>
+<li>mouseenter</li>
+<li>mouseleave</li>
+<li>mousemove</li>
+<li>mouseout</li>
+<li>mouseover</li>
+<li>mouseup</li>
+</ul>
+<p>注意先后顺序以及事件依赖; 详情看PDF</p>
+<h3 id="u952E_u76D8_u4E0E_u6587_u672C_u4E8B_u4EF6"><a href="#u952E_u76D8_u4E0E_u6587_u672C_u4E8B_u4EF6" class="headerlink" title="键盘与文本事件"></a>键盘与文本事件</h3><ul>
+<li>键码 发生<code>keydown</code> 和 <code>keyup</code>事件,event对象的keyCode属性包含一个值,与键盘上的特定键位对应.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> textbox = <span class="built_in">document</span>.getElementById(<span class="string">'myText'</span>);</span><br><span class="line">EventUtil.addHandler(textbox, <span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  event = EventUtil.getEvent(event);</span><br><span class="line">  alert(event.keyCode);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="/img/js-high-level-13-1.png" alt="键码图"></p>
+<ul>
+<li>文本类型属性<code>inputMethod</code>: 文本输入到文本框中的方式</li>
+</ul>
+<p>0:浏览器不确定输入<br>1: 键盘输入<br>2: 粘贴<br>3: 拖放进来<br>4: 使用IME输入<br>5: 表单选择某项输入<br>6: 手写输入<br>7: 语音输入<br>8: 通过几种组合方式输入<br>9: 通过脚本输入</p>
+<h3 id="u590D_u5408_u4E8B_u4EF6"><a href="#u590D_u5408_u4E8B_u4EF6" class="headerlink" title="复合事件"></a>复合事件</h3><p>DOM3级事件新添加的一类事件,用于处理IME(输入法编辑器)输入序列,在物理键盘上找不到的字符.</p>
+<h3 id="u53D8_u52A8_u4E8B_u4EF6"><a href="#u53D8_u52A8_u4E8B_u4EF6" class="headerlink" title="变动事件"></a>变动事件</h3><h3 id="HTML5_u4E8B_u4EF6"><a href="#HTML5_u4E8B_u4EF6" class="headerlink" title="HTML5事件"></a>HTML5事件</h3><ul>
+<li>contextmenu 事件</li>
+<li>beforeunload 事件</li>
+<li>DOMContentLoaded事件: 与load不同</li>
+<li>readystatechange 事件</li>
+<li>pageshow,pagehide</li>
+<li>hashchange</li>
+</ul>
+<h3 id="u8BBE_u5907_u4E8B_u4EF6"><a href="#u8BBE_u5907_u4E8B_u4EF6" class="headerlink" title="设备事件"></a>设备事件</h3><ul>
+<li>orientationchange 事件,IOS为Safari切屏模式</li>
+<li>MozOrientation</li>
+<li>deviceorientation 设备方向变化</li>
+<li>devicemotion 设备移动 </li>
+</ul>
+<h3 id="u89E6_u6478_u4E0E_u624B_u52BF"><a href="#u89E6_u6478_u4E0E_u624B_u52BF" class="headerlink" title="触摸与手势"></a>触摸与手势</h3><ul>
+<li>触摸事件</li>
+</ul>
+<p>touchstart,touchmove, touchend, touchcancel,</p>
+<ul>
+<li>手势事件</li>
+</ul>
+<p>gesturestart,gesturechange, gestureend</p>
+<h2 id="u5185_u5B58_u548C_u6027_u80FD"><a href="#u5185_u5B58_u548C_u6027_u80FD" class="headerlink" title="内存和性能"></a>内存和性能</h2><h3 id="u4E8B_u4EF6_u59D4_u6258"><a href="#u4E8B_u4EF6_u59D4_u6258" class="headerlink" title="事件委托"></a>事件委托</h3><p>对<code>事件处理程序过多</code>问题的解决方案就是<code>事件委托</code>.其利用了<code>事件冒泡</code>.只指定一个事件处理程序,就可以管理某一类型的所有事件.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;ul id=&#34;myLinks&#34;&#62;&#10;  &#60;li id=&#34;goSomewhere&#34;&#62;goSomewhere&#60;/li&#62;&#10;  &#60;li id=&#34;doSomething&#34;&#62;doSomething&#60;/li&#62;&#10;  &#60;li id=&#34;sayHi&#34;&#62;sayHi&#60;/li&#62;&#10;&#60;/ul&#62;</span><br></pre></td></tr></table></figure>
+<p>其中包含三个被点击后会执行操作的列表项.按照传统做法,会分别给每一个li添加事件处理程序.<br>如果是一个复杂的Web应用程序,就会有数不清的代码用于添加时间按处理程序.<br>可以利用<code>事件委托</code>技术解决问题.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"myLinks"</span>);</span><br><span class="line">    </span><br><span class="line">  EventUtil.addHandler(list, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    event = EventUtil.getEvent(event);</span><br><span class="line">    <span class="keyword">var</span> target = EventUtil.getTarget(event);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(target.id)&#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"doSomething"</span>:</span><br><span class="line">        <span class="built_in">document</span>.title = <span class="string">"I changed the document's title"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="string">"goSomewhere"</span>:</span><br><span class="line">        location.href = <span class="string">"http://www.wrox.com"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="string">"sayHi"</span>:</span><br><span class="line">        alert(<span class="string">"hi"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>将事件委托给ul元素.最适合采用事件委托的技术的事件包括:click,mousedown,mouseup,keydown,keyup,keypress.<br>虽然mouseover和mouseout事件也冒泡,但是处理并不太容易,需要经常计算元素位置.</p>
+<h3 id="u4E8B_u4EF6_u79FB_u9664"><a href="#u4E8B_u4EF6_u79FB_u9664" class="headerlink" title="事件移除"></a>事件移除</h3><p>有些时候虽然html内容被innerHTML替换了,但是绑定的事件还留在内存中.造成性能问题.<br>所以设置div的innerHTMl属性之前,现移除掉不用的事件处理程序,在替换掉,可以保存内存被再次利用.</p>
+<h2 id="u6A21_u62DF_u4E8B_u4EF6"><a href="#u6A21_u62DF_u4E8B_u4EF6" class="headerlink" title="模拟事件"></a>模拟事件</h2><h3 id="DOM_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF"><a href="#DOM_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF" class="headerlink" title="DOM中的事件模拟"></a>DOM中的事件模拟</h3><ul>
+<li>模拟鼠标事件</li>
+<li>模拟键盘事件</li>
+<li>模拟其他事件</li>
+<li>自定义DOM事件</li>
+</ul>
+<h3 id="IE_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF"><a href="#IE_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF" class="headerlink" title="IE中的事件模拟"></a>IE中的事件模拟</h3><hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2015/12/31/js-high-level-programming-language-13/" data-title="读《JavaScript高级程序设计》总结13 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/12/30/js-high-level-programming-language-12/"  title="读《JavaScript高级程序设计》总结12">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结12
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/12/31/js-high-level-programming-language-13/" data-title="读《JavaScript高级程序设计》总结13" data-url="http://blog.uijack.com/2015/12/31/js-high-level-programming-language-13/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u6D41"><span class="toc-number">1.</span> <span class="toc-text">事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u5192_u6CE1_u6D41"><span class="toc-number">1.1.</span> <span class="toc-text">事件冒泡流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u6355_u83B7"><span class="toc-number">1.2.</span> <span class="toc-text">事件捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM_u4E8B_u4EF6_u6D41"><span class="toc-number">1.3.</span> <span class="toc-text">DOM事件流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.</span> <span class="toc-text">事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM0_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.1.</span> <span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2_u7EA7_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.2.</span> <span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E8B_u4EF6_u5904_u7406_u7A0B_u5E8F"><span class="toc-number">2.3.</span> <span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u4E8B_u4EF6_u5904_u7406"><span class="toc-number">2.4.</span> <span class="toc-text">跨浏览器事件处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u5904_u7406"><span class="toc-number">3.</span> <span class="toc-text">事件处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61"><span class="toc-number">3.1.</span> <span class="toc-text">DOM中的事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E2D_u7684_u4E8B_u4EF6_u5BF9_u8C61"><span class="toc-number">3.2.</span> <span class="toc-text">IE中的事件对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u7684_u4E8B_u4EF6_u5BF9_u8C61"><span class="toc-number">3.3.</span> <span class="toc-text">跨浏览器的事件对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E8B_u4EF6_u7C7B_u578B"><span class="toc-number">4.</span> <span class="toc-text">事件类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UI_u4E8B_u4EF6"><span class="toc-number">4.1.</span> <span class="toc-text">UI事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7126_u70B9_u4E8B_u4EF6"><span class="toc-number">4.2.</span> <span class="toc-text">焦点事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9F20_u6807_u4E0E_u6EDA_u8F6E_u4E8B_u4EF6"><span class="toc-number">4.3.</span> <span class="toc-text">鼠标与滚轮事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u952E_u76D8_u4E0E_u6587_u672C_u4E8B_u4EF6"><span class="toc-number">4.4.</span> <span class="toc-text">键盘与文本事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u590D_u5408_u4E8B_u4EF6"><span class="toc-number">4.5.</span> <span class="toc-text">复合事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53D8_u52A8_u4E8B_u4EF6"><span class="toc-number">4.6.</span> <span class="toc-text">变动事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5_u4E8B_u4EF6"><span class="toc-number">4.7.</span> <span class="toc-text">HTML5事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8BBE_u5907_u4E8B_u4EF6"><span class="toc-number">4.8.</span> <span class="toc-text">设备事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u89E6_u6478_u4E0E_u624B_u52BF"><span class="toc-number">4.9.</span> <span class="toc-text">触摸与手势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5185_u5B58_u548C_u6027_u80FD"><span class="toc-number">5.</span> <span class="toc-text">内存和性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u59D4_u6258"><span class="toc-number">5.1.</span> <span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6_u79FB_u9664"><span class="toc-number">5.2.</span> <span class="toc-text">事件移除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6A21_u62DF_u4E8B_u4EF6"><span class="toc-number">6.</span> <span class="toc-text">模拟事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF"><span class="toc-number">6.1.</span> <span class="toc-text">DOM中的事件模拟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E2D_u7684_u4E8B_u4EF6_u6A21_u62DF"><span class="toc-number">6.2.</span> <span class="toc-text">IE中的事件模拟</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
