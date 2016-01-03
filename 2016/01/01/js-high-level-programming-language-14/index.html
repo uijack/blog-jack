@@ -1,0 +1,591 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结14 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第14章 表单脚本》主要介绍文本框表单,选择框表单,表单序列化,富文本编辑器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结14">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/01/js-high-level-programming-language-14/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第14章 表单脚本》主要介绍文本框表单,选择框表单,表单序列化,富文本编辑器">
+<meta property="og:updated_time" content="2016-01-03T00:59:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结14">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第14章 表单脚本》主要介绍文本框表单,选择框表单,表单序列化,富文本编辑器">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/01/js-high-level-programming-language-14/" title="读《JavaScript高级程序设计》总结14" itemprop="url">读《JavaScript高级程序设计》总结14</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2015-12-31T23:25:35.000Z" itemprop="datePublished"> 发表于 2016-01-01 07:25:35</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8868_u5355_u7684_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">1.</span> <span class="toc-text">表单的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8868_u5355_u5B57_u6BB5"><span class="toc-number">1.1.</span> <span class="toc-text">表单字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6587_u672C_u6846_u811A_u672C"><span class="toc-number">2.</span> <span class="toc-text">文本框脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u9009_u62E9_u6587_u672C"><span class="toc-number">2.1.</span> <span class="toc-text">选择文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FC7_u6EE4_u8F93_u5165"><span class="toc-number">2.2.</span> <span class="toc-text">过滤输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u81EA_u52A8_u5207_u6362_u7126_u70B9"><span class="toc-number">2.3.</span> <span class="toc-text">自动切换焦点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5_u7EA6_u675F_u9A8C_u8BC1API"><span class="toc-number">2.4.</span> <span class="toc-text">HTML5约束验证API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9009_u62E9_u6846_u811A_u672C"><span class="toc-number">2.5.</span> <span class="toc-text">选择框脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8868_u5355_u5E8F_u5217_u5316"><span class="toc-number">2.6.</span> <span class="toc-text">表单序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BCC_u6587_u672C_u7F16_u8F91"><span class="toc-number">2.7.</span> <span class="toc-text">富文本编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BCC_u6587_u672C_u4E0E_u8868_u5355"><span class="toc-number">2.8.</span> <span class="toc-text">富文本与表单</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u8868_u5355_u7684_u57FA_u7840_u77E5_u8BC6"><a href="#u8868_u5355_u7684_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="表单的基础知识"></a>表单的基础知识</h2><p>在JS中,表单对应的是HTMLFormElement类型,继承HTMLElement类型,独有属性和方法:</p>
+<ol>
+<li>acceptChart: 服务器能够处理的字符串,等价于HTML中的accept-charset特性</li>
+<li>action: 接收请求的URL .action</li>
+<li>elements: 表单的所有控件.</li>
+<li>enctype: 请求编码类型. enctype</li>
+<li>length: 表单控件数量.</li>
+<li>method: get or post. method</li>
+<li>name: 表单的民称. name</li>
+<li>reset(): 重置所有表单域为默认值</li>
+<li>submit(): 提交表单.</li>
+<li>target: 用于发送请求和接收响应的窗口名称.</li>
+</ol>
+<p>访问方式:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> form = <span class="built_in">document</span>.getElementById(<span class="string">'form1'</span>);</span><br><span class="line"><span class="keyword">var</span> firstForm = <span class="built_in">document</span>.forms[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> myForm =  <span class="built_in">document</span>.forms[<span class="string">'form2'</span>]; <span class="comment">// 根据页面中的表单名称name访问</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提交: form.submit();</p>
+</blockquote>
+<p>解决表单重复提交:</p>
+<ol>
+<li>第一次提交表单后禁用提交按钮.</li>
+<li>利用onsubmit事件处理程序取消后连续表单操作</li>
+</ol>
+<blockquote>
+<p>重置: form.reset(); 不推荐</p>
+</blockquote>
+<h3 id="u8868_u5355_u5B57_u6BB5"><a href="#u8868_u5355_u5B57_u6BB5" class="headerlink" title="表单字段"></a>表单字段</h3><ul>
+<li>共有的表单字段属性</li>
+</ul>
+<p>除<code>&lt;fieldset&gt;</code>元素之外,</p>
+<ol>
+<li>disabled: 布尔值.表示当前字段是否被禁用</li>
+<li>form.</li>
+<li>name: 当前字段名称.</li>
+<li>readOnly: 布尔值.字段只读.</li>
+<li>tabIndex: 当前字段切换序号.</li>
+<li>type: 字段类型, checkbox, radio</li>
+<li>value: 字段将被提交给服务器的值.</li>
+</ol>
+<ul>
+<li>共有方法</li>
+</ul>
+<p><code>focus()</code>获得焦点; <code>blur()</code>移走焦点;<br><code>change()</code>对于input和textarea元素,在他们失去焦点且value值改变时触发.对于select元素,在于选项改变时触发.</p>
+<h2 id="u6587_u672C_u6846_u811A_u672C"><a href="#u6587_u672C_u6846_u811A_u672C" class="headerlink" title="文本框脚本"></a>文本框脚本</h2><p><code>input</code>与<code>textarea</code>.</p>
+<ul>
+<li>input: type=’text’, size=”25”, value=’initial value’, maxlength=’50’</li>
+</ul>
+<p>显示25个字符,但输入不能超过50个字符.</p>
+<ul>
+<li>textarea: rows=’25’, cols=’5’</li>
+</ul>
+<p>不能在HTML中给textarea中指定最大字符串.</p>
+<h3 id="u9009_u62E9_u6587_u672C"><a href="#u9009_u62E9_u6587_u672C" class="headerlink" title="选择文本"></a>选择文本</h3><p>上述两种文本框都支持<code>select()</code>方法.用于选择文本框中的所有文本.</p>
+<h3 id="u8FC7_u6EE4_u8F93_u5165"><a href="#u8FC7_u6EE4_u8F93_u5165" class="headerlink" title="过滤输入"></a>过滤输入</h3><ol>
+<li>屏蔽字符. 调用keypress检测对应的键盘值.不符合调用preventDefault().从而屏蔽按键事件.</li>
+<li>操作剪切板</li>
+<li>beforecopy,copt, beforecut, cut, paste.</li>
+</ol>
+<h3 id="u81EA_u52A8_u5207_u6362_u7126_u70B9"><a href="#u81EA_u52A8_u5207_u6362_u7126_u70B9" class="headerlink" title="自动切换焦点"></a>自动切换焦点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;input type=&#34;text&#34; name=&#34;tel1&#34; id=&#34;txtTel1&#34; maxlength=&#34;3&#34;&#62;&#10;&#60;input type=&#34;text&#34; name=&#34;tel2&#34; id=&#34;txtTel2&#34; maxlength=&#34;3&#34;&#62;&#10;&#60;input type=&#34;text&#34; name=&#34;tel3&#34; id=&#34;txtTel3&#34; maxlength=&#34;4&#34;&#62;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为了增强易用性,同时加快数据输入,可以在前一个文本框中的字符串达到最大数量后,自动将焦点切换到下一个文本框中.<br>自动切换焦点.(<code>淘宝的支付宝密码就是这样</code>)</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">tabForward</span>(<span class="params">event</span>)</span>&#123;            </span><br><span class="line">    event = EventUtil.getEvent(event);</span><br><span class="line">    <span class="keyword">var</span> target = EventUtil.getTarget(event);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (target.value.length == target.maxLength)&#123;</span><br><span class="line">      <span class="keyword">var</span> form = target.form;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>, len=form.elements.length; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (form.elements[i] == target) &#123;</span><br><span class="line">          <span class="keyword">if</span> (form.elements[i+<span class="number">1</span>])&#123;</span><br><span class="line">            form.elements[i+<span class="number">1</span>].focus();</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">              </span><br><span class="line">  <span class="keyword">var</span> textbox1 = <span class="built_in">document</span>.getElementById(<span class="string">"txtTel1"</span>),</span><br><span class="line">      textbox2 = <span class="built_in">document</span>.getElementById(<span class="string">"txtTel2"</span>),</span><br><span class="line">      textbox3 = <span class="built_in">document</span>.getElementById(<span class="string">"txtTel3"</span>);</span><br><span class="line">  </span><br><span class="line">  EventUtil.addHandler(textbox1, <span class="string">"keyup"</span>, tabForward);        </span><br><span class="line">  EventUtil.addHandler(textbox2, <span class="string">"keyup"</span>, tabForward);        </span><br><span class="line">  EventUtil.addHandler(textbox3, <span class="string">"keyup"</span>, tabForward);        </span><br><span class="line">                </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h3 id="HTML5_u7EA6_u675F_u9A8C_u8BC1API"><a href="#HTML5_u7EA6_u675F_u9A8C_u8BC1API" class="headerlink" title="HTML5约束验证API"></a>HTML5约束验证API</h3><ol>
+<li>必填字段: required</li>
+<li>其他输入类型: email, url, 不支持的浏览器会转化为text.</li>
+<li>数值范围:  number, range,datetime, datetime-local,date,month, week,time.对于以上字段可以设置: min, max, step,name属性<br>4.正则表达式属性: pattern,开头和结尾不能加^和$</li>
+<li>检测有效性<code>checkValidity()</code>. </li>
+<li>禁用验证,通过在form标签上设置<code>novalidate</code>属性.告诉表单不用进行验证.js通过<code>noValidate</code>访问.</li>
+</ol>
+<h3 id="u9009_u62E9_u6846_u811A_u672C"><a href="#u9009_u62E9_u6846_u811A_u672C" class="headerlink" title="选择框脚本"></a>选择框脚本</h3><p>略…</p>
+<h3 id="u8868_u5355_u5E8F_u5217_u5316"><a href="#u8868_u5355_u5E8F_u5217_u5316" class="headerlink" title="表单序列化"></a>表单序列化</h3><p>需要自己写控件的必看.</p>
+<h3 id="u5BCC_u6587_u672C_u7F16_u8F91"><a href="#u5BCC_u6587_u672C_u7F16_u8F91" class="headerlink" title="富文本编辑"></a>富文本编辑</h3><p>WYSIWYG(What You  See Is What You Get, 所见即所得). </p>
+<ol>
+<li>借助<code>iframe</code>.</li>
+<li><code>contentEditable</code>属性</li>
+</ol>
+<h3 id="u5BCC_u6587_u672C_u4E0E_u8868_u5355"><a href="#u5BCC_u6587_u672C_u4E0E_u8868_u5355" class="headerlink" title="富文本与表单"></a>富文本与表单</h3><p>将iframe中的表单字段利用在<code>外设置隐藏的表单字段</code>对应.通过提交onsubmit事件处理程序绑定数据.模拟提交外部表单.</p>
+<hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/01/js-high-level-programming-language-14/" data-title="读《JavaScript高级程序设计》总结14 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/12/31/js-high-level-programming-language-13/"  title="读《JavaScript高级程序设计》总结13">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结13
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/01/js-high-level-programming-language-14/" data-title="读《JavaScript高级程序设计》总结14" data-url="http://blog.uijack.com/2016/01/01/js-high-level-programming-language-14/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8868_u5355_u7684_u57FA_u7840_u77E5_u8BC6"><span class="toc-number">1.</span> <span class="toc-text">表单的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8868_u5355_u5B57_u6BB5"><span class="toc-number">1.1.</span> <span class="toc-text">表单字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6587_u672C_u6846_u811A_u672C"><span class="toc-number">2.</span> <span class="toc-text">文本框脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u9009_u62E9_u6587_u672C"><span class="toc-number">2.1.</span> <span class="toc-text">选择文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8FC7_u6EE4_u8F93_u5165"><span class="toc-number">2.2.</span> <span class="toc-text">过滤输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u81EA_u52A8_u5207_u6362_u7126_u70B9"><span class="toc-number">2.3.</span> <span class="toc-text">自动切换焦点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5_u7EA6_u675F_u9A8C_u8BC1API"><span class="toc-number">2.4.</span> <span class="toc-text">HTML5约束验证API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9009_u62E9_u6846_u811A_u672C"><span class="toc-number">2.5.</span> <span class="toc-text">选择框脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8868_u5355_u5E8F_u5217_u5316"><span class="toc-number">2.6.</span> <span class="toc-text">表单序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BCC_u6587_u672C_u7F16_u8F91"><span class="toc-number">2.7.</span> <span class="toc-text">富文本编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BCC_u6587_u672C_u4E0E_u8868_u5355"><span class="toc-number">2.8.</span> <span class="toc-text">富文本与表单</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
