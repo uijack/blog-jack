@@ -1,6 +1,6 @@
 title: "读《JavaScript高级程序设计》总结13"
 date: 2015-12-31 7:27:59
-description: "读《JavaScript高级程序设计 -- 第12章 事件》主要介绍事件流,事件处理程序,事件对象,事件类型,内存和性能以及模拟事件"
+description: "读《JavaScript高级程序设计 -- 第13章 事件》主要介绍事件流,事件处理程序,事件对象,事件类型,内存和性能以及模拟事件"
 tags:
 - "JavaScript"
 - "随笔"
