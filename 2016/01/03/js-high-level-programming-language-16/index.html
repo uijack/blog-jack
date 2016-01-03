@@ -1,0 +1,532 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结16 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第16章 HTML5脚本编程》介绍原生拖动,媒体元素和历史状态管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结16">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/03/js-high-level-programming-language-16/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第16章 HTML5脚本编程》介绍原生拖动,媒体元素和历史状态管理">
+<meta property="og:updated_time" content="2016-01-03T08:50:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结16">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第16章 HTML5脚本编程》介绍原生拖动,媒体元素和历史状态管理">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/03/js-high-level-programming-language-16/" title="读《JavaScript高级程序设计》总结16" itemprop="url">读《JavaScript高级程序设计》总结16</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-03T08:08:54.000Z" itemprop="datePublished"> 发表于 2016-01-03 16:08:54</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8DE8_u6587_u6863_u6D88_u606F_u4F20_u9012"><span class="toc-number">1.</span> <span class="toc-text">跨文档消息传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u539F_u751F_u62D6_u653E"><span class="toc-number">2.</span> <span class="toc-text">原生拖放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u62D6_u653E_u4E8B_u4EF6"><span class="toc-number">2.1.</span> <span class="toc-text">拖放事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u90A3_u4E2A_u5B9A_u4E49_u653E_u7F6E_u76EE_u6807"><span class="toc-number">2.2.</span> <span class="toc-text">那个定义放置目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataTransfer__u5BF9_u8C61"><span class="toc-number">2.3.</span> <span class="toc-text">dataTransfer 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5C5E_u6027dropEffect__u4E0E_effectAllowed"><span class="toc-number">2.4.</span> <span class="toc-text">属性dropEffect 与 effectAllowed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53EF_u62D6_u52A8"><span class="toc-number">2.5.</span> <span class="toc-text">可拖动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5176_u4ED6_u6210_u5458"><span class="toc-number">2.6.</span> <span class="toc-text">其他成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5A92_u4F53_u5143_u7D20"><span class="toc-number">3.</span> <span class="toc-text">媒体元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u5171_u6709_u5C5E_u6027"><span class="toc-number">3.1.</span> <span class="toc-text">标签共有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6"><span class="toc-number">3.2.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u81EA_u5B9A_u4E49_u5A92_u4F53_u64AD_u653E_u5668"><span class="toc-number">3.3.</span> <span class="toc-text">自定义媒体播放器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u68C0_u6D4B_u7F16_u89E3_u7801_u5668_u7684_u652F_u6301_u60C5_u51B5"><span class="toc-number">3.4.</span> <span class="toc-text">检测编解码器的支持情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Audio_u7C7B_u578B"><span class="toc-number">3.5.</span> <span class="toc-text">Audio类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5386_u53F2_u72B6_u6001_u7BA1_u7406"><span class="toc-number">4.</span> <span class="toc-text">历史状态管理</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u8DE8_u6587_u6863_u6D88_u606F_u4F20_u9012"><a href="#u8DE8_u6587_u6863_u6D88_u606F_u4F20_u9012" class="headerlink" title="跨文档消息传递"></a>跨文档消息传递</h2><p>cross-document messaging 简称<code>XDM</code>,指来自不同域的页面间的传递消息。如www.wrox.com域中的页面与位于一个内嵌框架中的p2p.wrox.com域中的页面通信。核心方法就是<code>postMessage()</code>方法。</p>
+<p>接受两个参数： 一条消息和一个表示消息接收来自那个域的字符串。第二个参数对保障安全通信非常重要。可以组织浏览器把消息发送到不安全的地方。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 所有支持XDM的浏览器也支持iframe的contentWindow属性</span></span><br><span class="line"><span class="keyword">var</span> iframeWindow = <span class="built_in">document</span>.getElementById(<span class="string">'myframe'</span>).contentWindow;</span><br><span class="line">iframeWindow.postMessage(<span class="string">'A secret'</span>, <span class="string">'http://www.wrox,com'</span>); <span class="comment">// 来源不对什么也不做</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>data: 作为psotMessage()第一个参数传入的字符串数据。<br>origin: 发送消息的文档所在域，例如<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a><br>source: 发送消息文档的window对象的代理。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">EventUtil.addHandleer(<span class="built_in">window</span>, <span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> event </span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 确保发送消息的域是已知的域</span></span><br><span class="line">  <span class="keyword">if</span> (event.origin == <span class="string">'http://www.wrox.com'</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理接收消息的数据</span></span><br><span class="line">    processMessage(event.data);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可选：向来源窗口发送回执</span></span><br><span class="line">    event.source.postMessage(<span class="string">'Received!'</span>, <span class="string">'http://p2p.wrox.com'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="u539F_u751F_u62D6_u653E"><a href="#u539F_u751F_u62D6_u653E" class="headerlink" title="原生拖放"></a>原生拖放</h2><p>网页中只有两种元素可以拖放：图像和某些文本。</p>
+<h3 id="u62D6_u653E_u4E8B_u4EF6"><a href="#u62D6_u653E_u4E8B_u4EF6" class="headerlink" title="拖放事件"></a>拖放事件</h3><p>依次触发下列事件：</p>
+<ol>
+<li>dragstart</li>
+<li>drag // 被拖动期间持续触发该事件</li>
+<li>dragend</li>
+</ol>
+<h3 id="u90A3_u4E2A_u5B9A_u4E49_u653E_u7F6E_u76EE_u6807"><a href="#u90A3_u4E2A_u5B9A_u4E49_u653E_u7F6E_u76EE_u6807" class="headerlink" title="那个定义放置目标"></a>那个定义放置目标</h3><h3 id="dataTransfer__u5BF9_u8C61"><a href="#dataTransfer__u5BF9_u8C61" class="headerlink" title="dataTransfer 对象"></a>dataTransfer 对象</h3><h3 id="u5C5E_u6027dropEffect__u4E0E_effectAllowed"><a href="#u5C5E_u6027dropEffect__u4E0E_effectAllowed" class="headerlink" title="属性dropEffect 与 effectAllowed"></a>属性dropEffect 与 effectAllowed</h3><h3 id="u53EF_u62D6_u52A8"><a href="#u53EF_u62D6_u52A8" class="headerlink" title="可拖动"></a>可拖动</h3><h3 id="u5176_u4ED6_u6210_u5458"><a href="#u5176_u4ED6_u6210_u5458" class="headerlink" title="其他成员"></a>其他成员</h3><h2 id="u5A92_u4F53_u5143_u7D20"><a href="#u5A92_u4F53_u5143_u7D20" class="headerlink" title="媒体元素"></a>媒体元素</h2><p><code>video</code>标签和<code>audio</code>标签</p>
+<h3 id="u6807_u7B7E_u5171_u6709_u5C5E_u6027"><a href="#u6807_u7B7E_u5171_u6709_u5C5E_u6027" class="headerlink" title="标签共有属性"></a>标签共有属性</h3><h3 id="u4E8B_u4EF6"><a href="#u4E8B_u4EF6" class="headerlink" title="事件"></a>事件</h3><p>可以做音乐播放器</p>
+<h3 id="u81EA_u5B9A_u4E49_u5A92_u4F53_u64AD_u653E_u5668"><a href="#u81EA_u5B9A_u4E49_u5A92_u4F53_u64AD_u653E_u5668" class="headerlink" title="自定义媒体播放器"></a>自定义媒体播放器</h3><h3 id="u68C0_u6D4B_u7F16_u89E3_u7801_u5668_u7684_u652F_u6301_u60C5_u51B5"><a href="#u68C0_u6D4B_u7F16_u89E3_u7801_u5668_u7684_u652F_u6301_u60C5_u51B5" class="headerlink" title="检测编解码器的支持情况"></a>检测编解码器的支持情况</h3><p>audio.canPlayType(‘audio/mpeg’)</p>
+<p>各种支持格式的字符串和浏览器支持情况。</p>
+<h3 id="Audio_u7C7B_u578B"><a href="#Audio_u7C7B_u578B" class="headerlink" title="Audio类型"></a>Audio类型</h3><h2 id="u5386_u53F2_u72B6_u6001_u7BA1_u7406"><a href="#u5386_u53F2_u72B6_u6001_u7BA1_u7406" class="headerlink" title="历史状态管理"></a>历史状态管理</h2><p>首选<code>haschange事件</code>。</p>
+<hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/03/js-high-level-programming-language-16/" data-title="读《JavaScript高级程序设计》总结16 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/02/js-high-level-programming-language-15/"  title="读《JavaScript高级程序设计》总结15">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结15
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/03/js-high-level-programming-language-16/" data-title="读《JavaScript高级程序设计》总结16" data-url="http://blog.uijack.com/2016/01/03/js-high-level-programming-language-16/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8DE8_u6587_u6863_u6D88_u606F_u4F20_u9012"><span class="toc-number">1.</span> <span class="toc-text">跨文档消息传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u539F_u751F_u62D6_u653E"><span class="toc-number">2.</span> <span class="toc-text">原生拖放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u62D6_u653E_u4E8B_u4EF6"><span class="toc-number">2.1.</span> <span class="toc-text">拖放事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u90A3_u4E2A_u5B9A_u4E49_u653E_u7F6E_u76EE_u6807"><span class="toc-number">2.2.</span> <span class="toc-text">那个定义放置目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataTransfer__u5BF9_u8C61"><span class="toc-number">2.3.</span> <span class="toc-text">dataTransfer 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5C5E_u6027dropEffect__u4E0E_effectAllowed"><span class="toc-number">2.4.</span> <span class="toc-text">属性dropEffect 与 effectAllowed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53EF_u62D6_u52A8"><span class="toc-number">2.5.</span> <span class="toc-text">可拖动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5176_u4ED6_u6210_u5458"><span class="toc-number">2.6.</span> <span class="toc-text">其他成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5A92_u4F53_u5143_u7D20"><span class="toc-number">3.</span> <span class="toc-text">媒体元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u6807_u7B7E_u5171_u6709_u5C5E_u6027"><span class="toc-number">3.1.</span> <span class="toc-text">标签共有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E8B_u4EF6"><span class="toc-number">3.2.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u81EA_u5B9A_u4E49_u5A92_u4F53_u64AD_u653E_u5668"><span class="toc-number">3.3.</span> <span class="toc-text">自定义媒体播放器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u68C0_u6D4B_u7F16_u89E3_u7801_u5668_u7684_u652F_u6301_u60C5_u51B5"><span class="toc-number">3.4.</span> <span class="toc-text">检测编解码器的支持情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Audio_u7C7B_u578B"><span class="toc-number">3.5.</span> <span class="toc-text">Audio类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5386_u53F2_u72B6_u6001_u7BA1_u7406"><span class="toc-number">4.</span> <span class="toc-text">历史状态管理</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
