@@ -1,0 +1,583 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结15 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第15章 使用Canvas绘图》主要介绍Canvas基本用法,上下文和WebGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结15">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/02/js-high-level-programming-language-15/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第15章 使用Canvas绘图》主要介绍Canvas基本用法,上下文和WebGL">
+<meta property="og:updated_time" content="2016-01-03T04:49:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结15">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第15章 使用Canvas绘图》主要介绍Canvas基本用法,上下文和WebGL">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/02/js-high-level-programming-language-15/" title="读《JavaScript高级程序设计》总结15" itemprop="url">读《JavaScript高级程序设计》总结15</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-02T03:01:02.000Z" itemprop="datePublished"> 发表于 2016-01-02 11:01:02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u57FA_u672C_u7528_u6CD5"><span class="toc-number">1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D_u4E0A_u4E0B_u6587_u73AF_u5883"><span class="toc-number">2.</span> <span class="toc-text">2D上下文环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u586B_u5145_u548C_u63CF_u8FB9"><span class="toc-number">2.1.</span> <span class="toc-text">填充和描边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u77E9_u5F62"><span class="toc-number">2.2.</span> <span class="toc-text">绘制矩形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u8DEF_u5F84"><span class="toc-number">2.3.</span> <span class="toc-text">绘制路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u6587_u672C"><span class="toc-number">2.4.</span> <span class="toc-text">绘制文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53D8_u6362"><span class="toc-number">2.5.</span> <span class="toc-text">变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u56FE_u50CF"><span class="toc-number">2.6.</span> <span class="toc-text">绘制图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9634_u5F71"><span class="toc-number">2.7.</span> <span class="toc-text">阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6E10_u53D8"><span class="toc-number">2.8.</span> <span class="toc-text">渐变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6A21_u5F0F"><span class="toc-number">2.9.</span> <span class="toc-text">模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_u56FE_u50CF_u6570_u636E"><span class="toc-number">2.10.</span> <span class="toc-text">使用图像数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5408_u6210"><span class="toc-number">2.11.</span> <span class="toc-text">合成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebGL"><span class="toc-number">3.</span> <span class="toc-text">WebGL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7C7B_u578B_u5316_u6570_u7EC4"><span class="toc-number">3.1.</span> <span class="toc-text">类型化数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebGL_u4E0A_u4E0B_u6587"><span class="toc-number">3.2.</span> <span class="toc-text">WebGL上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u652F_u6301"><span class="toc-number">3.3.</span> <span class="toc-text">支持</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u57FA_u672C_u7528_u6CD5"><a href="#u57FA_u672C_u7528_u6CD5" class="headerlink" title="基本用法"></a>基本用法</h2><p>支持: IE9+, Firefox1.5+, Safari2+, Opera9+, Chrome,IOS版Safari以及Android版Webkit某种程度上都支持.<br>要使用<code>canvas</code>,必须设置<code>width</code>和<code>height</code>属性,也可以通过CSS样式设置.不添加任何样式或者绘制,在页面中看不到该元素.</p>
+<p>要在这块画布(canvas)上绘制,首先要取得<code>绘图上下文</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确定浏览器支持canvas元素</span></span><br><span class="line"><span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">  <span class="keyword">var</span> cxt = canvas.getContext(<span class="string">'2d'</span>); <span class="comment">//取得2d上下文对象.</span></span><br><span class="line">  <span class="comment">// 更多操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>导出在<code>&lt;canvas&gt;元素上绘制的图像.使用</code>toDataURL()`方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得图像的数据URL</span></span><br><span class="line"><span class="keyword">var</span> imgURL = canvas.toDataURL(<span class="string">'image/png'</span>); <span class="comment">// 接受一个图像的MIME类型格式参数。不是上下文环境，是canvas对象的方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示图像</span></span><br><span class="line"><span class="keyword">var</span> image = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</span><br><span class="line">image.src = imgURL;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(image);</span><br></pre></td></tr></table></figure>
+<h2 id="2D_u4E0A_u4E0B_u6587_u73AF_u5883"><a href="#2D_u4E0A_u4E0B_u6587_u73AF_u5883" class="headerlink" title="2D上下文环境"></a>2D上下文环境</h2><p>绘制坐标开始于左上角(0,0)处.width和height表示水平和垂直的两个方向上可用的像素数目.</p>
+<h3 id="u586B_u5145_u548C_u63CF_u8FB9"><a href="#u586B_u5145_u548C_u63CF_u8FB9" class="headerlink" title="填充和描边"></a>填充和描边</h3><ul>
+<li>填充: 使用指定样式(颜色, 渐变或图像)填充图形. <code>fillStyle</code></li>
+<li>描边: 只在图形的边缘划线.<code>strokeStyle</code></li>
+</ul>
+<p><code>fillStyle</code> 和 <code>strokeStyle</code>属性的值可以是字符串、渐变对象、或者模式对象，默认值都是<code>#000000</code>。可以指定css颜色值的任何格式：颜色名，16进制码，rgb，rgba，hsl，hsla。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cxt = canvas.getContext(<span class="string">'2d'</span>); <span class="comment">//取得2d上下文对象.</span></span><br><span class="line">cxt.strokeStyle = <span class="string">'red'</span>;</span><br><span class="line">cxt.fillStyle = <span class="string">'#0000ff'</span>; <span class="comment">// 填充颜色</span></span><br></pre></td></tr></table></figure>
+<h3 id="u7ED8_u5236_u77E9_u5F62"><a href="#u7ED8_u5236_u77E9_u5F62" class="headerlink" title="绘制矩形"></a>绘制矩形</h3><p>使用方法：</p>
+<blockquote>
+<p>fillRect()<br>strokeStyle()<br>clearRect()</p>
+</blockquote>
+<p>都接受四个参数：x坐标, y坐标, 举行宽，举行高。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cxt = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制红色矩形</span></span><br><span class="line">cxt.fillStyle = <span class="string">'#ff0000'</span>;</span><br><span class="line">cxt.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制半透明的蓝色矩形</span></span><br><span class="line">cxt.fillStyle = <span class="string">'rgba(0,0,255,0.5)'</span>;</span><br><span class="line">cxt.fillRect(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制红色描边矩形</span></span><br><span class="line">cxt.strokeStyle = <span class="string">'#ff0000'</span>;</span><br><span class="line">cxt.strokeRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制半透明的蓝色描边矩形</span></span><br><span class="line">cxt.strokeStyle = <span class="string">'rgba(0,0,255,0.5)'</span>;</span><br><span class="line">cxt.strokeRect(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><code>clearRect()</code>方法用于<code>清除画布上的矩形区域</code>。本质上，这个方法可用把绘制的上下文中的某一矩形区域变透明。<br>在上面的代码添加：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cxt.clearRect(<span class="number">40</span>, <span class="number">40</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>在两个矩形重叠的地方清除一个小矩形。</p>
+<h3 id="u7ED8_u5236_u8DEF_u5F84"><a href="#u7ED8_u5236_u8DEF_u5F84" class="headerlink" title="绘制路径"></a>绘制路径</h3><p><code>beginPath()</code>：表示要开始绘制路径。绘制方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. arc(x, y, radius, startAngle, endAngle, countercolorwise): &#20197;(x,y)&#20026;&#22278;&#24515;&#65292;radius&#20026;&#21322;&#24452;&#65292;&#20854;&#23454;&#21644;&#32467;&#26463;&#35282;&#24230;&#65288;&#29992;&#24359;&#24230;&#34920;&#31034;&#65289;&#65292;&#32472;&#21046;&#19968;&#26465;&#24359;&#24230;&#65292;contercolorwise&#34920;&#31034;&#26159;&#21542;&#25353;&#36870;&#26102;&#38024;&#26041;&#21521;&#35745;&#31639;&#65292;&#20026;false&#34920;&#31034;`&#25353;&#39034;&#26102;&#38024;`&#26041;&#21521;&#35745;&#31639;&#12290;&#10;&#10;2. arcTo(x1, y1, x2, y2, radius): &#20174;&#19978;&#19968;&#28857;&#24320;&#22987;&#32472;&#21046;&#19968;&#26465;&#24359;&#32447;&#65292;&#21040;&#65288;x2, y2&#65289;&#20026;&#27490;&#12290;&#24182;&#20197;&#32473;&#23450;&#30340;&#21322;&#24452;&#31359;&#36807;&#65288;x1,y1&#65289;.&#10;&#10;3. bezierCurveTo(clx, cly, c2x, c2t, x, y); &#20174;&#19978;&#19968;&#28857;&#24320;&#22987;&#32472;&#21046;&#19968;&#26465;&#26354;&#32447;&#65292;&#21040;&#65288;x,y&#65289;&#20026;&#27490;&#12290;&#24182;&#19988;&#20197;(c1x, c1y)&#21644;(c2x, c2y)&#20026;&#25511;&#21046;&#28857;&#12290;&#10;&#10;4. lineTo(x, y); &#20174;&#19978;&#19968;&#28857;&#32472;&#21046;&#19968;&#26465;&#30452;&#32447;&#21040;&#65288;x,y&#65289;&#20026;&#27490;.&#10;5. moveTo(x,y); &#23558;&#32472;&#22270;&#28216;&#26631;&#31227;&#21160;&#21040;&#65288;x,y&#65289;,&#19981;&#21010;&#32447;&#12290;&#10;6. quadrationCurveTo(cx, cy, x, y): &#20174;&#19978;&#19968;&#28857;&#24320;&#22987;&#32472;&#21046;&#19968;&#26465;&#26354;&#32447;&#65292;&#21040;&#65288;x,y),&#24182;&#19988;&#20197;&#65288;cx,cy&#65289;&#20316;&#20026;&#25511;&#21046;&#28857;&#12290;&#10;7. rect(x, y, width, hright): &#20174;&#28857;&#65288;x, y&#65289;&#32472;&#21046;&#19968;&#20010;width,height&#30340;&#30697;&#24418;&#12290;&#32472;&#21046;&#30340;&#26159;&#30697;&#24418;&#36335;&#24452;&#65292;&#32780;&#19981;&#26159;strokeRect()&#21644;fillRect()&#25152;&#32472;&#21046;&#30340;&#29420;&#31435;&#30340;&#24418;&#29366;&#12290;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>closePath()<br>fill()<br>stroke()<br>clip(): 在路径上创建一个剪切区域</p>
+</blockquote>
+<h3 id="u7ED8_u5236_u6587_u672C"><a href="#u7ED8_u5236_u6587_u672C" class="headerlink" title="绘制文本"></a>绘制文本</h3><blockquote>
+<p>fillText()<br>strokeText()</p>
+</blockquote>
+<p>上面两个方法都有以下3个基础属性： </p>
+<blockquote>
+<p>font: ‘10px Arial’.<br>textAlign: start， end, left， right, center。 推荐用（start和end,而不是left,right）<br>textBaseline: top, hanging, middle, alphabetic, ideographic, bottom.</p>
+</blockquote>
+<h3 id="u53D8_u6362"><a href="#u53D8_u6362" class="headerlink" title="变换"></a>变换</h3><blockquote>
+<p>rotate(angle) : 围绕圆点旋转图像angle弧度。<br>scale(scaleX, scaleY): 缩放图像，在x轴方向乘以scaleX,y轴乘以scaleY,默认为1.0<br>translate(x,y): 将坐标圆点移动到(x, y).执行这个变换过后，坐标(0,0)会变成(x,y).<br>transform(m1_1, m1_2, m2_1, m2_2, dx, dy);<br>setTransform(m1_1, m1_2, m2_1, m2_2, dx, dy);</p>
+</blockquote>
+<h3 id="u7ED8_u5236_u56FE_u50CF"><a href="#u7ED8_u5236_u56FE_u50CF" class="headerlink" title="绘制图像"></a>绘制图像</h3><p>将一副图像绘制到画布上。</p>
+<blockquote>
+<p>drawImage()</p>
+</blockquote>
+<p>第一种：<br>var img = document.images[0];<br>cxt.drawImage(img, 10, 10); //  起点坐标(10,10), 大小为图片原始大小</p>
+<p>第二种：<br>cxt.drawImage(img, 10, 10, 20, 30); // 图片大小为20*30像素</p>
+<p>第三种：9个参数：<br>要绘制的图像，源图像x坐标，源图像y坐标，源图像width，源图像height，目标图像x坐标，目标图像y坐标，目标图像width，目标图像height.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cxt.drawImage(img, <span class="number">0</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">1</span>, <span class="number">100</span>, <span class="number">40</span>, <span class="number">60</span>);</span><br></pre></td></tr></table></figure>
+<p>将原始图像的一部分绘制到画布上，这部分起点为(0,10)，宽度高度都为50px, 最终绘制到图像起点(0, 100),大小为40*60px.</p>
+<p>第一个参数也可以接收另一个<code>&lt;canvas&gt;</code>元素作为第一个参数。将另外一个画布内容绘制到当前画布上。</p>
+<h3 id="u9634_u5F71"><a href="#u9634_u5F71" class="headerlink" title="阴影"></a>阴影</h3><p>2D上下文会根据以下几个属性，自动为形状和路径绘制出阴影。</p>
+<blockquote>
+<p>shadowColoe:<br>shadowOffsetX:<br>shadowOffsetY:<br>shadowBlur: 模糊的像素数，默认0，既不模糊。</p>
+</blockquote>
+<h3 id="u6E10_u53D8"><a href="#u6E10_u53D8" class="headerlink" title="渐变"></a>渐变</h3><blockquote>
+<p>createLinearGradient(起点x,起点y, 终点x, 终点y);// 返回一个CanvasGradient对象的实例</p>
+</blockquote>
+<p>对象的方法：</p>
+<blockquote>
+<p>addColorStop(色标位置, css颜色值)</p>
+</blockquote>
+<h3 id="u6A21_u5F0F"><a href="#u6A21_u5F0F" class="headerlink" title="模式"></a>模式</h3><p>模式就是重复的图像，可以用来填充和描边图形，调用：</p>
+<blockquote>
+<p>createPattern(图像对象， background-repeat属性值形同)；</p>
+</blockquote>
+<p>background-repeat： repaet, repeat-x, repeat-y, no-repeat.</p>
+<h3 id="u4F7F_u7528_u56FE_u50CF_u6570_u636E"><a href="#u4F7F_u7528_u56FE_u50CF_u6570_u636E" class="headerlink" title="使用图像数据"></a>使用图像数据</h3><blockquote>
+<p>getImageData()</p>
+</blockquote>
+<h3 id="u5408_u6210"><a href="#u5408_u6210" class="headerlink" title="合成"></a>合成</h3><p><code>globalAlpha</code>和<code>globalComposition-Operation</code></p>
+<h2 id="WebGL"><a href="#WebGL" class="headerlink" title="WebGL"></a>WebGL</h2><p>针对Canvas的3D上下文，不是W3C指定的标准</p>
+<h3 id="u7C7B_u578B_u5316_u6570_u7EC4"><a href="#u7C7B_u578B_u5316_u6570_u7EC4" class="headerlink" title="类型化数组"></a>类型化数组</h3><h3 id="WebGL_u4E0A_u4E0B_u6587"><a href="#WebGL_u4E0A_u4E0B_u6587" class="headerlink" title="WebGL上下文"></a>WebGL上下文</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gl = canvas.getContext(<span class="string">'experimental-webgl'</span>);</span><br></pre></td></tr></table></figure>
+<p>具体内容略。。。</p>
+<h3 id="u652F_u6301"><a href="#u652F_u6301" class="headerlink" title="支持"></a>支持</h3><p>Firefox4+ 和Chrome都实现了WebGL API. Safari5.1也实现了，但默认是禁用。<br>计算机并须满足一点显卡要求。还在开发，不适合真正开发和应用。</p>
+<hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/02/js-high-level-programming-language-15/" data-title="读《JavaScript高级程序设计》总结15 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/01/js-high-level-programming-language-14/"  title="读《JavaScript高级程序设计》总结14">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结14
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/02/js-high-level-programming-language-15/" data-title="读《JavaScript高级程序设计》总结15" data-url="http://blog.uijack.com/2016/01/02/js-high-level-programming-language-15/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u57FA_u672C_u7528_u6CD5"><span class="toc-number">1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D_u4E0A_u4E0B_u6587_u73AF_u5883"><span class="toc-number">2.</span> <span class="toc-text">2D上下文环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u586B_u5145_u548C_u63CF_u8FB9"><span class="toc-number">2.1.</span> <span class="toc-text">填充和描边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u77E9_u5F62"><span class="toc-number">2.2.</span> <span class="toc-text">绘制矩形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u8DEF_u5F84"><span class="toc-number">2.3.</span> <span class="toc-text">绘制路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u6587_u672C"><span class="toc-number">2.4.</span> <span class="toc-text">绘制文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u53D8_u6362"><span class="toc-number">2.5.</span> <span class="toc-text">变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u7ED8_u5236_u56FE_u50CF"><span class="toc-number">2.6.</span> <span class="toc-text">绘制图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9634_u5F71"><span class="toc-number">2.7.</span> <span class="toc-text">阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6E10_u53D8"><span class="toc-number">2.8.</span> <span class="toc-text">渐变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6A21_u5F0F"><span class="toc-number">2.9.</span> <span class="toc-text">模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F7F_u7528_u56FE_u50CF_u6570_u636E"><span class="toc-number">2.10.</span> <span class="toc-text">使用图像数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5408_u6210"><span class="toc-number">2.11.</span> <span class="toc-text">合成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebGL"><span class="toc-number">3.</span> <span class="toc-text">WebGL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7C7B_u578B_u5316_u6570_u7EC4"><span class="toc-number">3.1.</span> <span class="toc-text">类型化数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebGL_u4E0A_u4E0B_u6587"><span class="toc-number">3.2.</span> <span class="toc-text">WebGL上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u652F_u6301"><span class="toc-number">3.3.</span> <span class="toc-text">支持</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
