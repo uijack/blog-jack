@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>读《JavaScript高级程序设计》总结12 | 千千哥</title>
+    <title>读《JavaScript高级程序设计》总结19 | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
     
 
     
-    <meta name="description" content="读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围">
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计》总结12">
-<meta property="og:url" content="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/index.html">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结19">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/index.html">
 <meta property="og:site_name" content="千千哥">
-<meta property="og:description" content="读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围">
-<meta property="og:updated_time" content="2015-12-30T09:54:01.000Z">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
+<meta property="og:updated_time" content="2016-01-04T01:34:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计》总结12">
-<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结19">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
 
     
     <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
@@ -75,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/30/js-high-level-programming-language-12/" title="读《JavaScript高级程序设计》总结12" itemprop="url">读《JavaScript高级程序设计》总结12</a>
+      <a href="/2016/01/04/js-high-level-programming-language-19/" title="读《JavaScript高级程序设计》总结19" itemprop="url">读《JavaScript高级程序设计》总结19</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-30T11:18:24.000Z" itemprop="datePublished"> 发表于 2015-12-30 19:18:24</time>
+    <time datetime="2016-01-04T11:25:34.000Z" itemprop="datePublished"> 发表于 2016-01-04 19:25:34</time>
     
   </p>
 </header>
@@ -91,35 +91,13 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM__u53D8_u5316"><span class="toc-number">1.</span> <span class="toc-text">DOM 变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6837_u5F0F"><span class="toc-number">2.</span> <span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u64CD_u4F5C_u6837_u5F0F_u8868"><span class="toc-number">2.1.</span> <span class="toc-text">操作样式表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">2.2.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NodeIterator"><span class="toc-number">3.</span> <span class="toc-text">NodeIterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeWalker"><span class="toc-number">4.</span> <span class="toc-text">TreeWalker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8303_u56F4"><span class="toc-number">5.</span> <span class="toc-text">范围</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E4X"><span class="toc-number">1.</span> <span class="toc-text">E4X</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="DOM__u53D8_u5316"><a href="#DOM__u53D8_u5316" class="headerlink" title="DOM 变化"></a>DOM 变化</h2><p><code>DOM1级</code>主要定义的是HTML和XML文档的底层结构,<br><code>DMO2</code>和<code>DOM3级</code>则在<code>DOM1级</code>基础上引入了更多的交互能力,也持之更高级的XML特性.</p>
-<p>DOM2和DOM3分为许多模块:</p>
-<ol>
-<li>DOM2级核心: 增添更是多属性和方法.</li>
-<li>DOM2级视图: 为文档定义了基本样式信息的不同视图.</li>
-<li>DOM2级事件: 说明如何使用事件与DOM交互.</li>
-<li>DOM2级样式: 如何以编程方式来访问和改变CSS样式信息.</li>
-<li>DOM2级遍历和范围: 引入遍历DOM文档和选择其特定部分接口.</li>
-<li>DOM2级HTML: 在一级HTML基础上构建,添加更多的属性,方法和新接口.</li>
-</ol>
-<h2 id="u6837_u5F0F"><a href="#u6837_u5F0F" class="headerlink" title="样式"></a>样式</h2><p>css属性—————-JavaScript属性<br>background-image——style.backgroundImage<br>color—————–style.color<br>display—————style.display</p>
-<p>但是<code>float</code>是JavaScript中的保留字,因此不能做属性名.<code>DOM2</code>规定为对应的属性名应该是<code>cssFloat</code>,唯独IE支持<code>styleFloat</code>.</p>
-<ul>
-<li>DOM样式属性和方法</li>
-</ul>
-<p>cssText, length, parentRule, getPropertyCSSValue(propertyName), getPropertyValue(propertyName), item(index),<br>removeProperty(propertyName), setProperty(propertyName, value, priority).</p>
-<ul>
-<li>样式计算</li>
-</ul>
-<h3 id="u64CD_u4F5C_u6837_u5F0F_u8868"><a href="#u64CD_u4F5C_u6837_u5F0F_u8868" class="headerlink" title="操作样式表"></a>操作样式表</h3><p>只做了解.</p>
-<h3 id="u904D_u5386"><a href="#u904D_u5386" class="headerlink" title="遍历"></a>遍历</h3><h2 id="NodeIterator"><a href="#NodeIterator" class="headerlink" title="NodeIterator"></a>NodeIterator</h2><p>只做了解.</p>
-<h2 id="TreeWalker"><a href="#TreeWalker" class="headerlink" title="TreeWalker"></a>TreeWalker</h2><p>只做了解.</p>
-<h2 id="u8303_u56F4"><a href="#u8303_u56F4" class="headerlink" title="范围"></a>范围</h2><ul>
-<li>createRange()</li>
-</ul>
+		<h2 id="E4X"><a href="#E4X" class="headerlink" title="E4X"></a>E4X</h2><p>ECMAScript for XML，本身不是一本语言，只是ECMAScript语言的可选扩展，为处理XML定义了新的语法，也定义了特定于XML的对象。</p>
+<p>支持不够，浏览器支持不高。</p>
+<p>暂无心得。</p>
 <hr>
 <blockquote>
 <p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
@@ -141,7 +119,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/" data-title="读《JavaScript高级程序设计》总结12 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/" data-title="读《JavaScript高级程序设计》总结19 | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,18 +133,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/31/js-high-level-programming-language-13/" title="读《JavaScript高级程序设计》总结13">
+ <a href="/2016/01/04/js-high-level-programming-language-20/" title="读《JavaScript高级程序设计》总结20">
   <strong>上一篇：</strong><br/>
   <span>
-  读《JavaScript高级程序设计》总结13</span>
+  读《JavaScript高级程序设计》总结20</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/30/js-high-level-programming-language-11/"  title="读《JavaScript高级程序设计》总结11">
+<a href="/2016/01/04/js-high-level-programming-language-18/"  title="读《JavaScript高级程序设计》总结18">
  <strong>下一篇：</strong><br/> 
- <span>读《JavaScript高级程序设计》总结11
+ <span>读《JavaScript高级程序设计》总结18
 </span>
 </a>
 </div>
@@ -175,7 +153,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/30/js-high-level-programming-language-12/" data-title="读《JavaScript高级程序设计》总结12" data-url="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/04/js-high-level-programming-language-19/" data-title="读《JavaScript高级程序设计》总结19" data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/"></div>
 </section>
 
 
@@ -185,7 +163,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM__u53D8_u5316"><span class="toc-number">1.</span> <span class="toc-text">DOM 变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6837_u5F0F"><span class="toc-number">2.</span> <span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u64CD_u4F5C_u6837_u5F0F_u8868"><span class="toc-number">2.1.</span> <span class="toc-text">操作样式表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">2.2.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NodeIterator"><span class="toc-number">3.</span> <span class="toc-text">NodeIterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeWalker"><span class="toc-number">4.</span> <span class="toc-text">TreeWalker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8303_u56F4"><span class="toc-number">5.</span> <span class="toc-text">范围</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E4X"><span class="toc-number">1.</span> <span class="toc-text">E4X</span></a></li></ol>
  
   </div>
 

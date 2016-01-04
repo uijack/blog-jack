@@ -1,0 +1,544 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结21 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第19章 Ajax 与 Comet》介绍XMLHttpRequest,进度事件,跨源资源共享,其他跨域技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结21">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第19章 Ajax 与 Comet》介绍XMLHttpRequest,进度事件,跨源资源共享,其他跨域技术">
+<meta property="og:updated_time" content="2016-01-04T12:18:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结21">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第19章 Ajax 与 Comet》介绍XMLHttpRequest,进度事件,跨源资源共享,其他跨域技术">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/04/js-high-level-programming-language-21/" title="读《JavaScript高级程序设计》总结21" itemprop="url">读《JavaScript高级程序设计》总结21</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-04T13:51:35.000Z" itemprop="datePublished"> 发表于 2016-01-04 21:51:35</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest_u5BF9_u8C61"><span class="toc-number">1.</span> <span class="toc-text">XMLHttpRequest对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR_u7528_u6CD5"><span class="toc-number">1.1.</span> <span class="toc-text">XHR用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest2_u7EA7"><span class="toc-number">2.</span> <span class="toc-text">XMLHttpRequest2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8D85_u65F6_u8BBE_u7F6E"><span class="toc-number">2.1.</span> <span class="toc-text">超时设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overrideMimeType_28_29_u65B9_u6CD5"><span class="toc-number">2.2.</span> <span class="toc-text">overrideMimeType()方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FDB_u5EA6_u4E8B_u4EF6"><span class="toc-number">3.</span> <span class="toc-text">进度事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8DE8_u6E90_u8D44_u6E90_u5171_u4EAB"><span class="toc-number">4.</span> <span class="toc-text">跨源资源共享</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5176_u4ED6_u8DE8_u57DF_u6280_u672F"><span class="toc-number">5.</span> <span class="toc-text">其他跨域技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u5168"><span class="toc-number">6.</span> <span class="toc-text">安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP"><span class="toc-number">6.1.</span> <span class="toc-text">JSONP</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="XMLHttpRequest_u5BF9_u8C61"><a href="#XMLHttpRequest_u5BF9_u8C61" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h2><p>Ajax(Asynchronous JavaScript and XML)技术的核心是XMLHttpRequest对象(简称XHR).<br>IE中的三个不同版本XHR对象,<code>MSXML2.XMLHttp</code>,<code>MSXML2.XMLHttp.3.0</code>,<code>MSXML2.XMLHttp.6.0</code></p>
+<p>适用于IE7之前的版本:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">'string'</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> versions = [<span class="string">'MSXML2.XMLHttp.6.0'</span>, <span class="string">'MSXML2.XMLHttp.3.0'</span>, <span class="string">'MSXML2.XMLHttp'</span>],</span><br><span class="line">      i, len;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>, len=versions.length; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">        <span class="built_in">arguments</span>.callee.activeXString = versions[i];</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">        <span class="comment">// 跳过</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此函数会更具IE中可用的MSXML库的情况创建最新版本的XHR对象.<br>IE7+,Firefox,Opera,Chrome,Safari都支持原生的XHR对象,使用XMLHttpRequest构造函数</p>
+<p>var xhr = new XMLHttpRequest();</p>
+<p>兼容模式:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>)&#123;</span><br><span class="line">      <span class="keyword">var</span> versions = [<span class="string">"MSXML2.XMLHttp.6.0"</span>, <span class="string">"MSXML2.XMLHttp.3.0"</span>,</span><br><span class="line">                      <span class="string">"MSXML2.XMLHttp"</span>],</span><br><span class="line">          i, len;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (i=<span class="number">0</span>,len=versions.length; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">          <span class="built_in">arguments</span>.callee.activeXString = versions[i];</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ex)&#123;</span><br><span class="line">          <span class="comment">//skip</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"No XHR object available."</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">var</span> xhr = createXHR();        </span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.txt"</span>, <span class="literal">false</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">    alert(xhr.statusText);</span><br><span class="line">    alert(xhr.responseText);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="XHR_u7528_u6CD5"><a href="#XHR_u7528_u6CD5" class="headerlink" title="XHR用法"></a>XHR用法</h3><p>第一个要调用的方法就是<code>open(&#39;get&#39;, &#39;example.txt&#39;, false)</code>,接收3个参数<br>1,请求方式,<br>2,URL相当于执行代码的当前页面(相对或者绝对路径).<br>3.调用open()并不会真正发送请求,只是启动一个请求状态以备发送.<br>4.第三个参数表示同步还是异步.默认是异步false.</p>
+<p>xhr.send(null);</p>
+<p>send()接收一个参数,没有发送数据则为null,必须要.</p>
+<p>服务器执行响应后会自动填充xhr对象的属性:</p>
+<blockquote>
+<p>responseText: 返回为本<br>responseXML: 响应类型是’text/xml’或’application/xml’.<br>status: 响应的HTTP状态<br>statusText: HTTP状态说明</p>
+</blockquote>
+<p>在接收到响应后,第一步检查status属性,一般来说为200.304表示从缓存里面取数据.<br>也可以检测XHR对象的readyState属性:</p>
+<p>0:未初始化.尚未调用open().<br>1:启动,已调用open(),未调用send()<br>2.发送,已调用send(),但未接到响应<br>3.接收,已接受部分响应数据<br>4.完成,已接收到全部数据,而且可以在客户端使用了.</p>
+<p>只要readyState属性的值由一个变成另一个,都会触发一次readystatechange事件.可以利用这个时间来检测状态变化后的readyStaete的值.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = createXHR();        </span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">      alert(xhr.responseText);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      alert(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<p>在接收到响应之前还可以调用<code>abort()</code>方法来取消异步请求</p>
+<p>xhr.abort();</p>
+<p>调用之后应该对XHR对象进行解引用操作,由于内存原因,不建议重用XHR对象.</p>
+<h2 id="XMLHttpRequest2_u7EA7"><a href="#XMLHttpRequest2_u7EA7" class="headerlink" title="XMLHttpRequest2级"></a>XMLHttpRequest2级</h2><p>定义了FormData类型:</p>
+<p>var data = new FormData();<br>data.append(‘name’, ‘Jack’);</p>
+<p>可以将data直接传递给XHR对象的send()方法.</p>
+<h3 id="u8D85_u65F6_u8BBE_u7F6E"><a href="#u8D85_u65F6_u8BBE_u7F6E" class="headerlink" title="超时设置"></a>超时设置</h3><p>IE8为XHR对象添加了一个timeout属性,表示请求在等待响应时间多少毫秒之后就停止.<br>规定时间没响应就调用<code>ontimeout</code>事件处理程序.</p>
+<h3 id="overrideMimeType_28_29_u65B9_u6CD5"><a href="#overrideMimeType_28_29_u65B9_u6CD5" class="headerlink" title="overrideMimeType()方法"></a>overrideMimeType()方法</h3><p>调用overrideMimeType()方法的时候,必须在send()方法之前.</p>
+<h2 id="u8FDB_u5EA6_u4E8B_u4EF6"><a href="#u8FDB_u5EA6_u4E8B_u4EF6" class="headerlink" title="进度事件"></a>进度事件</h2><h2 id="u8DE8_u6E90_u8D44_u6E90_u5171_u4EAB"><a href="#u8DE8_u6E90_u8D44_u6E90_u5171_u4EAB" class="headerlink" title="跨源资源共享"></a>跨源资源共享</h2><p>附加一个额外的Origin头部,其中包含请求页面的源信息(协议,域名,端口)<br><code>Origin: http://www.uijack.com</code><br>如果服务器认为这个请求可以接收,就在<code>Access-Control-Allow-Origin</code>头部中回发相同的源信息<br><code>Access-Control-Allow-Origin: http://www.uijack.com</code>.</p>
+<h2 id="u5176_u4ED6_u8DE8_u57DF_u6280_u672F"><a href="#u5176_u4ED6_u8DE8_u57DF_u6280_u672F" class="headerlink" title="其他跨域技术"></a>其他跨域技术</h2><p>大部分采用绝对地址;</p>
+<h2 id="u5B89_u5168"><a href="#u5B89_u5168" class="headerlink" title="安全"></a>安全</h2><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>JSON with padding:和JSON差不多,只不过是被包含在函数调用的中的JSON,如:<br>callback({“name”: “Jack”});</p>
+<p>JSONP由两部分组: 回调函数和数据:</p>
+<p><a href="http://www.uijack.com/json/?callback=handleResponse" target="_blank" rel="external">http://www.uijack.com/json/?callback=handleResponse</a></p>
+<hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/" data-title="读《JavaScript高级程序设计》总结21 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/04/js-high-level-programming-language-20/"  title="读《JavaScript高级程序设计》总结20">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结20
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/04/js-high-level-programming-language-21/" data-title="读《JavaScript高级程序设计》总结21" data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest_u5BF9_u8C61"><span class="toc-number">1.</span> <span class="toc-text">XMLHttpRequest对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR_u7528_u6CD5"><span class="toc-number">1.1.</span> <span class="toc-text">XHR用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest2_u7EA7"><span class="toc-number">2.</span> <span class="toc-text">XMLHttpRequest2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8D85_u65F6_u8BBE_u7F6E"><span class="toc-number">2.1.</span> <span class="toc-text">超时设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overrideMimeType_28_29_u65B9_u6CD5"><span class="toc-number">2.2.</span> <span class="toc-text">overrideMimeType()方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8FDB_u5EA6_u4E8B_u4EF6"><span class="toc-number">3.</span> <span class="toc-text">进度事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8DE8_u6E90_u8D44_u6E90_u5171_u4EAB"><span class="toc-number">4.</span> <span class="toc-text">跨源资源共享</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5176_u4ED6_u8DE8_u57DF_u6280_u672F"><span class="toc-number">5.</span> <span class="toc-text">其他跨域技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B89_u5168"><span class="toc-number">6.</span> <span class="toc-text">安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP"><span class="toc-number">6.1.</span> <span class="toc-text">JSONP</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>22</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

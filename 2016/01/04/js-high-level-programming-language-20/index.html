@@ -1,0 +1,575 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>读《JavaScript高级程序设计》总结20 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="读《JavaScript高级程序设计 -- 第19章 JSON》介绍JSON语法，解析与序列化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《JavaScript高级程序设计》总结20">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="读《JavaScript高级程序设计 -- 第19章 JSON》介绍JSON语法，解析与序列化">
+<meta property="og:updated_time" content="2016-01-04T09:50:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《JavaScript高级程序设计》总结20">
+<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第19章 JSON》介绍JSON语法，解析与序列化">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/04/js-high-level-programming-language-20/" title="读《JavaScript高级程序设计》总结20" itemprop="url">读《JavaScript高级程序设计》总结20</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-04T12:10:02.000Z" itemprop="datePublished"> 发表于 2016-01-04 20:10:02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BED_u6CD5"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B80_u5355_u503C"><span class="toc-number">1.1.</span> <span class="toc-text">简单值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BF9_u8C61"><span class="toc-number">1.2.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u7EC4"><span class="toc-number">1.3.</span> <span class="toc-text">数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u89E3_u6790_u4E0E_u5E8F_u5217_u5316"><span class="toc-number">2.</span> <span class="toc-text">解析与序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON_u5BF9_u8C61"><span class="toc-number">2.1.</span> <span class="toc-text">JSON对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E8F_u5217_u5316_u9009_u9879"><span class="toc-number">2.2.</span> <span class="toc-text">序列化选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u89E3_u6790_u9009_u9879"><span class="toc-number">2.3.</span> <span class="toc-text">解析选项</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="u8BED_u6CD5"><a href="#u8BED_u6CD5" class="headerlink" title="语法"></a>语法</h2><p>JSON的语法可以表示以下三种类型的值：</p>
+<ol>
+<li>简单值：与JS相同语法，可以在json中表示字符串、数值、布尔值和null,但<code>不支持</code>特殊值<code>undefined</code>。</li>
+<li>对象： 复杂数据类型，有一组有序的键值对儿，每个值可以是简单值，也可以是复杂数据类型的值。</li>
+<li>数组： 数组也是一种复杂数据类型值，表示一组有序的值的列表。可以通过数值索引访问其中的值。值可以使任意类型，–简单值，对象或数组</li>
+</ol>
+<h3 id="u7B80_u5355_u503C"><a href="#u7B80_u5355_u503C" class="headerlink" title="简单值"></a>简单值</h3><p>JS字符串与JSON字符串的最大区别在于：JSON字符串必须使用<code>双引号</code>（单引号会导致语法错误）。<br>布尔值和null也是有效的JSON形式，但实际运用中，JSON更多的用来表示复杂的数据结构，而简单值只是一部分。</p>
+<h3 id="u5BF9_u8C61"><a href="#u5BF9_u8C61" class="headerlink" title="对象"></a>对象</h3><p>JSON中的对象与JS字面量稍微有一些不同，<code>JSON中的对象要求给属性加双引号（不能是单引号）</code>，<br><code>没有变量声明</code>，<code>末尾没有分号</code>，<code>同一对象中绝对不应该出现两个相同属性</code>。</p>
+<h3 id="u6570_u7EC4"><a href="#u6570_u7EC4" class="headerlink" title="数组"></a>数组</h3><p>JS中的数组字面量：var values = [25, “hi”, true];<br>JSON中：[25, “hi”, true]<br>同样注意：<code>JSON</code>数组也没有变量和末尾分号。</p>
+<h2 id="u89E3_u6790_u4E0E_u5E8F_u5217_u5316"><a href="#u89E3_u6790_u4E0E_u5E8F_u5217_u5316" class="headerlink" title="解析与序列化"></a>解析与序列化</h2><p>JSON流行原因：</p>
+<ol>
+<li>拥有与JS类似的语法。</li>
+<li>可以把JSON数据结构解析为有用的JavaScript对象。（最重要原因）</li>
+</ol>
+<h3 id="JSON_u5BF9_u8C61"><a href="#JSON_u5BF9_u8C61" class="headerlink" title="JSON对象"></a>JSON对象</h3><p>早期的JSON解析器基本上使用JS的<code>eval()</code>函数，解析返回JS对象和数组。</p>
+<p>JSON对象的两个方法：</p>
+<blockquote>
+<p>stringify()<br>parse()</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">  title: <span class="string">"Professional JavaScript"</span>,</span><br><span class="line">  authors: [</span><br><span class="line">    <span class="string">"Nicholas C. Zakas"</span></span><br><span class="line">  ],</span><br><span class="line">  edition: <span class="number">3</span>,</span><br><span class="line">  year: <span class="number">2011</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jsonText = <span class="built_in">JSON</span>.stringify(book);</span><br><span class="line">alert(jsonText);</span><br></pre></td></tr></table></figure>
+<p>这个例子使用JSON.stringify()把一个JavaScript对象序列化成一个JSON字符串。然后将它保存在变量jsonText中，<br>默认情况下，JSON.stringify()输出的JSON字符串不包含任何空格字符和缩进。</p>
+<p>利用JSON.parse()可以将JSON字符串转化为相应的JavaScript值。解析不是有效的JSON对象，会抛出异常。</p>
+<h3 id="u5E8F_u5217_u5316_u9009_u9879"><a href="#u5E8F_u5217_u5316_u9009_u9879" class="headerlink" title="序列化选项"></a>序列化选项</h3><ul>
+<li>过滤结果</li>
+</ul>
+<p>如果参数是数组。那么JSON.stringify()的结果将只包含数组中列出的属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">  title: <span class="string">"Professional JavaScript"</span>,</span><br><span class="line">  authors: [</span><br><span class="line">    <span class="string">"Nicholas C. Zakas"</span></span><br><span class="line">  ],</span><br><span class="line">  edition: <span class="number">3</span>,</span><br><span class="line">  year: <span class="number">2011</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jsonText = <span class="built_in">JSON</span>.stringify(book, [<span class="string">"title"</span>, <span class="string">"edition"</span>]);</span><br><span class="line">alert(jsonText);</span><br></pre></td></tr></table></figure>
+<p>结果：{“title”:”Professional JavaScript”,”edition”:3}</p>
+<blockquote>
+<p>如果第二个参数是函数，行为会稍有不同，传入的函数接受两个参数，属性(键)名和属性值。<br>属性名只能是字符串，而在值并非键值对结构的值时，键名可以是空字符串。</p>
+</blockquote>
+<p>为了改变序列化对象的结果，函数返回的值就是相应键的值。如果返回<code>undefined</code>,那么相应的属性会被忽略。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">  title: <span class="string">"Professional JavaScript"</span>,</span><br><span class="line">  authors: [</span><br><span class="line">      <span class="string">"Nicholas C. Zakas"</span></span><br><span class="line">  ],</span><br><span class="line">  edition: <span class="number">3</span>,</span><br><span class="line">  year: <span class="number">2011</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jsonText = <span class="built_in">JSON</span>.stringify(book, <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(key)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"authors"</span>:</span><br><span class="line">      <span class="keyword">return</span> value.join(<span class="string">","</span>)</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">case</span> <span class="string">"year"</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="number">5000</span>;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">case</span> <span class="string">"edition"</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">alert(jsonText);</span><br></pre></td></tr></table></figure>
+<p>结果为：{“title”:”Professional JavaScript”,”authors”:”Nicholas C. Zakas”,”year”:5000}</p>
+<ul>
+<li>字符串缩进</li>
+</ul>
+<p>JSON.stringify()方法的<code>第三个参数</code>用于控制结果中的缩进和空白符.参数是一个<code>数值</code>,表示每个级别缩进的空格数<br>JSON.stringify()同时也在结果字符串中插入了换行符以提高可读性.第三个参数最大数值为<code>10</code>.超过会转化为10.<br>如果是字符串,则这个字符串将在JSON字符串中被用作缩进字符(不要使用空格),最好是制表符或者两个段划线之类的任意字符.</p>
+<ul>
+<li>toJSON()方法</li>
+</ul>
+<p>JSON.stringify()不能满足对对象的自定义序列化需求,可以调用对象上的<code>toJSON()</code>方法,返回其自身的JSON数据格式.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">  title: <span class="string">"Professional JavaScript"</span>,</span><br><span class="line">  authors: [</span><br><span class="line">      <span class="string">"Nicholas C. Zakas"</span></span><br><span class="line">  ],</span><br><span class="line">  edition: <span class="number">3</span>,</span><br><span class="line">  year: <span class="number">2011</span>,</span><br><span class="line">  toJSON: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.title;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> jsonText = <span class="built_in">JSON</span>.stringify(book); <span class="comment">// "Professional JavaScript"</span></span><br></pre></td></tr></table></figure>
+<p><code>toJSON()</code>方法可以作为函数过滤器的补充,<br><code>序列化内部顺序:</code></p>
+<ol>
+<li>如果存在toJSON()方法而且能通过它取的有效值,则调用该方法.否则,按默认顺序执行序列化.</li>
+<li>如果提供了第二个参数,应用这个函数过滤器.传入函数过滤器的值是第(1)步返回的值.</li>
+<li>对第(2)步返回的每个值经行相应的序列化.</li>
+<li>如果提供第三个参数,执行相应的格式化.</li>
+</ol>
+<h3 id="u89E3_u6790_u9009_u9879"><a href="#u89E3_u6790_u9009_u9879" class="headerlink" title="解析选项"></a>解析选项</h3><p>JSON.parse()方法也可以接受另一个参数,该参数是函数.将在每个键值对儿上调用.这个函数被称为还原函数(reviver).<br>接受两个参数,一个键和一个值.而且都需要返回一个值.如果还原函数返回<code>undefined</code>,则表示要从结果中删除相应的键.<br>如果返回其他值,则将该值插入到结果中.</p>
+<p>在将日期字符串转化为Date对象时,经常要用到还原函数.如:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">  <span class="string">"title"</span>: <span class="string">"Professional JavaScript"</span>,</span><br><span class="line">  <span class="string">"authors"</span>: [</span><br><span class="line">    <span class="string">"Nicholas C. Zakas"</span></span><br><span class="line">  ],</span><br><span class="line">  edition: <span class="number">3</span>,</span><br><span class="line">  year: <span class="number">2011</span>,</span><br><span class="line">  releaseDate: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2011</span>, <span class="number">11</span>, <span class="number">1</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jsonText = <span class="built_in">JSON</span>.stringify(book);</span><br><span class="line">alert(jsonText);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bookCopy = <span class="built_in">JSON</span>.parse(jsonText, <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (key == <span class="string">"releaseDate"</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(value); <span class="comment">// return undefined;</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// alert("releaseDate" in bookCopy);</span></span><br><span class="line">alert(bookCopy.releaseDate.getFullYear());</span><br></pre></td></tr></table></figure>
+<p>以上代码先是为book对象新增releaseDate属性,该属性保存着一个Date对象.经过序列化之后变成有效JSON字符串,经过解析还原成Date对象, 才能基于这个对象调用getFullYear()方法.</p>
+<hr>
+<blockquote>
+<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/" data-title="读《JavaScript高级程序设计》总结20 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/01/04/js-high-level-programming-language-21/" title="读《JavaScript高级程序设计》总结21">
+  <strong>上一篇：</strong><br/>
+  <span>
+  读《JavaScript高级程序设计》总结21</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/01/04/js-high-level-programming-language-19/"  title="读《JavaScript高级程序设计》总结19">
+ <strong>下一篇：</strong><br/> 
+ <span>读《JavaScript高级程序设计》总结19
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/04/js-high-level-programming-language-20/" data-title="读《JavaScript高级程序设计》总结20" data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u8BED_u6CD5"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u7B80_u5355_u503C"><span class="toc-number">1.1.</span> <span class="toc-text">简单值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5BF9_u8C61"><span class="toc-number">1.2.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u6570_u7EC4"><span class="toc-number">1.3.</span> <span class="toc-text">数组</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u89E3_u6790_u4E0E_u5E8F_u5217_u5316"><span class="toc-number">2.</span> <span class="toc-text">解析与序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON_u5BF9_u8C61"><span class="toc-number">2.1.</span> <span class="toc-text">JSON对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E8F_u5217_u5316_u9009_u9879"><span class="toc-number">2.2.</span> <span class="toc-text">序列化选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u89E3_u6790_u9009_u9879"><span class="toc-number">2.3.</span> <span class="toc-text">解析选项</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>22</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
