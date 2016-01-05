@@ -226,8 +226,8 @@ function inner() {
 }
 ```
 IE,Ff,Chrome,Saf所有版本都支持,Opera9.6都支持`caller`属性
-当函数`严格模式`下访问`arguents.callee`会导致错误,
-ECMAScript5还定义了arguments.caller属性,严格模式下访问也会出错.非严格模式下这个属性始终是`undefined`.严格模式不能为函数的caller属性赋值.
+在函数`严格模式(use strict)`下访问`arguents.callee`会导致错误,
+ECMAScript5还定义了arguments.caller属性,严格模式下访问也会出错.非严格模式下这个属性始终是`undefined`.严格模式不能为函数的caller属性赋值.但是可以访问`arguments`.`这很重要`.
 
 ### 属性和方法 length, property, apply,call,bind
 

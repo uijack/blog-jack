@@ -252,7 +252,7 @@ EventUtil.addHandler(btn, "click", handler.handleClick.bind(handler));
 
 ### 函数柯里化
 
-与`函数绑定`紧密相关的主题是函数柯里化(function currying), 他用于`创建`已经设置好了一个活多个参数的函数.
+与`函数绑定`紧密相关的主题是函数柯里化(function currying), 他用于`创建`已经设置好了一个或多个参数的函数.
 函数柯里化的基本方法和函数绑定是一样的,`使用一个闭包返回一个函数`.
 `两者区别`在于,当函数被调用时,返回的函数还需要`设置一些传入的参数`.
 
@@ -269,16 +269,18 @@ alert(add(2,3)); //5
 alert(curriedAdd(3)); //8
 ```
 
-柯里化函数通常由一下步骤动态创建: 调用另一个函数并为它传入要柯里化的函数和必要参数.
+柯里化函数通常由以下步骤动态创建: 调用另一个函数并为它传入要柯里化的函数和必要参数.
 
 ```js
 function curry(fn){
   // 在arguments对象上调用slice()方法,并传入参数1表示要返回的数组包含从第二个参数开始返回所有参数
   // 然后args数组包含了来自外部函数的参数.
+  // 这是第一次柯里化时传入的参数
   var args = Array.prototype.slice.call(arguments, 1);
   return function(){
     // 创建innerArgs数组用来存放所有传入的参数,有了存放来自函数外部和内部函数的参数数组后
     // 就可以调用concat()方法将他们组合成finalArgs.然后使用apply()将结果传递给该函数.
+    // 这是真正调用函数再次传入的参数,然后将它们按顺序连接起来给fn函数使用.
     var innerArgs = Array.prototype.slice.call(arguments),
         finalArgs = args.concat(innerArgs);
         // 并没有考虑到执行环境,所以第一个参数为null
@@ -297,7 +299,7 @@ var curriedAdd2 = curry(add, 5, 12);
 alert(curriedAdd2());   //17
 ```
 
-curry()工作就是将返回函数的参数经行排序.`第一个参数`是要进行`柯里化`的函数.,其他参数是要传入的值.
+curry()工作就是将返回函数的参数进行排序.`第一个参数`是要进行`柯里化`的函数.,其他参数是要传入的值.
 
 `还有更复杂的`bind()结合curry().
 
@@ -326,8 +328,7 @@ alert(person.age); // undefined;
 ### 密封对象
 
 ECMAScript5为对象定义的第二个保护级别是`密封对象(sealed object`.密封对象不可扩展,
-而已有成员的[[Configrable]]特性将被设置为`false`.这就意味着不能删除属性和方法.,因为不能使用Object.definedProperty()把
-数据属性修改为访问器属性.但是`属性值是可以修改的`.
+而已有成员的[[Configrable]]特性将被设置为`false`.这就意味着不能删除属性和方法.,因为不能使用Object.definedProperty()把数据属性修改为访问器属性.但是`属性值是可以修改的`.
 
 ```js
 var person = { name: "Nicholas" };
