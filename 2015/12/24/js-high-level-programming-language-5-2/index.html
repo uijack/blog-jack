@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-6.png">
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-7.png">
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-7.png">
-<meta property="og:updated_time" content="2015-12-30T03:00:03.000Z">
+<meta property="og:updated_time" content="2016-01-05T09:20:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《JavaScript高级程序设计》总结5-2">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Date、RegExp、Function、基本包装类型、单体内置对象等">
@@ -171,7 +171,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>) </span>&#123; inner(); &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>) </span>&#123; alert(inner.caller);&#125;</span><br><span class="line">outer(); <span class="comment">// 会显示outer()函数的源代码.</span></span><br></pre></td></tr></table></figure>
 <p>为了实现更散松的耦合,也可以通过改写</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  alert(<span class="built_in">arguments</span>.callee.caller);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>IE,Ff,Chrome,Saf所有版本都支持,Opera9.6都支持<code>caller</code>属性<br>当函数<code>严格模式</code>下访问<code>arguents.callee</code>会导致错误,<br>ECMAScript5还定义了arguments.caller属性,严格模式下访问也会出错.非严格模式下这个属性始终是<code>undefined</code>.严格模式不能为函数的caller属性赋值.</p>
+<p>IE,Ff,Chrome,Saf所有版本都支持,Opera9.6都支持<code>caller</code>属性<br>在函数<code>严格模式(use strict)</code>下访问<code>arguents.callee</code>会导致错误,<br>ECMAScript5还定义了arguments.caller属性,严格模式下访问也会出错.非严格模式下这个属性始终是<code>undefined</code>.严格模式不能为函数的caller属性赋值.但是可以访问<code>arguments</code>.<code>这很重要</code>.</p>
 <h3 id="u5C5E_u6027_u548C_u65B9_u6CD5_length_2C_property_2C_apply_2Ccall_2Cbind"><a href="#u5C5E_u6027_u548C_u65B9_u6CD5_length_2C_property_2C_apply_2Ccall_2Cbind" class="headerlink" title="属性和方法 length, property, apply,call,bind"></a>属性和方法 length, property, apply,call,bind</h3><p>函数也是对象,因此有属性和方法,每个函数都包含两个属性:</p>
 <ul>
 <li>length : 表示函数希望接收的命名参数的个数</li>
@@ -333,11 +333,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>23</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>25</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>16</sup></a></li>
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>18</sup></a></li>
 			
 		
 			
