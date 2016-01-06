@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>读《JavaScript高级程序设计》总结19 | 千千哥</title>
+    <title>JavaScript技巧总结(持续更新中...) | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
     
 
     
-    <meta name="description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
+    <meta name="description" content="本片文章会持续更新在js中避免一些坑的技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计》总结19">
-<meta property="og:url" content="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/index.html">
+<meta property="og:title" content="JavaScript技巧总结(持续更新中...)">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/06/javascript-keng/index.html">
 <meta property="og:site_name" content="千千哥">
-<meta property="og:description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
-<meta property="og:updated_time" content="2016-01-04T01:34:52.000Z">
+<meta property="og:description" content="本片文章会持续更新在js中避免一些坑的技巧">
+<meta property="og:updated_time" content="2016-01-06T13:29:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计》总结19">
-<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
+<meta name="twitter:title" content="JavaScript技巧总结(持续更新中...)">
+<meta name="twitter:description" content="本片文章会持续更新在js中避免一些坑的技巧">
 
     
     <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
@@ -75,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/04/js-high-level-programming-language-19/" title="读《JavaScript高级程序设计》总结19" itemprop="url">读《JavaScript高级程序设计》总结19</a>
+      <a href="/2016/01/06/javascript-keng/" title="JavaScript技巧总结(持续更新中...)" itemprop="url">JavaScript技巧总结(持续更新中...)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-04T11:25:34.000Z" itemprop="datePublished"> 发表于 2016-01-04 19:25:34</time>
+    <time datetime="2016-01-05T23:08:16.000Z" itemprop="datePublished"> 发表于 2016-01-06 07:08:16</time>
     
   </p>
 </header>
@@ -91,17 +91,94 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E4X"><span class="toc-number">1.</span> <span class="toc-text">E4X</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="E4X"><a href="#E4X" class="headerlink" title="E4X"></a>E4X</h2><p>ECMAScript for XML，本身不是一本语言，只是ECMAScript语言的可选扩展，为处理XML定义了新的语法，也定义了特定于XML的对象。</p>
-<p>支持不够，浏览器支持不高。</p>
-<p>暂无心得。</p>
-<hr>
+		<ul>
+<li>检索:</li>
+</ul>
+<p>1.尝试检索一个并不存在的成员元素的值.将返回一个<code>undefined</code>值.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">'Jack'</span>,</span><br><span class="line">  age: <span class="number">29</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.name;   <span class="comment">// 优先考虑使用`.`表示法,看起来更紧凑且可读性更好.</span></span><br><span class="line">person.sex;    <span class="comment">// undefined</span></span><br><span class="line">person[<span class="string">'sex'</span>]; <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>2.可以使用<code>||运算符</code>来填充默认值.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sex = person.sex || <span class="string">'male'</span>;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>尝试检索一个<code>undefined</code>值将会导致TypeError异常,可以通过<code>&amp;&amp;运算符</code>来避免错误.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">person.sex;   <span class="comment">// undefined</span></span><br><span class="line">person.sex.model; <span class="comment">// throw TypeError 重点</span></span><br><span class="line">person.sex &amp;&amp; person.sex.model;  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>原型</li>
+</ul>
+<p>原性关系是一种动态关系,如果添加一个新的属性到原型中,该属性会立即对所有该原型创建的对象可见.</p>
+<ul>
+<li>删除delete</li>
+</ul>
+<p><code>delete</code>运算符可以用来删除对象中<code>确定包含的属性</code>,它不会触及<code>原型链</code>中的任何对象.<br>通过<code>delete</code>运算符删除包含的属性从而暴露<code>原型链</code>中的属性.</p>
+<ul>
+<li>减少全局变量污染</li>
+</ul>
+<ol>
+<li>在运用中只创建<code>唯一一个全局变量</code>.</li>
+<li>使用<code>闭包</code>来进行信息隐藏.</li>
+</ol>
+<ul>
+<li>函数对象</li>
+</ul>
+<p>JS中函数是对象,对象是<code>名/值</code>对的集合并拥有一个链接到原型对象的隐藏链接.</p>
 <blockquote>
-<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+<p>对象字面量产生的对象连接到<code>Object.property</code>.<br>函数对象链接到<code>Function.property(该原型对象本身链接到Object.property)</code>.</p>
 </blockquote>
+<p>每个函数对象在创建时也附带一个<code>property</code>属性,它的值是一个拥有<code>constructor</code>属性且值即为该函数的对象,</p>
+<ul>
+<li>调用</li>
+</ul>
+<p>在JavaScript中一共有<code>4种调用模式</code>:</p>
+<ol>
+<li>方法调用模式</li>
+<li>函数调用模式</li>
+<li>构造器调用模式</li>
+<li><code>apply</code>调用模式<br>这些模式在如何初始化关键参数<code>this</code>上存在差异.</li>
+</ol>
+<p>注: 实际参数(arguments)的个数与形式参数(parameters)的个数不匹配不会导致运行时错误,实际参数过多,超出部分忽略掉.过少,缺失值被替换为<code>undefined</code>,对参数不经行类型检查.</p>
+<ul>
+<li>方法调用模式</li>
+</ul>
+<p><code>当一个函数被保存为对象的一个属性时</code>,我们称它为一个<code>方法</code>.<code>当一个方法被调用时</code>,<code>this被绑定到该对象(重要)</code>,</p>
+<ul>
+<li>函数调用模式</li>
+</ul>
+<p>‘当一个函数并非一个对象的属性时’,<code>那么它被当作一个函数来调用</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = add(<span class="number">3</span>,<span class="number">4</span>); <span class="comment">// sum值为7</span></span><br></pre></td></tr></table></figure>
+<p>当以函数调用此模式时,<code>this被绑定到全局对象</code>,这是设计上的一个错误.有一个解决法方案:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">myObject.double = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>; <span class="comment">// 解决方法</span></span><br><span class="line">  <span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    that.value = add(that.value, that.value);</span><br><span class="line">  &#125;;</span><br><span class="line">  helper(); <span class="comment">// 以函数形式调用helper</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以方法的形式调用double.</span></span><br><span class="line">myObject.double();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>构造器调用模式</li>
+</ul>
+<p>如果在一个函数前面带上<code>new</code>来调用,那么将创建一个隐藏连接到该函数的<code>property</code>成员的新对象,同时,<br><code>this也被绑定到那个新对象上</code>.</p>
+<ul>
+<li>apply调用模式</li>
+</ul>
+<p>因为JS是一门函数式的面向对象编程语言,所以函数可以拥有自己的方法.<br><code>apply</code>方法让我们构建<code>一个参数数组</code>并用其去调用函数,他也允许我们<code>选择this的值</code>.<br>apply()接受两个参数: 第一个是<code>将被绑定给this的值</code>,第二个就是<code>一个参数数组</code>.</p>
+<ul>
+<li>参数arguments</li>
+</ul>
+<p>通过它可以访问所有它被调用时传递给它的参数列表.包括多余的函数参数.这使得编写一个无需指定参数个数的函数成为可能.<br>因为<code>语言的一个设计错误</code>,<code>arguments并不是一个真正的数组</code>,它只是一个<code>类似数组(array-like)</code>的对象, arguments拥有一个<code>length</code>属性.<code>但它缺少所有的数组方法(证明它不是一个真正数组的原因)</code>.</p>
+<ul>
+<li>返回</li>
+</ul>
+<p>一个函数总是会返回一个值.如果没有指定返回值,则返回<code>undefined</code>.<br>如果函数以在前面加上<code>new</code>前缀的方式调用,且返回值不是一个对象,则返回<code>this(该新对象)</code>.</p>
+<ul>
+<li>模块</li>
+</ul>
+<p>我们可以使用函数和闭包来构建模块.模块是一个提供接口却隐藏状态与实现的函数或对象.</p>
+<ul>
+<li>级联</li>
+</ul>
+<p>有一些方法没有返回值,如果我们让这些方法返回<code>this</code>而不是<code>undefined</code>,就可以启动级联.<br><code>级联</code>可以产生出具备很强表现力的接口.也能帮助控制那种构造试图一次做太多的事情的接口的趋势.</p>
+<ul>
+<li>记忆</li>
+</ul>
+<p>很重要(必看)</p>
+<p>未完待续……</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,7 +187,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  <span></span> <a href="/tags/js/">js</a>
   </div>
 
 </div>
@@ -119,7 +196,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/" data-title="读《JavaScript高级程序设计》总结19 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2016/01/06/javascript-keng/" data-title="JavaScript技巧总结(持续更新中...) | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,18 +210,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/01/04/js-high-level-programming-language-20/" title="读《JavaScript高级程序设计》总结20">
+ <a href="/2016/01/06/http-definitive-guide/" title="《HTTP权威指南》随笔1">
   <strong>上一篇：</strong><br/>
   <span>
-  读《JavaScript高级程序设计》总结20</span>
+  《HTTP权威指南》随笔1</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/01/04/js-high-level-programming-language-18/"  title="读《JavaScript高级程序设计》总结18">
+<a href="/2016/01/05/js-high-level-programming-language-25/"  title="读《JavaScript高级程序设计》总结25">
  <strong>下一篇：</strong><br/> 
- <span>读《JavaScript高级程序设计》总结18
+ <span>读《JavaScript高级程序设计》总结25
 </span>
 </a>
 </div>
@@ -153,7 +230,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/01/04/js-high-level-programming-language-19/" data-title="读《JavaScript高级程序设计》总结19" data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/06/javascript-keng/" data-title="JavaScript技巧总结(持续更新中...)" data-url="http://blog.uijack.com/2016/01/06/javascript-keng/"></div>
 </section>
 
 
@@ -163,7 +240,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E4X"><span class="toc-number">1.</span> <span class="toc-text">E4X</span></a></li></ol>
+ 
  
   </div>
 

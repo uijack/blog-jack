@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>读《JavaScript高级程序设计》总结19 | 千千哥</title>
+    <title>《HTTP权威指南》随笔1 | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
     
 
     
-    <meta name="description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
+    <meta name="description" content="读《HTTP权威指南 -- 第1章 HTTP概述》主要有MIME">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计》总结19">
-<meta property="og:url" content="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/index.html">
+<meta property="og:title" content="《HTTP权威指南》随笔1">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/06/http-definitive-guide/index.html">
 <meta property="og:site_name" content="千千哥">
-<meta property="og:description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
-<meta property="og:updated_time" content="2016-01-04T01:34:52.000Z">
+<meta property="og:description" content="读《HTTP权威指南 -- 第1章 HTTP概述》主要有MIME">
+<meta property="og:updated_time" content="2016-01-06T13:29:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计》总结19">
-<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法">
+<meta name="twitter:title" content="《HTTP权威指南》随笔1">
+<meta name="twitter:description" content="读《HTTP权威指南 -- 第1章 HTTP概述》主要有MIME">
 
     
     <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
@@ -75,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/04/js-high-level-programming-language-19/" title="读《JavaScript高级程序设计》总结19" itemprop="url">读《JavaScript高级程序设计》总结19</a>
+      <a href="/2016/01/06/http-definitive-guide/" title="《HTTP权威指南》随笔1" itemprop="url">《HTTP权威指南》随笔1</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-04T11:25:34.000Z" itemprop="datePublished"> 发表于 2016-01-04 19:25:34</time>
+    <time datetime="2016-01-06T11:27:53.000Z" itemprop="datePublished"> 发表于 2016-01-06 19:27:53</time>
     
   </p>
 </header>
@@ -91,17 +91,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E4X"><span class="toc-number">1.</span> <span class="toc-text">E4X</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5A92_u4F53_u7C7B_u578B"><span class="toc-number">1.</span> <span class="toc-text">媒体类型</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="E4X"><a href="#E4X" class="headerlink" title="E4X"></a>E4X</h2><p>ECMAScript for XML，本身不是一本语言，只是ECMAScript语言的可选扩展，为处理XML定义了新的语法，也定义了特定于XML的对象。</p>
-<p>支持不够，浏览器支持不高。</p>
-<p>暂无心得。</p>
-<hr>
-<blockquote>
-<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
-</blockquote>
+		<h2 id="u5A92_u4F53_u7C7B_u578B"><a href="#u5A92_u4F53_u7C7B_u578B" class="headerlink" title="媒体类型"></a>媒体类型</h2><p>因特网上有数千种不同的类型数据,HTTP会给每种要通过Web传输的对象都打上名为<code>MIME类型(MIME type)</code>的数据标签格式.<br>最初设计MIME(Multipurpose Internet Mail Extension, 多用途因特网邮件扩展)是为了解决不同的电子邮件系统之间<code>搬移报文</code>是存在的问题.后来HTTP也采纳用来<code>描述并标记多媒体内容</code>.</p>
+<p>MIME类型是一种文本标记,表示<code>一种主要的对象类型</code>和<code>一个特定的子类型</code>.中间由<code>一条斜杠</code>来分割.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTML格式文本: text/html</span><br><span class="line">普通的ASCII文本文档: text/plain</span><br><span class="line">JPEG版本图片: image/jpeg</span><br><span class="line">GIFg格式图片: image/gif</span><br><span class="line">Apple的QuickTime电影: video/quicktime</span><br><span class="line">微软PowerPoint文件: application/vnd.ms-powerpoint</span><br></pre></td></tr></table></figure>
+<p>大多数浏览器都可以处理数百种常见的对象类型.<br>HTTP客户端和HTTP服务器共同构成了万维网的基本组件.<code>Web浏览器</code>是最常见的<code>HTTP客户端</code></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -110,7 +107,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  <span></span> <a href="/tags/HTTP/">HTTP</a><a href="/tags/随笔/">随笔</a>
   </div>
 
 </div>
@@ -119,7 +116,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/" data-title="读《JavaScript高级程序设计》总结19 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2016/01/06/http-definitive-guide/" data-title="《HTTP权威指南》随笔1 | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,19 +129,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/04/js-high-level-programming-language-20/" title="读《JavaScript高级程序设计》总结20">
-  <strong>上一篇：</strong><br/>
-  <span>
-  读《JavaScript高级程序设计》总结20</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/01/04/js-high-level-programming-language-18/"  title="读《JavaScript高级程序设计》总结18">
+<a href="/2016/01/06/javascript-keng/"  title="JavaScript技巧总结(持续更新中...)">
  <strong>下一篇：</strong><br/> 
- <span>读《JavaScript高级程序设计》总结18
+ <span>JavaScript技巧总结(持续更新中...)
 </span>
 </a>
 </div>
@@ -153,7 +142,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/01/04/js-high-level-programming-language-19/" data-title="读《JavaScript高级程序设计》总结19" data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/06/http-definitive-guide/" data-title="《HTTP权威指南》随笔1" data-url="http://blog.uijack.com/2016/01/06/http-definitive-guide/"></div>
 </section>
 
 
@@ -163,7 +152,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E4X"><span class="toc-number">1.</span> <span class="toc-text">E4X</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5A92_u4F53_u7C7B_u578B"><span class="toc-number">1.</span> <span class="toc-text">媒体类型</span></a></li></ol>
  
   </div>
 

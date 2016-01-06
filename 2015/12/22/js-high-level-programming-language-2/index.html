@@ -17,7 +17,8 @@
 <meta property="og:url" content="http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/index.html">
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
-<meta property="og:updated_time" content="2015-12-30T02:59:09.000Z">
+<meta property="og:image" content="http://blog.uijack.com/img/js-high-level-5-3.png">
+<meta property="og:updated_time" content="2016-01-06T13:28:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《JavaScript高级程序设计》总结2">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
@@ -223,6 +224,7 @@
 <p><code>API: isNaN(任何类型参数)</code> 该函数会帮我们确定这个参数是否是“不是数值”。先转化成数值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">NaN</span>))    <span class="comment">// true</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="number">10</span>))     <span class="comment">// false 10是一个数值</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">'10'</span>))   <span class="comment">// false 可以被转化成数值10</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">'blue'</span>))  <span class="comment">// true 不能转化成数值</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">true</span>))  <span class="comment">// false 可以被转化成1</span></span><br></pre></td></tr></table></figure></p>
 <p>注：基于对象调用isNaN(),首先会调用对象valueOf(),不能转化则基于这个值在调用toString()在测试返回值。</p>
 <p>数值转化函数： <code>Number()</code> <code>parseInt()</code> <code>parseFloat()</code> 转化规则详情官网。<code>很重要</code></p>
+<p><img src="/img/js-high-level-5-3.png" alt="其他类型转化数字规则表"></p>
 <h3 id="String__u7C7B_u578B"><a href="#String__u7C7B_u578B" class="headerlink" title="String 类型"></a>String 类型</h3><p>由零或多位16位Unicode字符串组成的字符序列，即字符串。</p>
 <p>数值、布尔值、对象和字符串值都有toString()方法，但<code>null</code>和<code>undefined</code>值没有这个方法。<br>数值调用toString()方法默认以10进制格式返回数值的字符串表示。可以用过传递基数参数，转化为其他格式字符串</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">alert(num.toString())    <span class="comment">// "10"</span></span><br><span class="line">alert(num.toString(<span class="number">2</span>))   <span class="comment">// "1010"</span></span><br><span class="line">alert(num.toString(<span class="number">8</span>))   <span class="comment">// "12"</span></span><br><span class="line">alert(num.toString(<span class="number">10</span>))  <span class="comment">// "10"</span></span><br><span class="line">alert(num.toString(<span class="number">16</span>))  <span class="comment">// "a"</span></span><br></pre></td></tr></table></figure>
@@ -249,7 +251,7 @@
 </blockquote>
 </li>
 </ul>
-<p>在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ ] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为1.</span><br><span class="line">[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。</span><br><span class="line">[ ] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。</span><br><span class="line">null 和 undefined比较遵循下列原则：</span><br><span class="line">[ ] null 和 undefined 是相等的。</span><br><span class="line">[ ] 要比较相等性之前，不能将null和undefined转化成其他任何值。</span><br><span class="line">[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.</span><br><span class="line">[ ] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。</span><br></pre></td></tr></table></figure></p>
+<p>在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ ] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为1.</span><br><span class="line">[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。Number(字符串).Number('') = 0</span><br><span class="line">[ ] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。</span><br><span class="line">null 和 undefined比较遵循下列原则：</span><br><span class="line">[ ] null 和 undefined 是相等的。</span><br><span class="line">[ ] 要比较相等性之前，不能将null和undefined转化成其他任何值。</span><br><span class="line">[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.</span><br><span class="line">[ ] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。</span><br></pre></td></tr></table></figure></p>
 <p>下列列出一些特殊的情况集结果：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="code">       表达式        |    值     </span></span><br><span class="line"><span class="horizontal_rule">------------------- | --------  </span></span><br><span class="line">null == undefined   |   true    </span><br><span class="line"><span class="code">     "NaN" == NaN   |   false  </span></span><br><span class="line"><span class="code">         5 == NaN   |   false  </span></span><br><span class="line"><span class="code">       NaN == NaN   |   false  </span></span><br><span class="line"><span class="code">       NaN != NaN   |   true </span></span><br><span class="line"><span class="code">       false == 0   |   true </span></span><br><span class="line"><span class="code">        true == 1   |   true </span></span><br><span class="line"><span class="code">        true == 2   |   false </span></span><br><span class="line">   undefined == 0   |   false </span><br><span class="line"><span class="code">        null == 0   |   false </span></span><br><span class="line"><span class="code">         "5" == 5   |   true</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>全等和全不等在比较之前不转换操作数</p>
@@ -379,7 +381,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>25</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>26</sup></a></li>
 			
 		
 			
@@ -387,7 +389,7 @@
 			
 		
 			
-				<li><a href="/tags/js/" title="js">js<sup>3</sup></a></li>
+				<li><a href="/tags/js/" title="js">js<sup>4</sup></a></li>
 			
 		
 			
@@ -403,11 +405,11 @@
 			
 		
 			
-				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
 			
 		
 			
@@ -427,7 +429,11 @@
 			
 		
 			
-				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+				<li><a href="/tags/HTTP/" title="HTTP">HTTP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
 			
 		
 		</ul>
