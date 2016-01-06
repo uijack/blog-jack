@@ -197,7 +197,7 @@ alert(isNaN(true))  // false 可以被转化成1
 
 数值转化函数： `Number()` `parseInt()` `parseFloat()` 转化规则详情官网。`很重要`
 
-![其他类型转化数字规则表](/img/js-high-level-5-3.png)
+![其他类型转化数字规则表](/img/js-high-level-2-1.png)
 
 ### String 类型
 
