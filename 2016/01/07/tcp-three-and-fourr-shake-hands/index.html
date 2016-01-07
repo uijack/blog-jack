@@ -1,0 +1,621 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>TCP的3次握手和4次挥手机制 | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="主要讲一下TCP(Transmission Control Protocol)传输控制协议3次握手和4次挥手的过程以及相关扩展知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP的3次握手和4次挥手机制">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/07/tcp-three-and-fourr-shake-hands/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="主要讲一下TCP(Transmission Control Protocol)传输控制协议3次握手和4次挥手的过程以及相关扩展知识">
+<meta property="og:image" content="http://blog.uijack.com/img/tcp-three-and-four-hand.png">
+<meta property="og:image" content="http://blog.uijack.com/img/tcp-three-and-four-hand-2.png">
+<meta property="og:image" content="http://blog.uijack.com/img/tcp-three-and-four-hand-3.png">
+<meta property="og:image" content="http://blog.uijack.com/img/tcp-three-and-four-hand-4.png">
+<meta property="og:updated_time" content="2016-01-07T15:07:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP的3次握手和4次挥手机制">
+<meta name="twitter:description" content="主要讲一下TCP(Transmission Control Protocol)传输控制协议3次握手和4次挥手的过程以及相关扩展知识">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/07/tcp-three-and-fourr-shake-hands/" title="TCP的3次握手和4次挥手机制" itemprop="url">TCP的3次握手和4次挥手机制</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-07T11:32:26.000Z" itemprop="datePublished"> 发表于 2016-01-07 19:32:26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u770B_u524D_u987B_u77E5"><span class="toc-number">1.</span> <span class="toc-text">看前须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E09_u6B21_u63E1_u624B_28_u5EFA_u7ACB_u8FDE_u63A5_29"><span class="toc-number">2.</span> <span class="toc-text">三次握手(建立连接)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u56DB_u6B21_u6325_u624B_28_u5173_u95ED_u8FDE_u63A5_29"><span class="toc-number">3.</span> <span class="toc-text">四次挥手(关闭连接)</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="u770B_u524D_u987B_u77E5"><a href="#u770B_u524D_u987B_u77E5" class="headerlink" title="看前须知"></a>看前须知</h2><ul>
+<li>6种位码:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYN: Synchronize&#21516;&#27493;&#24314;&#31435;&#36830;&#25509;&#30340;&#26631;&#35782;&#20301;.&#21021;&#22987;&#20026;1&#10;ACK: Acknowledgement&#30830;&#35748;&#10;PSH: push&#20256;&#36865;&#10;FIN: finish&#32467;&#26463;&#10;RST: Reset&#37325;&#32622;&#10;URG: Urgent&#32039;&#24613;&#10;&#10;&#38468;&#24102;:&#10;&#10;seq: Sequence number(&#39034;&#24207;&#21495;&#30721;)&#10;ack: Acknowledge number(&#30830;&#35748;&#21495;&#30721;)</span><br></pre></td></tr></table></figure>
+<p><code>TCP</code>在网络OSI的七层协议模型中的第4层(Transport, 传输层).定义传输数据的协议端口号,以及控制和差错校验,协议有:TCP,UDP,数据包一旦离开网卡即进入网络传输层.</p>
+<p><code>IP</code>在第3层(Network,网络层).进行逻辑地址寻址,实现不同网络之间的路径选择.协议有:ICMP,IGMP,<code>IP(IPV4,IPV6)</code>,ARP,RARP.</p>
+<p><code>数据链路层</code>在第2层(Link).建立逻辑连接,进行硬件地址寻址,差错校验.将<code>比特</code>组合进而合成<code>帧</code>,用MAC地址访问介质.错误发现但不纠正.</p>
+<p><code>物理层</code>在网络第1层(Physical Layer).建立,维护,断开物理连接.</p>
+<ul>
+<li>窗口</li>
+</ul>
+<blockquote>
+<p>建立连接时,各端分配一块缓冲区用来存储接收的数据,并将缓冲区的尺寸发送给另一端.接收方发送的<code>确认信息</code>中包含了自己剩余的缓冲区尺寸.<code>剩余缓冲区空间的数量叫做窗口</code>.</p>
+</blockquote>
+<ul>
+<li>TCP流量控制</li>
+</ul>
+<p>所谓流量控制(flow control)就是让发送方的发送速率不要太快,要让接收方来得及接收.否则就会造成<code>数据丢失</code>.<br>TCP的窗口单位是字节,不是报文段.数据报文段序号的初始值设为1.</p>
+<ul>
+<li>滑动窗口</li>
+</ul>
+<p>利用滑动窗口实现<code>TCP流量控制</code>.发送方的发送窗口不能超过接收方给出的接收窗口数值.<br>如我的接收窗口rwnd = 400字节.(receive window).</p>
+<h2 id="u4E09_u6B21_u63E1_u624B_28_u5EFA_u7ACB_u8FDE_u63A5_29"><a href="#u4E09_u6B21_u63E1_u624B_28_u5EFA_u7ACB_u8FDE_u63A5_29" class="headerlink" title="三次握手(建立连接)"></a>三次握手(建立连接)</h2><p><img src="/img/tcp-three-and-four-hand.png" alt="tcp三次握手图"></p>
+<p><img src="/img/tcp-three-and-four-hand-2.png" alt="tcp首部"></p>
+<p>注: 主动发起连接建立的应用进程叫做<code>客户端</code>.而被动等待连接建立的应用进程叫做<code>服务器</code>.<br><code>ACK</code>表示首部中的确认位ACK,小写的<code>ack</code>表示确认字段(确认号)的值.</p>
+<p>TCP协议提供可靠的连接服务,采用三次握手连接一个连接.</p>
+<p><code>TCB(Transimission Control Block)</code>存储了每一个连接中的重要信息.TCP连接表,发送和接受缓存指针,重传队列指针,当前的发送和接收序号等.</p>
+<p>服务器进程先创建传输控制块,准备接受客户端进程的连接请求,然后服务器进程就处于<code>LISTEN(收听)</code>状态,等待客户的连接请求.如有,即作出响应.</p>
+<ul>
+<li>第一次握手</li>
+</ul>
+<blockquote>
+<p>客户端进程先创建<code>传输控制块TCB</code>,然后向服务器发出连接请求<code>报文</code>.这时TCP报文首部中的<code>同部位SYN=1</code>,同时选择一个<code>初始序号seq=x</code>.这时TCP客户端进程进入<code>SYN-SENT(同步已发送)</code>状态.</p>
+</blockquote>
+<p>TCP规定,SYN报文段(即SYN=1的报文段)不能携带数据,但要消耗掉一个序号.</p>
+<ul>
+<li>第二次握手</li>
+</ul>
+<blockquote>
+<p>服务器收到连接请求报文后,如同意建立连接,则向客服端发送确认.在<code>确认报文段</code>中把<code>SYN</code>位和<code>ACK</code>位都置1(即 SYN=1, ACK=1),确认号<code>ack = x+1</code>, 同时也为自己选择一个<code>初始序号seq = y</code>.这时TCP服务器进程进入<code>SYN-RECV(同步收到)</code>状态.</p>
+</blockquote>
+<p>注意:这个报文段也不能携带数据,但同样要消耗一个序号.</p>
+<ul>
+<li>第三次握手</li>
+</ul>
+<blockquote>
+<p>TCP客户端进程收到B的确认后,还要向B给出确认.确认报文段<code>ACK=1</code>,确认号<code>ack = y+1</code>,而自己的序号<code>seq = x+1</code>.这时TCP连接已经建立,客户端进入<code>ESTABLISHED(已建立连接)</code>状态.当服务器收到A的确认后,也进入ESTABLISHED状态.</p>
+</blockquote>
+<p>TCP标准规定,ACK报文段可以携带数据,但<code>如果不携带数据则不消耗序号</code>.在这种情况下,<code>下一个数据报文段</code>的序号仍是<code>seq = x+1</code>.</p>
+<ul>
+<li>为什么A要发送一次确认报文呢?</li>
+</ul>
+<p>主要是为了防止已失效的连接请求报文段突然又传送到了服务端,因而产生错误.所谓<code>已失效的连接请求报文段</code>是这样产生的.考虑正常情况,客户端发出连接请求,但因连接请求报文丢失而未收到确认报文,于是客户端在重传一次连接请求.后来收到了确认,连理了连接.数据传输完毕,就释放了连接.客户端共发送<code>两个连接请求报文段</code>.其中第一个丢失,第二个到了服务器.没有<code>已经失效的连接请求报文段</code>.</p>
+<p>现假定出现一种异常情况,即客户端发出的第一个连接请求报文段并没有丢失,而是在<code>某些网络节点长时间滞留了</code>.以致延误到连接释放以后的某个时间才到达客户端.本来这是一个早已失效的报文段.但服务器收到此失效的连接请求报文段后,就<code>误认为</code>是客户端<code>又</code>发出一次新的连接请求,于是向客户端发送确认报文段,同意建立连接.假定不采用三次握手,那么只要服务器发出确认,新的连接就建立了.由于现在客服端并没有发出建立连接的请求.因此<code>不理睬</code>服务端的确认.也不会向服务端发送数据.但B却以为新的运输连接已经建立了,并一直等待客服端发来数据.服务端的许多资源就被<code>白白浪费</code>了.<br>采用<code>三次握手</code>的办法可以防止上述现象.因为服务端由于收不到确认.就知道A并没有要求建立连接.</p>
+<h2 id="u56DB_u6B21_u6325_u624B_28_u5173_u95ED_u8FDE_u63A5_29"><a href="#u56DB_u6B21_u6325_u624B_28_u5173_u95ED_u8FDE_u63A5_29" class="headerlink" title="四次挥手(关闭连接)"></a>四次挥手(关闭连接)</h2><p><img src="/img/tcp-three-and-four-hand-3.png" alt="tcp三次握手图"></p>
+<p>由于TCP连接是全双工的,因此每个方向都必须单独进行关闭.数据传输结束后,通信双方都可以释放连接,现在客户端和服务器都处于也进入ESTABLISHED状态.以下假设客户端先发起.</p>
+<ul>
+<li>第一次挥手</li>
+</ul>
+<blockquote>
+<p>客户端应用进程先其TCP发出连接释放报文段,并停止再发送数据,主动关闭TCP连接,此时客户端把<code>连接释放报文段首部</code>的<code>FIN位置1(即FIN=1)</code>,其序号<code>seq = u</code>,u等于前面客户端已经传过的数据的最后一个字节的序号加1.这是客户端进入<code>FIN-WAIT-1(终止等待1)</code>状态,等待服务端确认.</p>
+</blockquote>
+<p>TCP规定,FIN报文段即使不携带数据,它也消耗一个序号.</p>
+<ul>
+<li>第二次挥手</li>
+</ul>
+<blockquote>
+<p>服务器端收连接释放报文段后即发出确认,报文段的<code>确认位ACK=1</code>,确认号<code>ack = u+1</code>,而这个报文段自己的序号<code>seq = v</code>, v等于前面服务端已传过的数据的最后一个字节的序号加1. 然后服务端就进入`CLOSE-WAIT(关闭等待)状态.</p>
+</blockquote>
+<p>TCP服务器进程这是应通知高层应用进程,因而客户端到服务端方向的连接就释放了.这时候TCP连接处于<code>半封闭(half-close)</code>状态,即客户端已经没有数据要发送了,但服务端若发送数据,客户端仍要接收,也就是说.服务端到客户端这个方向的连接并未关闭,</p>
+<p>客户端收到来自服务端的确认后,就进入<code>FIN-WAIT-2(终止等待2)</code>状态,等待服务端发出的连接是释放报文段.</p>
+<p>若服务端已经没有要向客户端发送的数据,其应用进程就通知TCP释放连接,</p>
+<ul>
+<li>第三次挥手</li>
+</ul>
+<blockquote>
+<p>若服务端已经没有要向客户端发送的数据,其应用进程就通知TCP释放连接,这时服务端发出的连接释放报文段必须使<code>FIN=1</code>,确认位<code>ACK=1</code>,现假定服务端的序号<code>seq = w</code>(在半关闭状态服务端可能有发送了一些数据).服务端还<code>必须重复</code>上次已发送过的<code>确认号ack = u+1</code>.这时服务端就进入<code>LAST-ACK</code>(最后确认)状态,等待客服端的确认.</p>
+</blockquote>
+<ul>
+<li>第四次挥手</li>
+</ul>
+<blockquote>
+<p>客户端收到服务端的连接释放报文段后,必须对此发出确认,再确认报文段中把ACK置1(ACK=1),确认号<code>ack = w+1</code>,而自己的序号<code>seq = u+1</code>(根据TCP标准,前面发送过的FIN报文段要消耗一个序号).然后进入到<code>TIME-WAIT</code>(时间等待)状态.</p>
+</blockquote>
+<p>请注意现在的TCP连接还没释放掉.必须进过<code>时间等待计时器</code>设置的时间2MSL后,客户端才进入到<code>CLOSE</code>状态.时间<code>MSL</code>叫做<code>最长报文段寿命(Maximun Segment Lifetime)</code>.建议为2分钟.从客服端进入到TME-WAIT状态后,要经过4分钟才能进入CLOSED状态.当客服端撤销相应的<code>传输控制块TCB</code>后,就结束了这次TCP释放.</p>
+<ul>
+<li>为什么客户端在TIME-WAIT状态必须等待2MSL的时间呢?两个理由:</li>
+</ul>
+<ol>
+<li><p>为了保证客户端发送的最后一个ACK报文段能够到达服务端,这个ACK报文有可能丢失,因而使处于在LAST-ACK状态的服务端收不到已发送的FIN+ACK报文段确认.服务端会超时重传这个FIN-ACK报文段.而客户端就能在2MSL时间内收到这个重传的FIN+ACK报文.接着客户端重传一次确认,重回新启动2MSL计时器.最后客户端和服务端都正常进入到CLOSED状态,如果A在TIME-WAIT状态下不能等待一段时间,而在发送完ACK报文段后就立即释放连接,就无法收到服务端重传的FIN+ACK报文段,也不会再发送再次确认报文段.服务端就<code>无法按照正常步骤进入CLOSED状态</code>.</p>
+</li>
+<li><p>防止上一节提到的<code>已失效的连接请求报文段</code>出现在本连接中.客户端在发送完最后一个ACK报文段后,在经过时间2MSL,就可以使本连接持续的时间内所产生的<code>所有报文段都从网络中消失</code>.这样可以使下一个新的连接中不会出现这种旧的连接请求报文段.服务端只要收到客服端发出的确认,就进入CLOSED状态.同样,服务端在撤销相应的传输控制块TCB后,就结束了这次TCP连接.我们注意到<code>服务端结束TCP连接的时间要比客服端早一些</code>.</p>
+</li>
+</ol>
+<ul>
+<li>保活计时器(keepalive timer)</li>
+</ul>
+<p>假设客户端已主动与服务器建立连了TCP连接,后来出故障.服务端就不可能在收到来自客户端发来的数据.因此应该<code>有措施使服务器不要白白等待下去</code>.这时就要使用<code>保活计时器</code>.服务器每次收到一次客户的数据,就重置保护计时器,时间设通常为2小时.两小时没有收到客户的数据,服务器就发送一个<code>探测报文段</code>,以后每隔75分钟发送一次,若连续发送<code>10个探测报文段</code>后仍无客户的响应,服务器就认为客户端出了故障,接着就关闭了连接.</p>
+<p><img src="/img/tcp-three-and-four-hand-4.png" alt="TCP有限状态机"></p>
+<p>注:<code>粗实线箭头</code>表示对客户进程的正常变迁;<code>虚线箭头</code>表示对服务器进程的正常变迁;另一种<code>细箭头</code>表示异常变迁.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/TCP/">TCP</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/07/tcp-three-and-fourr-shake-hands/" data-title="TCP的3次握手和4次挥手机制 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/06/http-definitive-guide/"  title="《HTTP权威指南》随笔1">
+ <strong>下一篇：</strong><br/> 
+ <span>《HTTP权威指南》随笔1
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/07/tcp-three-and-fourr-shake-hands/" data-title="TCP的3次握手和4次挥手机制" data-url="http://blog.uijack.com/2016/01/07/tcp-three-and-fourr-shake-hands/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u770B_u524D_u987B_u77E5"><span class="toc-number">1.</span> <span class="toc-text">看前须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u4E09_u6B21_u63E1_u624B_28_u5EFA_u7ACB_u8FDE_u63A5_29"><span class="toc-number">2.</span> <span class="toc-text">三次握手(建立连接)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u56DB_u6B21_u6325_u624B_28_u5173_u95ED_u8FDE_u63A5_29"><span class="toc-number">3.</span> <span class="toc-text">四次挥手(关闭连接)</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>26</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>18</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTTP/" title="HTTP">HTTP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
