@@ -1,7 +1,8 @@
 title: "AngularJS内置工具函数源码"
 date: 2016-01-11 19:02:38
+description: "经常使用的类型判断工具"
 tags:
-- angular
+- "angular"
 ---
 
 ## 参考ng内置工具函数
