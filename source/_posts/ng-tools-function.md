@@ -28,6 +28,8 @@ function isObject(value) {
   return value !== null && typeof value === 'object';
 }
 
+var getPrototypeOf = Object.getPrototypeOf;
+
  // @returns {boolean} True if `value` is an `Object` with a null prototype
 function isBlankObject(value) {
   return value !== null && typeof value === 'object' && !getPrototypeOf(value);
