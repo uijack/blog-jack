@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>读《JavaScript高级程序设计》总结12 | 千千哥</title>
+    <title>AngularJS Controller详解 | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
     
 
     
-    <meta name="description" content="读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围">
+    <meta name="description" content="总结AngularJS Controller的使用和注意事项">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计》总结12">
-<meta property="og:url" content="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/index.html">
+<meta property="og:title" content="AngularJS Controller详解">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/12/ng-controller/index.html">
 <meta property="og:site_name" content="千千哥">
-<meta property="og:description" content="读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围">
-<meta property="og:updated_time" content="2015-12-30T09:54:01.000Z">
+<meta property="og:description" content="总结AngularJS Controller的使用和注意事项">
+<meta property="og:updated_time" content="2016-01-12T13:23:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计》总结12">
-<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围">
+<meta name="twitter:title" content="AngularJS Controller详解">
+<meta name="twitter:description" content="总结AngularJS Controller的使用和注意事项">
 
     
     <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
@@ -75,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/12/30/js-high-level-programming-language-12/" title="读《JavaScript高级程序设计》总结12" itemprop="url">读《JavaScript高级程序设计》总结12</a>
+      <a href="/2016/01/12/ng-controller/" title="AngularJS Controller详解" itemprop="url">AngularJS Controller详解</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
 		
   <p class="article-time">
-    <time datetime="2015-12-30T11:18:24.000Z" itemprop="datePublished"> 发表于 2015-12-30 19:18:24</time>
+    <time datetime="2016-01-11T23:08:06.000Z" itemprop="datePublished"> 发表于 2016-01-12 07:08:06</time>
     
   </p>
 </header>
@@ -91,39 +91,37 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM__u53D8_u5316"><span class="toc-number">1.</span> <span class="toc-text">DOM 变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6837_u5F0F"><span class="toc-number">2.</span> <span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u64CD_u4F5C_u6837_u5F0F_u8868"><span class="toc-number">2.1.</span> <span class="toc-text">操作样式表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">2.2.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NodeIterator"><span class="toc-number">3.</span> <span class="toc-text">NodeIterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeWalker"><span class="toc-number">4.</span> <span class="toc-text">TreeWalker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8303_u56F4"><span class="toc-number">5.</span> <span class="toc-text">范围</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7406_u89E3_u63A7_u5236_u5668_28Controller_29"><span class="toc-number">1.</span> <span class="toc-text">理解控制器(Controller)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller_u7684_u7528_u9014"><span class="toc-number">2.</span> <span class="toc-text">Controller的用途</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u521D_u59CB_u5316_24scope_u5BF9_u8C61"><span class="toc-number">2.1.</span> <span class="toc-text">初始化$scope对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3A_24scope_u6DFB_u52A0_u884C_u4E3A"><span class="toc-number">2.2.</span> <span class="toc-text">为$scope添加行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6B63_u786E_u4F7F_u7528Controller"><span class="toc-number">3.</span> <span class="toc-text">正确使用Controller</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4EE5_u4E0B_u573A_u666F_u4E0D_u8981_u4F7F_u7528Controller"><span class="toc-number">3.1.</span> <span class="toc-text">以下场景不要使用Controller</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#controller_u663E_u5F0F_u6CE8_u5165service"><span class="toc-number">4.</span> <span class="toc-text">controller显式注入service</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="DOM__u53D8_u5316"><a href="#DOM__u53D8_u5316" class="headerlink" title="DOM 变化"></a>DOM 变化</h2><p><code>DOM1级</code>主要定义的是HTML和XML文档的底层结构,<br><code>DMO2</code>和<code>DOM3级</code>则在<code>DOM1级</code>基础上引入了更多的交互能力,也持之更高级的XML特性.</p>
-<p>DOM2和DOM3分为许多模块:</p>
-<ol>
-<li>DOM2级核心: 增添更是多属性和方法.</li>
-<li>DOM2级视图: 为文档定义了基本样式信息的不同视图.</li>
-<li>DOM2级事件: 说明如何使用事件与DOM交互.</li>
-<li>DOM2级样式: 如何以编程方式来访问和改变CSS样式信息.</li>
-<li>DOM2级遍历和范围: 引入遍历DOM文档和选择其特定部分接口.</li>
-<li>DOM2级HTML: 在一级HTML基础上构建,添加更多的属性,方法和新接口.</li>
+		<h2 id="u7406_u89E3_u63A7_u5236_u5668_28Controller_29"><a href="#u7406_u89E3_u63A7_u5236_u5668_28Controller_29" class="headerlink" title="理解控制器(Controller)"></a>理解控制器(Controller)</h2><ol>
+<li>ng-controller是一个<code>指令(directive)</code>.</li>
+<li>在Angular中,控制器就像JavaScript中的构造函数一般,用来增强<code>Angular作用域(scope)</code>的.</li>
+<li>控制器(Controller)通过<code>ng-controller</code>指令被添加到DOM中,ng会调用该控制器的构造函数来生成一个控制器对象,这样就创建了一个新的<code>子级作用域(scope)</code>,在构造函数中,作用域<code>scope</code>会作为<code>$scope</code>参数注入其中,并允许用户代码访问它.</li>
 </ol>
-<h2 id="u6837_u5F0F"><a href="#u6837_u5F0F" class="headerlink" title="样式"></a>样式</h2><p>css属性—————-JavaScript属性<br>background-image——style.backgroundImage<br>color—————–style.color<br>display—————style.display</p>
-<p>但是<code>float</code>是JavaScript中的保留字,因此不能做属性名.<code>DOM2</code>规定为对应的属性名应该是<code>cssFloat</code>,唯独IE支持<code>styleFloat</code>.</p>
-<ul>
-<li>DOM样式属性和方法</li>
-</ul>
-<p>cssText, length, parentRule, getPropertyCSSValue(propertyName), getPropertyValue(propertyName), item(index),<br>removeProperty(propertyName), setProperty(propertyName, value, priority).</p>
-<ul>
-<li>样式计算</li>
-</ul>
-<h3 id="u64CD_u4F5C_u6837_u5F0F_u8868"><a href="#u64CD_u4F5C_u6837_u5F0F_u8868" class="headerlink" title="操作样式表"></a>操作样式表</h3><p>只做了解.</p>
-<h3 id="u904D_u5386"><a href="#u904D_u5386" class="headerlink" title="遍历"></a>遍历</h3><h2 id="NodeIterator"><a href="#NodeIterator" class="headerlink" title="NodeIterator"></a>NodeIterator</h2><p>只做了解.</p>
-<h2 id="TreeWalker"><a href="#TreeWalker" class="headerlink" title="TreeWalker"></a>TreeWalker</h2><p>只做了解.</p>
-<h2 id="u8303_u56F4"><a href="#u8303_u56F4" class="headerlink" title="范围"></a>范围</h2><ul>
-<li>createRange()</li>
-</ul>
-<hr>
+<h2 id="Controller_u7684_u7528_u9014"><a href="#Controller_u7684_u7528_u9014" class="headerlink" title="Controller的用途"></a>Controller的用途</h2><h3 id="u521D_u59CB_u5316_24scope_u5BF9_u8C61"><a href="#u521D_u59CB_u5316_24scope_u5BF9_u8C61" class="headerlink" title="初始化<code>$scope</code>对象"></a>初始化<code>$scope</code>对象</h3><p>当我们创建应用程序时，我们通常要为Angular的$scope对象设置初始状态，这是通过在$scope对象上添加属性实现的。这些属性就是供在视图中展示用的视图模型（view model）它们在与此控制器相关的模板中均可以访问到.</p>
 <blockquote>
-<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+<p>虽然Angular允许我们在全局作用域下(window)定义控制器函数，但建议不要用这种方式。在一个实际的应用程序中，推荐在 Angular模块下通过<code>.controller</code>为你的应用创建控制器.</p>
 </blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp = angular.module(<span class="string">'myApp'</span>,[]);</span><br><span class="line"></span><br><span class="line">myApp.controller(<span class="string">'GreetingCtrl'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.greeting = <span class="string">'Hola!'</span>;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;html ng-app=&#34;myApp&#34;&#62;&#10;&#60;div ng-controller=&#34;GreetingCtrl&#34;&#62;&#10;&#123;&#123;greeting&#125;&#125;&#10;&#60;/div&#62;&#10;&#60;/html&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="u4E3A_24scope_u6DFB_u52A0_u884C_u4E3A"><a href="#u4E3A_24scope_u6DFB_u52A0_u884C_u4E3A" class="headerlink" title="为$scope添加行为"></a>为$scope添加行为</h3><p>为了对事件作出响应，或是在视图中执行计算，我们需要为scope提供相关的行为操作的逻辑.这些方法就可以在模板/视图中被调用了.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp = angular.module(<span class="string">'myApp'</span>,[]);</span><br><span class="line"></span><br><span class="line">myApp.controller(<span class="string">'DoubleController'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.double = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123; <span class="keyword">return</span> value * <span class="number">2</span>; &#125;;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div ng-controller=&#34;DoubleController&#34;&#62;&#10;  Two times &#60;input ng-model=&#34;num&#34;&#62; equals &#123;&#123; double(num) &#125;&#125;&#10;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<h2 id="u6B63_u786E_u4F7F_u7528Controller"><a href="#u6B63_u786E_u4F7F_u7528Controller" class="headerlink" title="正确使用Controller"></a>正确使用Controller</h2><p>通常情况下，控制器不应做很多处理，它只需负责一个单一视图所需的业务逻辑.</p>
+<h3 id="u4EE5_u4E0B_u573A_u666F_u4E0D_u8981_u4F7F_u7528Controller"><a href="#u4EE5_u4E0B_u573A_u666F_u4E0D_u8981_u4F7F_u7528Controller" class="headerlink" title="以下场景不要使用Controller"></a>以下场景不要使用Controller</h3><ol>
+<li>操作DOM: 控制器应该只包含<code>业务逻辑</code>,DOM操作属于<code>应用程序的表现层逻辑</code>,把任何表现逻辑放到控制器中会大大<code>增加业务逻辑的测试难度</code>,需要手动操作DOM,最好将表现层的逻辑封装在<code>指令(directive)</code>中.(很重要)</li>
+<li>格式化输入: 使用angular form controls代替</li>
+<li>过滤输出: 使用angular filter代替</li>
+<li>在控制器间复用有状态或无状态的代码: 使用angular service代替</li>
+<li>管理其他部件的生命周期(如手动创建service实例)</li>
+</ol>
+<blockquote>
+<p>由于<code>controller</code>存在着很多级,在HTML中controller一层一层嵌套,子级controller的<code>$scope</code>可以访问父级,如果子级有则只能访问自己的属性. 类似<code>prototype</code>一样.</p>
+</blockquote>
+<h2 id="controller_u663E_u5F0F_u6CE8_u5165service"><a href="#controller_u663E_u5F0F_u6CE8_u5165service" class="headerlink" title="controller显式注入service"></a>controller显式注入service</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种:通过数组形式注入(推荐推荐推荐)</span></span><br><span class="line">myModule.controller(<span class="string">'MyController'</span>, [<span class="string">'$location'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$location</span>) </span>&#123; ... &#125;]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种:通过$inject</span></span><br><span class="line"><span class="keyword">var</span> MyController = <span class="function"><span class="keyword">function</span>(<span class="params">$location</span>) </span>&#123; ... &#125;;</span><br><span class="line">MyController.$inject = [<span class="string">'$location'</span>];</span><br><span class="line">myModule.controller(<span class="string">'MyController'</span>, MyController);</span><br></pre></td></tr></table></figure>
+<p>简单的例子: <a href="https://code.angularjs.org/1.4.8/docs/guide/controller" target="_blank" rel="external">参考官网例子example</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -132,7 +130,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/随笔/">随笔</a>
+  <span></span> <a href="/tags/angular/">angular</a>
   </div>
 
 </div>
@@ -141,7 +139,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/" data-title="读《JavaScript高级程序设计》总结12 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2016/01/12/ng-controller/" data-title="AngularJS Controller详解 | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,18 +153,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/12/31/js-high-level-programming-language-13/" title="读《JavaScript高级程序设计》总结13">
+ <a href="/2016/01/12/ng-services/" title="AngularJS Services详解">
   <strong>上一篇：</strong><br/>
   <span>
-  读《JavaScript高级程序设计》总结13</span>
+  AngularJS Services详解</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/12/30/js-high-level-programming-language-11/"  title="读《JavaScript高级程序设计》总结11">
+<a href="/2016/01/11/ng-tools-function/"  title="AngularJS内置工具函数源码">
  <strong>下一篇：</strong><br/> 
- <span>读《JavaScript高级程序设计》总结11
+ <span>AngularJS内置工具函数源码
 </span>
 </a>
 </div>
@@ -175,7 +173,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/12/30/js-high-level-programming-language-12/" data-title="读《JavaScript高级程序设计》总结12" data-url="http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/12/ng-controller/" data-title="AngularJS Controller详解" data-url="http://blog.uijack.com/2016/01/12/ng-controller/"></div>
 </section>
 
 
@@ -185,7 +183,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM__u53D8_u5316"><span class="toc-number">1.</span> <span class="toc-text">DOM 变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6837_u5F0F"><span class="toc-number">2.</span> <span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u64CD_u4F5C_u6837_u5F0F_u8868"><span class="toc-number">2.1.</span> <span class="toc-text">操作样式表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u904D_u5386"><span class="toc-number">2.2.</span> <span class="toc-text">遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NodeIterator"><span class="toc-number">3.</span> <span class="toc-text">NodeIterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeWalker"><span class="toc-number">4.</span> <span class="toc-text">TreeWalker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u8303_u56F4"><span class="toc-number">5.</span> <span class="toc-text">范围</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u7406_u89E3_u63A7_u5236_u5668_28Controller_29"><span class="toc-number">1.</span> <span class="toc-text">理解控制器(Controller)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller_u7684_u7528_u9014"><span class="toc-number">2.</span> <span class="toc-text">Controller的用途</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u521D_u59CB_u5316_24scope_u5BF9_u8C61"><span class="toc-number">2.1.</span> <span class="toc-text">初始化$scope对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4E3A_24scope_u6DFB_u52A0_u884C_u4E3A"><span class="toc-number">2.2.</span> <span class="toc-text">为$scope添加行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6B63_u786E_u4F7F_u7528Controller"><span class="toc-number">3.</span> <span class="toc-text">正确使用Controller</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#u4EE5_u4E0B_u573A_u666F_u4E0D_u8981_u4F7F_u7528Controller"><span class="toc-number">3.1.</span> <span class="toc-text">以下场景不要使用Controller</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#controller_u663E_u5F0F_u6CE8_u5165service"><span class="toc-number">4.</span> <span class="toc-text">controller显式注入service</span></a></li></ol>
  
   </div>
 
