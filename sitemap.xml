@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.uijack.com/2016/01/13/ng-directives/</loc>
+    <lastmod>2016-01-17T01:56:58.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.uijack.com/2016/01/11/ng-tools-function/</loc>
     <lastmod>2016-01-13T14:30:19.000Z</lastmod>
   </url>
@@ -24,11 +29,6 @@
   <url>
     <loc>http://blog.uijack.com/2016/01/12/ng-controller/</loc>
     <lastmod>2016-01-13T05:47:42.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/13/ng-directives/</loc>
-    <lastmod>2016-01-13T04:48:20.000Z</lastmod>
   </url>
   
   <url>
