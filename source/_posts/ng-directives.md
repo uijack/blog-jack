@@ -46,7 +46,7 @@ Angular把一个元素的标签和属性名字进行规范化，来决定哪个�
 <span class="my-dir: exp;"></span>
 ```
 
-> 最佳实践: 最好通过`标签名`和``属性`来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的.
+> 最佳实践: 最好通过`标签名`和`属性`来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的.
 
 通常注释式命名式指令使用在如下情景：某些指令需要跨越多个元素，但是受DOM API的限制，无法跨越多个元素(如:table标签元素)。 AngularJS 1.2 引入了ng-repeat-start和ng-repeat-end指令，作为更好的解决方案。 建议开发者使用这种方式，而不要用“自定义注释”形式的指令。
 
@@ -252,7 +252,7 @@ Name: {{customer.name}} Address: {{customer.address}}
 > 什么情况下该用元素名，什么情况下该用属性名？
 > 当创建一个含有自己模板的组件的时候,建议使用元素名,常见情况是,当你想为你的模板创建一个DSL（特定领域语言）的时候。如果仅仅想为已有的元素添加功能，建议使用属性名.
 
-使用元素名做为myCustomer指令是非常正确的决定，因为你不是用一些'customer'行为来装饰这个元素，而是定义一个具有自定义行为的元素作为customer组件
+使用元素名做为myCustomer指令是非常正确的决定，因为你不是用一些`customer`行为来装饰这个元素，而是定义一个具有自定义行为的元素作为customer组件
 
 ### 给指令一个独立作用域(isolate scope)
 
@@ -407,7 +407,7 @@ Name: {{customerInfo.name}} Address: {{customerInfo.address}}
 Name: {{vojta.name}} Address: {{vojta.address}}
 ```
 
-注意,{{vojta.name}}和{{vojta.address}} 都是空的,意味着他们是undefined,虽然我们在控制器中定义了vojta,但是在指令内部访问不到.
+注意,`{{vojta.name}}`和`{{vojta.address}}` 都是空的,意味着他们是`undefined`,虽然我们在控制器中定义了vojta,但是在指令内部访问不到.
 
 指令的`独立作用域(isolate scope)`隔离除了你添加到scope:{}对象中的数据模型之外的一切东西.这对于建立一个`可复用的组件`来说是非常有用的,因为它可以阻止除你传入数据模型之外的一切东西改变你内部数据模型的状态.
 
@@ -427,10 +427,10 @@ directive修改DOM一般使用`link函数`来注册DOM监听,同时更新DOM,当
 `link`选项接受一个带有如下签名的函数function link(scope, element, attrs, controller, transcludeFn) {}
 
 1. scope: 是一个angular scope对象
-2. element: 指令匹配的jqLite封装的元素(angular内部实现的类jquery的库)
+2. element: 指令匹配的jqLite封装的元素(angular内部实现的类似jquery的库)
 3. attrs: 一个带有`规范化normalized`属性名字和相应值的对象.
 4. controller: 指令需要的controller的实例或者指令自带的controller,确切的值取决于该指令的要求属性。
-5. transcludeFn: 是一个嵌入的链接功能``预绑定`到正确的嵌入包含范围
+5. transcludeFn: 是一个嵌入的链接功能`预绑定`到正确的嵌入包含范围
 
 [更多link选项参考$compile API page](https://code.angularjs.org/1.4.8/docs/api/ng/service/$compile#-link-)
 
@@ -525,6 +525,19 @@ Check out the contents, Tobias!
 </div>
 ```
 
+```plain
+// 最终的渲染结构:
+<body ng-app="docsTransclusionDirective" class="ng-scope">
+  <div ng-controller="Controller" class="ng-scope">
+    <my-dialog>
+      <div class="alert" ng-transclude="">
+        <span class="ng-binding ng-scope">Check out the contents, Tobias!</span>
+      </div>
+    </my-dialog>
+  </div>
+</body>
+```
+
 > 这个transclude选项用来干嘛呢？带有transclude选项的指令,指令的scope`访问外部的作用域scope`而不是自己的scope。
 
 为了证明这个,请看上面例子改写的script.js:
@@ -550,9 +563,9 @@ angular.module('docsTransclusionExample', [])
 输出结果:Check out the contents, Tobias!
 
 我们会认为{{name}}会被解析为Jeff,然而例子中的{{name}}被解析成了Tobias.
-`transclude`选项改变了指令scope嵌套的方式,他使指令的内容拥有任何指令外部的作用域,而不是内部的作用域.
+`transclude`选项改变了指令scope嵌套的方式,他使指令的内容拥有任何指令外部的作用域,而不是内部的作用域.此时内部作用域scope使用`=attr`是无效的,但是可以使用`&fun`来绑定函数是可以的.
 
-> 如果指令不创建自己的scope(就是说scope:false，或省略),然后在link函数里执行scope.name = 'Jeff'; 很明显外部的scopescope会受影响,因为指令是继续了外部的scope ,在输出上会看出 Jeff.
+> 如果指令不创建自己的scope(就是说scope:false，或省略),然后在link函数里执行scope.name = 'Jeff'; 很明显外部的scope会受影响,因为指令是继续了外部的scope ,在输出上会看出 Jeff.
 
 这样的行为对于包含内容的指令是非常有意义的。因为如果不这样的话,当你需要数据模型的时候,你就必须分别传入这个你需要使用的数据模型,那么你就无法做到适应各种不同内容的情况.
 
@@ -561,6 +574,7 @@ angular.module('docsTransclusionExample', [])
 接下来我们增加一个按钮到'dialog box'组件里面，允许用户使用指令绑定自己定义的行为。
 
 ```js
+// script.js
 angular.module('docsIsoFnBindExample', [])
 .controller('Controller', ['$scope', '$timeout', function($scope, $timeout) {
   $scope.name = 'Tobias';
@@ -587,6 +601,7 @@ angular.module('docsIsoFnBindExample', [])
 ```
 
 ```plain
+// index.html
 <div ng-controller="Controller">
   {{message}}
   <my-dialog ng-hide="dialogIsHidden" on-close="hideDialog(message)">
@@ -594,16 +609,39 @@ angular.module('docsIsoFnBindExample', [])
   </my-dialog>
 </div>
 ```
+
 ```plain
+// my-dialog-close.html
 <div class="alert">
   <a href class="close" ng-click="close({message: 'closing for now'})">&times;</a>
   <div ng-transclude></div>
 </div>
 ```
 
+```plain
+// 最终生成html结构:
+<body ng-app="docsIsoFnBindExample" class="ng-scope">
+  <div ng-controller="Controller" class="ng-scope ng-binding">
+    {{message}} // 此时的{{message}}为'',不显示
+    <my-dialog ng-hide="dialogIsHidden" on-close="hideDialog(message)" class="ng-isolate-scope">
+      <div class="alert">
+        <a href="" class="close" ng-click="close({message: 'closing for now'})">×</a>
+        <div ng-transclude="">
+          <span>Check out the contents, Tobias!
+          </span>
+        </div>
+      </div>
+    </my-dialog>
+  </div>
+</body>
+
+```
+
 我们想要通过在指令的作用域上调用我们传进去的函数,但是这个函数本该运行在定义时候的上下文。
 
 先前我们看到如何在scope选项中使用=attr,但是本例子中却使用了`&attr`,`&`允许绑定了原scope的函数到独立作用域,允许独立作用于调用它.同时保留了来函数的作用域.所以当用户点击X的时候,就会运行Controller控制器的close函数.
+
+注意:此时`<div ng-transclude="">`用来站位,填充`<my-dialog>`的内容,如果放到class='alert'这个div上面,则里面的a标签内容将被替换掉.
 
 > 最佳实践: 当你的指令想要开放一个API去绑定特定的行为，在scope选项中使用&attr。
 
@@ -742,9 +780,9 @@ angular.module('docsTabsExample', [])
 ```
 myPane指令有一个require的选项,其值为:^myTabs.当指令使用这个选项,$compile服务会查找一个名叫myTabs的控制器,如果没有找到,就会抛出一个错误.^前缀意味着指令将会在它的父元素上面搜索控制器(如果没有^前缀,指令默认只在所属元素上搜索指定的控制器).
 
-这里myTabs的控制器是来自何处呢？简单的通过controller选项就可以为指令定义一个控制器,比如上面例子中myTabs 就使用了这个选项.如ngController一样,此选项把这个控制器绑定到了指令的模板上。
+这里myTabs的控制器是来自何处呢？简单的通过controller选项就可以为指令定义一个控制器,比如上面例子中myTabs 就使用了这个选项.如ngController一样,`此controller选项把这个控制器绑定到了指令的模板上`。
 
-回顾myPane的定义,你会注意到link函数的最后一个参数: tabsCtrl,当一个指令需要(require)一个控制器时,它会接收该指令的控制器实例作为link函数的第四个参数,通过它，myPane就可以调用myTabs的addPane函数了。
+回顾myPane的定义,你会注意到`link函数`的最后一个参数: tabsCtrl,当一个指令需要(require)一个控制器时,它会接收该指令的控制器实例作为link函数的第四个参数,通过它，myPane就可以调用myTabs的addPane函数了。
 
 如果需要多个controller,则可以数组表示:
 
@@ -770,8 +808,8 @@ angular.module('docsTabsExample', [])
 ```
 
 聪明的读者可能想知道link 和 controller之间的区别.最基本的区别就是:
-> 控制器可以导出一个API,而子指令的link函数可以通过require来与这个API交互。
 
-> 最佳实践: 当你想暴露一个API给其它的指令调用那就用controller,否则用link。
+> controller可以`导出一个API`,而`子指令`的link函数可以通过`require来`与这个API交互。
+> `最佳实践`: 当你想暴露一个API给其它的指令调用那就用controller(使用this),否则用link。
 
 如果你想更深入的了解编译的处理过程,可以查看HTML编译器.[$compile API](http://docs.ngnice.com/api/ng.$compile)页面有directive每个选项的具体解释,可参阅.
