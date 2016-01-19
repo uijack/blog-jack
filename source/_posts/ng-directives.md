@@ -1,4 +1,4 @@
-title: "AngularJS Directives详解"
+title: "AngularJS Directives详解(1)"
 date: 2016-01-13 07:12:06
 description: "总结AngularJS Directives的使用和注意事项"
 tags:
@@ -46,7 +46,7 @@ Angular把一个元素的标签和属性名字进行规范化，来决定哪个�
 <span class="my-dir: exp;"></span>
 ```
 
-> 最佳实践: 最好通过`标签名`和`属性`来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的.
+> `最佳实践`: 最好通过`标签名`和`属性`来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的.
 
 通常注释式命名式指令使用在如下情景：某些指令需要跨越多个元素，但是受DOM API的限制，无法跨越多个元素(如:table标签元素)。 AngularJS 1.2 引入了ng-repeat-start和ng-repeat-end指令，作为更好的解决方案。 建议开发者使用这种方式，而不要用“自定义注释”形式的指令。
 
@@ -415,7 +415,7 @@ Name: {{vojta.name}} Address: {{vojta.address}}
 
 --------------------------------------
 
-> 最佳实践: 如果要使你的组件在应用范围内可重用，那么使用scope选项去创建一个独立作用域
+> `最佳实践`: 如果要使你的组件在应用范围内可重用，那么使用scope选项去创建一个独立作用域
 
 ## 创建操作DOM的指令
 
@@ -488,7 +488,7 @@ angular.module('docsTimeDirective', [])
 
 3. 通过监听事件,你可以移除可能引起内存泄露的事件监听器,注册在元素和作用域上的监听器在它们被移除的时候,会自动会清理掉.但是假如注册一个事件在服务或者没有被删除的DOM节点上,你就必须手工清理,否则会有内存泄露的风险
 
-> 最佳实践: 指令应该自己管理自身分配的内存。当指令被移除时,你可以使用element.on('$destroy', ...)或 scope.$on('$destroy', ...)来执行一个清理的工作.
+> `最佳实践`: 指令应该自己管理自身分配的内存。当指令被移除时,你可以使用element.on('$destroy', ...)或 scope.$on('$destroy', ...)来执行一个清理的工作.
 
 ### 创建一个包含其他元素的指令
 
@@ -569,7 +569,7 @@ angular.module('docsTransclusionExample', [])
 
 这样的行为对于包含内容的指令是非常有意义的。因为如果不这样的话,当你需要数据模型的时候,你就必须分别传入这个你需要使用的数据模型,那么你就无法做到适应各种不同内容的情况.
 
-> 最佳实践: 仅当你要创建一个包裹任意内容的指令的时候使用transclude: true
+> `最佳实践`: 仅当你要创建一个包裹任意内容的指令的时候使用transclude: true
 
 接下来我们增加一个按钮到'dialog box'组件里面，允许用户使用指令绑定自己定义的行为。
 
@@ -643,7 +643,7 @@ angular.module('docsIsoFnBindExample', [])
 
 注意:此时`<div ng-transclude="">`用来站位,填充`<my-dialog>`的内容,如果放到class='alert'这个div上面,则里面的a标签内容将被替换掉.
 
-> 最佳实践: 当你的指令想要开放一个API去绑定特定的行为，在scope选项中使用&attr。
+> `最佳实践`: 当你的指令想要开放一个API去绑定特定的行为，在scope选项中使用&attr。
 
 ### 创建一个带事件监听的指令
 
@@ -810,6 +810,6 @@ angular.module('docsTabsExample', [])
 聪明的读者可能想知道link 和 controller之间的区别.最基本的区别就是:
 
 > controller可以`导出一个API`,而`子指令`的link函数可以通过`require来`与这个API交互。
-> `最佳实践`: 当你想暴露一个API给其它的指令调用那就用controller(使用this),否则用link。
+> `最佳实践`: 当你想暴露一个API给其它的指令调用那就用controller(使用`this`),否则用link。
 
 如果你想更深入的了解编译的处理过程,可以查看HTML编译器.[$compile API](http://docs.ngnice.com/api/ng.$compile)页面有directive每个选项的具体解释,可参阅.
