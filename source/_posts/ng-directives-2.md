@@ -52,7 +52,7 @@ angular.module("ezstuff",[])
 <span ez-hoverable>我是SPAN</span>
 <button ez-hoverable>我是BUTTON</button>
 <div ez-hoverable>我是DIV</div>
-```js
+```
 
 ## 指令定义对象
 
