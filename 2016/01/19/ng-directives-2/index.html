@@ -1,0 +1,592 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>AngularJS Directives详解(2) | 千千哥</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jack Chan">
+    
+
+    
+    <meta name="description" content="简单介绍AngularJS Directives实例详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS Directives详解(2)">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/19/ng-directives-2/index.html">
+<meta property="og:site_name" content="千千哥">
+<meta property="og:description" content="简单介绍AngularJS Directives实例详解">
+<meta property="og:image" content="http://blog.uijack.com/img/ng-directive.png">
+<meta property="og:updated_time" content="2016-01-19T09:49:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS Directives详解(2)">
+<meta name="twitter:description" content="简单介绍AngularJS Directives实例详解">
+
+    
+    <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="千千哥">千千哥</a></h1>
+				<h2 class="blog-motto">记录，成为更好的自己</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.uijack.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/01/19/ng-directives-2/" title="AngularJS Directives详解(2)" itemprop="url">AngularJS Directives详解(2)</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
+		
+  <p class="article-time">
+    <time datetime="2016-01-19T11:20:14.000Z" itemprop="datePublished"> 发表于 2016-01-19 19:20:14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u521B_u5EFA_u6307_u4EE4"><span class="toc-number">1.</span> <span class="toc-text">创建指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#restrict_3A__u9650_u5236_u6307_u4EE4_u7684_u51FA_u73B0_u4F4D_u7F6E"><span class="toc-number">2.</span> <span class="toc-text">restrict: 限制指令的出现位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace__u6A21_u677F_u7684_u4F7F_u7528_u65B9_u5F0F_28_u91CD_u8981_29"><span class="toc-number">3.</span> <span class="toc-text">replace 模板的使用方式(重要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F5C_u7528_u57DF_u95EE_u9898"><span class="toc-number">4.</span> <span class="toc-text">作用域问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scope_3A_u4F7F_u7528_u9694_u79BB_u7684_u4F5C_u7528_u57DF"><span class="toc-number">5.</span> <span class="toc-text">scope:使用隔离的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#link_3A_u5728_u6307_u4EE4_u4E2D_u64CD_u4F5CDOM"><span class="toc-number">6.</span> <span class="toc-text">link:在指令中操作DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transclude_3A_u5305_u542B_u5176_u4ED6_u5143_u7D20"><span class="toc-number">7.</span> <span class="toc-text">transclude:包含其他元素</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="u521B_u5EFA_u6307_u4EE4"><a href="#u521B_u5EFA_u6307_u4EE4" class="headerlink" title="创建指令"></a>创建指令</h3><p>指令也是一种<code>服务</code>,只是这种服务的定义有几个特殊要求:</p>
+<ol>
+<li>必须使用模块的<code>directive()</code>方法注册服务</li>
+<li>必须以<code>对象工厂/factory()</code>方法定义服务实现</li>
+<li>对象工厂必须返回一个<code>指令定义对象</code></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义指令的类工厂</span></span><br><span class="line"><span class="keyword">var</span> directiveFactory = <span class="function"><span class="keyword">function</span>(<span class="params">injectables</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//指令定义对象</span></span><br><span class="line">    <span class="keyword">var</span> directiveDefinationObject = &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> directiveDefinationObject;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//在模块上注册指令</span></span><br><span class="line">angular.module(<span class="string">"someModule"</span>,[])</span><br><span class="line">.directive(<span class="string">"directiveName"</span>,directiveFactory);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>INSIDE:指令在注入器中的登记名称是:指令名+Directive.例如,ng-app指令的服务名称是：”ngAppDirective”。</p>
+</blockquote>
+<p>示例定义一个简单的指令ez-hoverable,这个指令被限制只能出现在属性的位置,每个具有这个指令的HTML元素,将在鼠标移入时以虚线边框突出显示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ezHoverableFactory = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict : <span class="string">"A"</span>,</span><br><span class="line">    link : <span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attrs</span>)</span>&#123;</span><br><span class="line">      element.on(<span class="string">"mouseover"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        element.css(&#123;outline:<span class="string">"#ff0000 dotted thick"</span>&#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">      .on(<span class="string">"mouseout"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        element.css(&#123;outline:<span class="string">"none"</span>&#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">angular.module(<span class="string">"ezstuff"</span>,[])</span><br><span class="line">.directive(<span class="string">"ezHoverable"</span>,ezHoverableFactory);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;span ez-hoverable&#62;&#25105;&#26159;SPAN&#60;/span&#62;&#10;&#60;button ez-hoverable&#62;&#25105;&#26159;BUTTON&#60;/button&#62;&#10;&#60;div ez-hoverable&#62;&#25105;&#26159;DIV&#60;/div&#62;&#10;```js&#10;&#10;## &#25351;&#20196;&#23450;&#20041;&#23545;&#35937;&#10;&#10;&#27599;&#20010;&#25351;&#20196;&#23450;&#20041;&#30340;&#24037;&#21378;&#20989;&#25968;,&#38656;&#35201;&#36820;&#22238;&#19968;&#20010;`&#25351;&#20196;&#23450;&#20041;&#23545;&#35937;`.&#25351;&#20196;&#23450;&#20041;&#23545;&#35937;&#23601;&#26159;&#19968;&#20010;&#20855;&#26377;`&#32422;&#23450;&#23646;&#24615;`&#30340;JavaScript&#23545;&#35937;,&#32534;&#35793;&#22120;($compile)&#22312;&#32534;&#35793;&#26102;&#23601;&#26681;&#25454;&#36825;&#20010;&#23450;&#20041;&#23545;&#35937;&#23545;&#25351;&#20196;&#36827;&#34892;&#23637;&#24320;&#12290;&#10;&#25351;&#20196;&#23450;&#20041;&#23545;&#35937;&#30340;&#24120;&#29992;`&#32422;&#23450;&#23646;&#24615;`&#22914;&#19979;:&#10;&#10;- template : string&#10;&#10;&#20351;&#29992;template&#25351;&#23450;&#30340;HTML&#26631;&#35760;&#26367;&#25442;&#25351;&#20196;&#20869;&#23481;&#65288;&#25110;&#25351;&#20196;&#33258;&#36523;&#65289;&#10;&#10;- restrict : sring&#10;&#10;&#29992;&#26469;&#38480;&#23450;&#25351;&#20196;&#22312;HTML&#27169;&#26495;&#20013;&#20986;&#29616;&#30340;&#20301;&#32622;&#12290;&#10;&#10;- replace : `true`|`false`&#10;&#10;&#20351;&#29992;&#36825;&#20010;&#23646;&#24615;&#25351;&#26126;template&#30340;&#26367;&#25442;&#26041;&#24335;&#12290;&#10;&#10;- scope :  true|false|&#123;...&#125;&#10;&#10;scope&#23646;&#24615;&#20026;&#25351;&#20196;&#21019;&#24314;&#31169;&#26377;&#30340;&#20316;&#29992;&#22495;&#65292;&#36825;&#22312;&#21019;&#24314;&#21487;&#22797;&#29992;&#30340;Widget(&#32452;&#20214;)&#26102;&#38750;&#24120;&#26377;&#29992;&#10;&#10;- link : function(..)&#123;...&#125;&#10;&#10;link&#23646;&#24615;&#26159;&#19968;&#20010;&#20989;&#25968;&#65292;&#29992;&#26469;&#22312;&#25351;&#20196;&#20013;&#25805;&#20316;DOM&#26641;&#12289;&#23454;&#29616;&#25968;&#25454;&#32465;&#23450;&#12290;&#10;&#10;- transclude : true|false|&#39;element&#39;&#10;&#10;&#20801;&#35768;&#25351;&#20196;&#21253;&#21547;&#20854;&#20182;HTML&#20803;&#32032;&#65292;&#36825;&#36890;&#24120;&#29992;&#20110;&#23454;&#29616;&#19968;&#20010;&#23481;&#22120;&#31867;&#22411;&#30340;Widget&#12290;&#10;&#10;### template:&#23450;&#20041;&#26367;&#25442;&#27169;&#26495;&#10;&#10;&#26368;&#31616;&#21333;&#30340;&#25351;&#20196;&#21482;&#38656;&#35201;&#20351;&#29992;template&#23646;&#24615;&#36827;&#34892;&#27169;&#26495;&#26367;&#25442;&#23601;&#21487;&#20197;&#23454;&#29616;,template&#25351;&#26126;&#19968;&#20010;HTML&#29255;&#27573;&#65292;&#21487;&#20197;&#29992;&#26469;:&#10;1. &#26367;&#25442;&#25351;&#20196;&#30340;&#20869;&#23481;&#12290;&#36825;&#26159;&#40664;&#35748;&#30340;&#34892;&#20026;&#65292;&#21487;&#20197;&#20351;&#29992;replace&#23646;&#24615;&#26356;&#25913;.&#10;2. &#22914;&#26524;replace = true&#65292;&#37027;&#20040;&#29992;HTML&#29255;&#27573;&#26367;&#25442;&#25351;&#20196;&#26412;&#36523;.&#10;3. &#21253;&#35065;&#25351;&#20196;&#30340;&#20869;&#23481;&#65292;&#22914;&#26524;transclue&#23646;&#24615;&#20026;true.&#10;&#10;```js&#10;angular.module(&#34;ezstuff&#34;,[])&#10;.controller(&#34;ezCtrl&#34;, [&#34;$scope&#34;, function($scope) &#123;&#10;  $scope.customer = &#123;&#10;    name: &#34;Naomi&#34;,&#10;    address: &#34;1600 Amphitheatre&#34;&#10;  &#125;;&#10;&#125;])&#10;.directive(&#34;ezCustomer&#34;, function() &#123;&#10;  return &#123;&#10;    template: &#34;Name: &#123;&#123;customer.name&#125;&#125; Address: &#123;&#123;customer.address&#125;&#125;&#34;&#10;  &#125;;&#10;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div ez-customer&#62;&#60;/div&#62;&#10;&#32463;&#36807;$compile&#32534;&#35793;&#21518;&#29983;&#25104;&#30340;&#32467;&#26500;:&#10;&#60;div ez-customer&#62;&#10;  Name: &#123;&#123;customer.name&#125;&#125; Address: &#123;&#123;customer.address&#125;&#125;&#10;&#60;/div&#62;&#10;&#23558;&#25968;&#20540;&#22635;&#20805;&#23601;&#34892;</span><br></pre></td></tr></table></figure>
+<h3 id="restrict_3A__u9650_u5236_u6307_u4EE4_u7684_u51FA_u73B0_u4F4D_u7F6E"><a href="#restrict_3A__u9650_u5236_u6307_u4EE4_u7684_u51FA_u73B0_u4F4D_u7F6E" class="headerlink" title="restrict: 限制指令的出现位置"></a>restrict: 限制指令的出现位置</h3><p>restict属性可以是EACM这四个字母的<code>任意组合</code>,用来限定指令的应用场景。如果不指定这个属性,默认情况下,指令将仅允许被用作<code>元素名</code>和<code>属性名</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E - &#25351;&#20196;&#21487;&#20197;&#20316;&#20026;HTML&#20803;&#32032;&#20351;&#29992;&#10;A - &#25351;&#20196;&#21487;&#20197;&#20316;&#20026;HTML&#23646;&#24615;&#20351;&#29992;&#10;C - &#25351;&#20196;&#21487;&#20197;&#20316;&#20026;CSS&#31867;&#20351;&#29992;&#10;M - &#25351;&#20196;&#21487;&#20197;&#22312;HTML&#27880;&#37322;&#20013;&#20351;&#29992;</span><br></pre></td></tr></table></figure></p>
+<p>我们对之前的示例，增加一个restrict属性，限制这个只能作为元素名使用。代码已经预置到右边，你可以看到，现在唯一合法的方式是使用如下方式应用指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;ez-customer&#62;&#60;/ez-customer&#62;&#10;&#10;&#32463;&#36807;$compile&#20043;&#21518;&#21464;&#25104;:&#10;&#60;ez-customer&#62;&#10;  Name: &#123;&#123;customer.name&#125;&#125; Address: &#123;&#123;customer.address&#125;&#125;&#10;&#60;/ez-customer&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="replace__u6A21_u677F_u7684_u4F7F_u7528_u65B9_u5F0F_28_u91CD_u8981_29"><a href="#replace__u6A21_u677F_u7684_u4F7F_u7528_u65B9_u5F0F_28_u91CD_u8981_29" class="headerlink" title="replace 模板的使用方式(重要)"></a>replace 模板的使用方式(重要)</h3><p>我们希望使用template完整地替换原始的DOM对象,而不是填充其内容,<code>replace</code>属性负责这件事。replace属性指明使用template时,如何替换指令元素:</p>
+<ol>
+<li><code>true</code> - 编译时,将使用template替换指令元素</li>
+<li><code>false</code> - 编译时，将使用template替换指令元素的内容</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">"ezstuff"</span>,[])</span><br><span class="line">.controller(<span class="string">"ezCtrl"</span>, [<span class="string">"$scope"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.customer = &#123;</span><br><span class="line">    name: <span class="string">"Naomi"</span>,</span><br><span class="line">    address: <span class="string">"1600 Amphitheatre"</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;])</span><br><span class="line">.directive(<span class="string">"ezCustomer"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict:<span class="string">"E"</span>,</span><br><span class="line">    replace:<span class="literal">true</span>,</span><br><span class="line">    template: <span class="string">"&lt;div&gt;Name: &#123;&#123;customer.name&#125;&#125; Address: &#123;&#123;customer.address&#125;&#125;&lt;/div&gt;"</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;ez-customer&#62;&#60;/ez-customer&#62;&#10;&#10;&#32463;&#36807;&#32534;&#35793;&#21518;&#25104;&#20026;:&#10;&#10;&#60;div&#62;Name: &#123;&#123;customer.name&#125;&#125; Address: &#123;&#123;customer.address&#125;&#125;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="u4F5C_u7528_u57DF_u95EE_u9898"><a href="#u4F5C_u7528_u57DF_u95EE_u9898" class="headerlink" title="作用域问题"></a>作用域问题</h3><p>默认情况下，指令没有自己的scope对象，换句话说，它使用所在DOM对象对应的scope对象。那么问题来了，如果一个指令在同一个scope内出现多次，会怎样？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div ng-controller=&#34;ezCtrl&#34;&#62;&#10;    &#60;ez-customer&#62;&#60;/ez-customer&#62;&#10;    &#60;ez-customer&#62;&#60;/ez-customer&#62;&#10;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<p>没错，由于两个ez-customer指令都处在ezCtrl开辟的作用域内，所以两个指令绑定到了同样的 数据模型上，得到的是重复的结果。</p>
+<p>显然，我们可以将每个ez-customer指令置于不同的作用域下，这意味着我们给每个ez-customer 一个不同的控制器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div ng-controller=&#34;ezCtrl1&#34;&#62;&#10;    &#60;ez-customer&#62;&#60;/ez-customer&#62;&#10;&#60;/div&#62;&#10;&#60;div ng-controller=&#34;ezCtrl2&#34;&#62;&#10;    &#60;ez-customer&#62;&#60;/ez-customer&#62;&#10;&#60;/div&#62;</span><br></pre></td></tr></table></figure>
+<p>看起来很怪异，对吗？</p>
+<h3 id="scope_3A_u4F7F_u7528_u9694_u79BB_u7684_u4F5C_u7528_u57DF"><a href="#scope_3A_u4F7F_u7528_u9694_u79BB_u7684_u4F5C_u7528_u57DF" class="headerlink" title="scope:使用隔离的作用域"></a>scope:使用隔离的作用域</h3><p>通过设置scope属性,指令的每个实例都将获得一个隔离的本地作用域:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;ez-customer name=&#34;Emmy.name&#34; address=&#34;Emmy.address&#34;&#62;&#10;&#60;/ez-customer&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">"ezstuff"</span>,[])</span><br><span class="line">.controller(<span class="string">"ezCtrl"</span>, [<span class="string">"$scope"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.Emmy = &#123;</span><br><span class="line">    name: <span class="string">"Emmy"</span>,</span><br><span class="line">    address: <span class="string">"1600 Amphitheatre"</span></span><br><span class="line">  &#125;;</span><br><span class="line">])</span><br><span class="line">.directive(<span class="string">"ezCustomer"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict:<span class="string">"E"</span>,</span><br><span class="line">    replace:<span class="literal">true</span>,</span><br><span class="line">    scope:&#123;</span><br><span class="line">      name : <span class="string">"@name"</span>, </span><br><span class="line">      address : <span class="string">"=address"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    template: <span class="string">"&lt;div&gt;name:&#123;&#123;name&#125;&#125; address:&#123;&#123;address&#125;&#125;&lt;/div&gt;"</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，我们在本地scope上定义了两个属性：name和address，这样在 模板中就可以使用name和address了。</p>
+<blockquote>
+<p>你应该已经注意到,name属性的值之前有一个<code>@attr</code>,这是一个约定好的标记,它告诉编译器,本地scope上的name值需要从应用这个指令的DOM元素的name属性值读取,如果DOM元素的name属性值变了,那么本地scope上的name值也会变化。</p>
+<p>同样,address属性之前的<code>=attr</code>也是一个约定好的标记，它告诉编译器，本地scope上的address属性值和DOM元素的address属性值指定的外部scope对象上的模型需要建立双向连接：外部scope上模型的变化会改变本地scope上的address属性，本地scope上address属性的变化也会改变外部scope上模型的变化。</p>
+</blockquote>
+<p>从图中可以看出：</p>
+<ol>
+<li>指令的template绑定的是本地scope上的name和address。</li>
+<li>本地scope的name属性的值始终是ez-customer对象上name属性的值</li>
+<li>本地scope的address属性值始终和ez-customer对应的scope对象上的Emmy.address保持同步。</li>
+</ol>
+<h3 id="link_3A_u5728_u6307_u4EE4_u4E2D_u64CD_u4F5CDOM"><a href="#link_3A_u5728_u6307_u4EE4_u4E2D_u64CD_u4F5CDOM" class="headerlink" title="link:在指令中操作DOM"></a>link:在指令中操作DOM</h3><p>如果需要在指令中操作DOM,我们需要在对象中定义link属性,link函数的定义如下:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">link</span>(<span class="params">scope, iElement, iAttrs, controller, transcludeFn</span>) </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>注意link函数的参数,AngularJS在<code>编译</code>时负责传入正确的值:</p>
+<ul>
+<li>scope</li>
+</ul>
+<p>指令对应的scope对象.如果指令没有定义自己的本地作用域,那么传入的就是外部的作用域对象。</p>
+<ul>
+<li>iElement</li>
+</ul>
+<p>指令所在DOM对象的jqLite封装.如果使用了template属性,那么iElement对应变换后的DOM对象的jqLite封装。</p>
+<ul>
+<li>iAttrs</li>
+</ul>
+<p>指令所在DOM对象的属性集.这是一个Hash对象,每个键是驼峰规范化后的属性名。</p>
+<blockquote>
+<p>例子参考<a href="http://blog.uijack.com/2016/01/13/ng-directives/">AngularJS Directives详解(1)时钟</a></p>
+</blockquote>
+<h3 id="transclude_3A_u5305_u542B_u5176_u4ED6_u5143_u7D20"><a href="#transclude_3A_u5305_u542B_u5176_u4ED6_u5143_u7D20" class="headerlink" title="transclude:包含其他元素"></a>transclude:包含其他元素</h3><p>有些指令需要能够包含其他未知的元素.比如我们定义一个指令ez-dialog,用来封装对话框的样式和行为,它应当允许在使用期(也就是在界面模板文件里)才指定其内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;ez-dialog&#62;&#10;  &#60;p&#62;&#23545;&#35805;&#26694;&#30340;&#20869;&#23481;&#22312;&#25105;&#20204;&#24320;&#21457;ez-dialog&#25351;&#20196;&#30340;&#26102;&#20505;&#26159;&#26080;&#27861;&#39044;&#35745;&#30340;&#12290;&#36825;&#37096;&#20998;&#20869;&#23481;&#38656;&#35201;&#36716;&#31227;&#21040;&#23637;&#24320;&#30340;DOM&#26641;&#20013;&#36866;&#24403;&#30340;&#20301;&#32622;&#12290;&#60;/p&#62;&#10;&#60;/ez-dialog&#62;</span><br></pre></td></tr></table></figure>
+<p><code>transclude</code>属性可以告诉编译器,利用所在DOM元素的内容,替换template中包含<code>ng-transclude</code>指令的元素的内容:<br><img src="/img/ng-directive.png" alt="$compile解析图"></p>
+<p>从上图中可以看到，使用transclude有两个要点：</p>
+<ol>
+<li>需要首先声明transclude属性值为true,这将告诉编译器,使用我们这个指令的DOM元素,其内容需要被<code>复制</code>并<code>插入</code>到编译后的DOM树的某个点。</li>
+<li>需要在template属性值中使用ng-transclude指明<code>插入点</code>。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/angular/">angular</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://blog.uijack.com/2016/01/19/ng-directives-2/" data-title="AngularJS Directives详解(2) | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/01/19/ng-services-2/"  title="AngularJS Services详解(2)">
+ <strong>下一篇：</strong><br/> 
+ <span>AngularJS Services详解(2)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/01/19/ng-directives-2/" data-title="AngularJS Directives详解(2)" data-url="http://blog.uijack.com/2016/01/19/ng-directives-2/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u521B_u5EFA_u6307_u4EE4"><span class="toc-number">1.</span> <span class="toc-text">创建指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#restrict_3A__u9650_u5236_u6307_u4EE4_u7684_u51FA_u73B0_u4F4D_u7F6E"><span class="toc-number">2.</span> <span class="toc-text">restrict: 限制指令的出现位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace__u6A21_u677F_u7684_u4F7F_u7528_u65B9_u5F0F_28_u91CD_u8981_29"><span class="toc-number">3.</span> <span class="toc-text">replace 模板的使用方式(重要)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u4F5C_u7528_u57DF_u95EE_u9898"><span class="toc-number">4.</span> <span class="toc-text">作用域问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scope_3A_u4F7F_u7528_u9694_u79BB_u7684_u4F5C_u7528_u57DF"><span class="toc-number">5.</span> <span class="toc-text">scope:使用隔离的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#link_3A_u5728_u6307_u4EE4_u4E2D_u64CD_u4F5CDOM"><span class="toc-number">6.</span> <span class="toc-text">link:在指令中操作DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transclude_3A_u5305_u542B_u5176_u4ED6_u5143_u7D20"><span class="toc-number">7.</span> <span class="toc-text">transclude:包含其他元素</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>26</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>18</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>8</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js/" title="js">js<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-window/" title="js.window">js.window<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Property/" title="js.Property">js.Property<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-继承模式/" title="js.继承模式">js.继承模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Function/" title="js.Function">js.Function<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/TCP/" title="TCP">TCP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Object/" title="js.Object">js.Object<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-Array/" title="js.Array">js.Array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/js-闭包/" title="js.闭包">js.闭包<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Keng/" title="Keng">Keng<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTTP/" title="HTTP">HTTP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hello-world/" title="hello world">hello world<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=Jcc2&verifier=ab33e144&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Jack <br/>
+			Hi, Jack. I change my mind.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/Jcc2" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/igitinode" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:igitinode@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="Jack Chan">Jack Chan</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"uijack"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-71258760-1', 'blog.uijack.com');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?0d91ed7cb113a9682525e692a6e074ad";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

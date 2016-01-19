@@ -2,8 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.uijack.com/2016/01/19/ng-directives-2/</loc>
+    <lastmod>2016-01-19T09:49:12.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/12/ng-services/</loc>
+    <lastmod>2016-01-19T09:48:38.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.uijack.com/2016/01/13/ng-directives/</loc>
-    <lastmod>2016-01-17T01:56:58.000Z</lastmod>
+    <lastmod>2016-01-19T02:59:58.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/19/ng-services-2/</loc>
+    <lastmod>2016-01-19T02:55:33.000Z</lastmod>
   </url>
   
   <url>
@@ -14,11 +29,6 @@
   <url>
     <loc>http://blog.uijack.com/2016/01/13/ng-filters/</loc>
     <lastmod>2016-01-13T10:07:12.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/12/ng-services/</loc>
-    <lastmod>2016-01-13T10:06:46.000Z</lastmod>
   </url>
   
   <url>

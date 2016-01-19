@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>AngularJS Directives详解 | 千千哥</title>
+    <title>AngularJS Directives详解(1) | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
@@ -13,13 +13,13 @@
     
     <meta name="description" content="总结AngularJS Directives的使用和注意事项">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AngularJS Directives详解">
+<meta property="og:title" content="AngularJS Directives详解(1)">
 <meta property="og:url" content="http://blog.uijack.com/2016/01/13/ng-directives/index.html">
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="总结AngularJS Directives的使用和注意事项">
-<meta property="og:updated_time" content="2016-01-17T01:56:58.000Z">
+<meta property="og:updated_time" content="2016-01-19T02:59:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AngularJS Directives详解">
+<meta name="twitter:title" content="AngularJS Directives详解(1)">
 <meta name="twitter:description" content="总结AngularJS Directives的使用和注意事项">
 
     
@@ -75,7 +75,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/13/ng-directives/" title="AngularJS Directives详解" itemprop="url">AngularJS Directives详解</a>
+      <a href="/2016/01/13/ng-directives/" title="AngularJS Directives详解(1)" itemprop="url">AngularJS Directives详解(1)</a>
   </h1>
   <p class="article-author">By
        
@@ -114,7 +114,7 @@
 <p><code>$compile(编译)</code> 可以基于<code>元素名字</code>、<code>属性</code>、<code>类名</code>和<code>注释</code>来匹配指令的.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;my-dir&#62;&#60;/my-dir&#62;&#10;&#60;span my-dir=&#34;exp&#34;&#62;&#60;/span&#62;&#10;&#60;!-- directive: my-dir exp --&#62;&#10;&#60;span class=&#34;my-dir: exp;&#34;&#62;&#60;/span&#62;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>最佳实践: 最好通过<code>标签名</code>和<code>属性</code>来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的.</p>
+<p><code>最佳实践</code>: 最好通过<code>标签名</code>和<code>属性</code>来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的.</p>
 </blockquote>
 <p>通常注释式命名式指令使用在如下情景：某些指令需要跨越多个元素，但是受DOM API的限制，无法跨越多个元素(如:table标签元素)。 AngularJS 1.2 引入了ng-repeat-start和ng-repeat-end指令，作为更好的解决方案。 建议开发者使用这种方式，而不要用“自定义注释”形式的指令。</p>
 <h3 id="u6587_u672C_u548C_u5C5E_u6027_u7ED1_u5B9A"><a href="#u6587_u672C_u548C_u5C5E_u6027_u7ED1_u5B9A" class="headerlink" title="文本和属性绑定"></a>文本和属性绑定</h3><p>在编译的过程中编译器会使用 $interpolate服务去匹配文本和属性,查看是否含有内嵌表达式.这些表达式会作为<code>watches</code>的值来注册,并作为<code>digest</code>循环的一部分来进行实时更新。如下:</p>
@@ -205,7 +205,7 @@
 </blockquote>
 <hr>
 <blockquote>
-<p>最佳实践: 如果要使你的组件在应用范围内可重用，那么使用scope选项去创建一个独立作用域</p>
+<p><code>最佳实践</code>: 如果要使你的组件在应用范围内可重用，那么使用scope选项去创建一个独立作用域</p>
 </blockquote>
 <h2 id="u521B_u5EFA_u64CD_u4F5CDOM_u7684_u6307_u4EE4"><a href="#u521B_u5EFA_u64CD_u4F5CDOM_u7684_u6307_u4EE4" class="headerlink" title="创建操作DOM的指令"></a>创建操作DOM的指令</h2><p>需求: 我们会创建一个显示当前时间的指令，每秒一次更新DOM以正确的显示当前的时间。</p>
 <h3 id="u521B_u5EFA_u987B_u77E5"><a href="#u521B_u5EFA_u987B_u77E5" class="headerlink" title="创建须知"></a>创建须知</h3><p>directive修改DOM一般使用<code>link函数</code>来注册DOM监听,同时更新DOM,当模板被克隆并且指令逻辑执行后他才会被触发.<br><code>link</code>选项接受一个带有如下签名的函数function link(scope, element, attrs, controller, transcludeFn) {}</p>
@@ -229,7 +229,7 @@
 </li>
 </ol>
 <blockquote>
-<p>最佳实践: 指令应该自己管理自身分配的内存。当指令被移除时,你可以使用element.on(‘$destroy’, …)或 scope.$on(‘$destroy’, …)来执行一个清理的工作.</p>
+<p><code>最佳实践</code>: 指令应该自己管理自身分配的内存。当指令被移除时,你可以使用element.on(‘$destroy’, …)或 scope.$on(‘$destroy’, …)来执行一个清理的工作.</p>
 </blockquote>
 <h3 id="u521B_u5EFA_u4E00_u4E2A_u5305_u542B_u5176_u4ED6_u5143_u7D20_u7684_u6307_u4EE4"><a href="#u521B_u5EFA_u4E00_u4E2A_u5305_u542B_u5176_u4ED6_u5143_u7D20_u7684_u6307_u4EE4" class="headerlink" title="创建一个包含其他元素的指令"></a>创建一个包含其他元素的指令</h3><p>我们现在已经实现了使用独立作用域传递数据模型到指令里面,但是有时候我们需要能够传进去整个模板而不是字符串或者对象,让我们通过创建<code>dialog box</code>组件来演示它。这个组件应该能够包裹任意内容,要想实现这个,我们需要使用<code>transclude</code>选项。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// script.js</span></span><br><span class="line">angular.module(<span class="string">'docsTransclusionDirective'</span>, [])</span><br><span class="line">.controller(<span class="string">'Controller'</span>, [<span class="string">'$scope'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">  $scope.name = <span class="string">'Tobias'</span>;</span><br><span class="line">&#125;])</span><br><span class="line">.directive(<span class="string">'myDialog'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict: <span class="string">'E'</span>,</span><br><span class="line">    transclude: <span class="literal">true</span>,</span><br><span class="line">    templateUrl: <span class="string">'my-dialog.html'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -248,7 +248,7 @@
 </blockquote>
 <p>这样的行为对于包含内容的指令是非常有意义的。因为如果不这样的话,当你需要数据模型的时候,你就必须分别传入这个你需要使用的数据模型,那么你就无法做到适应各种不同内容的情况.</p>
 <blockquote>
-<p>最佳实践: 仅当你要创建一个包裹任意内容的指令的时候使用transclude: true</p>
+<p><code>最佳实践</code>: 仅当你要创建一个包裹任意内容的指令的时候使用transclude: true</p>
 </blockquote>
 <p>接下来我们增加一个按钮到’dialog box’组件里面，允许用户使用指令绑定自己定义的行为。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// script.js</span></span><br><span class="line">angular.module(<span class="string">'docsIsoFnBindExample'</span>, [])</span><br><span class="line">.controller(<span class="string">'Controller'</span>, [<span class="string">'$scope'</span>, <span class="string">'$timeout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope, $timeout</span>) </span>&#123;</span><br><span class="line">  $scope.name = <span class="string">'Tobias'</span>;</span><br><span class="line">  $scope.message = <span class="string">''</span>;</span><br><span class="line">  $scope.hideDialog = <span class="function"><span class="keyword">function</span> (<span class="params">message</span>) </span>&#123;</span><br><span class="line">    $scope.message = message;</span><br><span class="line">    $scope.dialogIsHidden = <span class="literal">true</span>;</span><br><span class="line">    $timeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      $scope.message = <span class="string">''</span>;</span><br><span class="line">      $scope.dialogIsHidden = <span class="literal">false</span>;</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;])</span><br><span class="line">.directive(<span class="string">'myDialog'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict: <span class="string">'E'</span>,</span><br><span class="line">    transclude: <span class="literal">true</span>,</span><br><span class="line">    scope: &#123;</span><br><span class="line">      <span class="string">'close'</span>: <span class="string">'&amp;onClose'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    templateUrl: <span class="string">'my-dialog-close.html'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -259,7 +259,7 @@
 <p>先前我们看到如何在scope选项中使用=attr,但是本例子中却使用了<code>&amp;attr</code>,<code>&amp;</code>允许绑定了原scope的函数到独立作用域,允许独立作用于调用它.同时保留了来函数的作用域.所以当用户点击X的时候,就会运行Controller控制器的close函数.</p>
 <p>注意:此时<code>&lt;div ng-transclude=&quot;&quot;&gt;</code>用来站位,填充<code>&lt;my-dialog&gt;</code>的内容,如果放到class=’alert’这个div上面,则里面的a标签内容将被替换掉.</p>
 <blockquote>
-<p>最佳实践: 当你的指令想要开放一个API去绑定特定的行为，在scope选项中使用&amp;attr。</p>
+<p><code>最佳实践</code>: 当你的指令想要开放一个API去绑定特定的行为，在scope选项中使用&amp;attr。</p>
 </blockquote>
 <h3 id="u521B_u5EFA_u4E00_u4E2A_u5E26_u4E8B_u4EF6_u76D1_u542C_u7684_u6307_u4EE4"><a href="#u521B_u5EFA_u4E00_u4E2A_u5E26_u4E8B_u4EF6_u76D1_u542C_u7684_u6307_u4EE4" class="headerlink" title="创建一个带事件监听的指令"></a>创建一个带事件监听的指令</h3><p>先前,我们使用link函数创建一个操作DOM元素的指令,基于上面的例子,我们创建一个监听元素的事件,以作出相应操作的指令。<br>比如说,假如我们想要创建一个让用户可拖曳的元素,该怎么做呢？</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// script.js</span></span><br><span class="line">angular.module(<span class="string">'dragModule'</span>, [])</span><br><span class="line">.directive(<span class="string">'myDraggable'</span>, [<span class="string">'$document'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$document</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attr</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> startX = <span class="number">0</span>, startY = <span class="number">0</span>, x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">      element.css(&#123;</span><br><span class="line">       position: <span class="string">'relative'</span>,</span><br><span class="line">       border: <span class="string">'1px solid red'</span>,</span><br><span class="line">       backgroundColor: <span class="string">'lightgrey'</span>,</span><br><span class="line">       cursor: <span class="string">'pointer'</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      element.on(<span class="string">'mousedown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Prevent default dragging of selected content</span></span><br><span class="line">        event.preventDefault();</span><br><span class="line">        startX = event.pageX - x;</span><br><span class="line">        startY = event.pageY - y;</span><br><span class="line">        $<span class="built_in">document</span>.on(<span class="string">'mousemove'</span>, mousemove);</span><br><span class="line">        $<span class="built_in">document</span>.on(<span class="string">'mouseup'</span>, mouseup);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">mousemove</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        y = event.pageY - startY;</span><br><span class="line">        x = event.pageX - startX;</span><br><span class="line">        element.css(&#123;</span><br><span class="line">          top: y + <span class="string">'px'</span>,</span><br><span class="line">          left:  x + <span class="string">'px'</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">mouseup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        $<span class="built_in">document</span>.off(<span class="string">'mousemove'</span>, mousemove);</span><br><span class="line">        $<span class="built_in">document</span>.off(<span class="string">'mouseup'</span>, mouseup);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
@@ -276,7 +276,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'docsTabsExample'</span>, [])</span><br><span class="line">.directive(<span class="string">'myPane'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="built_in">require</span>: [<span class="string">'^myTabs'</span>, <span class="string">'^ngModel'</span>],</span><br><span class="line">    restrict: <span class="string">'E'</span>,</span><br><span class="line">    transclude: <span class="literal">true</span>,</span><br><span class="line">    scope: &#123;</span><br><span class="line">      title: <span class="string">'@'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    link: <span class="function"><span class="keyword">function</span>(<span class="params">scope, element, attrs, controllers</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> tabsCtrl = controllers[<span class="number">0</span>],</span><br><span class="line">          modelCtrl = controllers[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">      tabsCtrl.addPane(scope);</span><br><span class="line">    &#125;,</span><br><span class="line">    templateUrl: <span class="string">'my-pane.html'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>聪明的读者可能想知道link 和 controller之间的区别.最基本的区别就是:</p>
 <blockquote>
-<p>controller可以<code>导出一个API</code>,而<code>子指令</code>的link函数可以通过<code>require来</code>与这个API交互。<br><code>最佳实践</code>: 当你想暴露一个API给其它的指令调用那就用controller(使用this),否则用link。</p>
+<p>controller可以<code>导出一个API</code>,而<code>子指令</code>的link函数可以通过<code>require来</code>与这个API交互。<br><code>最佳实践</code>: 当你想暴露一个API给其它的指令调用那就用controller(使用<code>this</code>),否则用link。</p>
 </blockquote>
 <p>如果你想更深入的了解编译的处理过程,可以查看HTML编译器.<a href="http://docs.ngnice.com/api/ng.$compile" target="_blank" rel="external">$compile API</a>页面有directive每个选项的具体解释,可参阅.</p>
   
@@ -296,7 +296,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2016/01/13/ng-directives/" data-title="AngularJS Directives详解 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2016/01/13/ng-directives/" data-title="AngularJS Directives详解(1) | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -319,9 +319,9 @@
 
 
 <div class="next">
-<a href="/2016/01/12/ng-services/"  title="AngularJS Services详解">
+<a href="/2016/01/12/ng-services/"  title="AngularJS Services详解(1)">
  <strong>下一篇：</strong><br/> 
- <span>AngularJS Services详解
+ <span>AngularJS Services详解(1)
 </span>
 </a>
 </div>
@@ -330,7 +330,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/01/13/ng-directives/" data-title="AngularJS Directives详解" data-url="http://blog.uijack.com/2016/01/13/ng-directives/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/13/ng-directives/" data-title="AngularJS Directives详解(1)" data-url="http://blog.uijack.com/2016/01/13/ng-directives/"></div>
 </section>
 
 
@@ -364,7 +364,7 @@
 			
 		
 			
-				<li><a href="/tags/angular/" title="angular">angular<sup>6</sup></a></li>
+				<li><a href="/tags/angular/" title="angular">angular<sup>8</sup></a></li>
 			
 		
 			
