@@ -3,7 +3,6 @@ date: 2016-01-04 19:25:34
 description: "读《JavaScript高级程序设计 -- 第19章 E4X》介绍一般用法"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 

@@ -2,7 +2,7 @@ title: "AngularJS 依赖注入详解"
 date: 2016-01-13 19:47:26
 description: "总结AngularJS Dependency Injection使用和注意事项"
 tags:
-- "angular"
+- "angular1.x"
 ---
 
 依赖注入(DI)是一种让代码管理其依赖关系的设计模式。

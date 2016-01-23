@@ -1,9 +1,8 @@
 title: "读《JavaScript高级程序设计》总结7"
 date: 2015-12-27 17:18:07
-description: "读《JavaScript高级程序设计 -- 第7章 函数表达式》总结,介绍递归, 闭包,模仿块级作用域,私有变量等"
+description: "读《JavaScript高级程序设计 -- 第7章 函数表达式》总结,介绍递归, 闭包(closure),模仿块级作用域,私有变量等"
 tags:
-- "js.闭包"
-- "随笔"
+- "JavaScript"
 ---
 
 ## 函数表达式

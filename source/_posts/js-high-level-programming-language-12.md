@@ -3,7 +3,6 @@ date: 2015-12-30 19:18:24
 description: "读《JavaScript高级程序设计 -- 第12章 DOM2和DOM3》主要介绍DOM变化,样式,遍历,范围"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## DOM 变化

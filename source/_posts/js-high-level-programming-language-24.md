@@ -3,7 +3,6 @@ date: 2016-01-05 07:41:18
 description: "读《JavaScript高级程序设计 -- 第24章 最佳实践》介绍可维护性,性能,部署"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## 可维护性

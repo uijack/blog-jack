@@ -2,8 +2,7 @@ title: "读《JavaScript高级程序设计》总结2"
 date: 2015-12-22 09:01:09
 description: "读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等"
 tags:
-- "js"
-- "随笔"
+- "JavaScript"
 ---
 
 ## 语法

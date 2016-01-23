@@ -2,7 +2,7 @@ title: "AngularJS Controller详解"
 date: 2016-01-12 07:08:06
 description: "总结AngularJS Controller的使用和注意事项"
 tags:
-- "angular"
+- "angular1.x"
 ---
 ## 理解控制器(Controller)
 

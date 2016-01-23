@@ -3,7 +3,6 @@ date: 2016-01-04 20:10:02
 description: "读《JavaScript高级程序设计 -- 第19章 JSON》介绍JSON语法，解析与序列化"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 

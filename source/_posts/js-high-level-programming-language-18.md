@@ -3,7 +3,6 @@ date: 2016-01-04 07:41:22
 description: "读《JavaScript高级程序设计 -- 第18章 JavaScript 与 XML》介绍浏览器对XML DOM的支持,对XPath的支持，对XSLT的支持"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 

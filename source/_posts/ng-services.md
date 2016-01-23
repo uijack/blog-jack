@@ -2,7 +2,7 @@ title: "AngularJS Services详解(1)"
 date: 2016-01-12 19:35:06
 description: "总结AngularJS Services的使用和注意事项"
 tags:
-- "angular"
+- "angular1.x"
 ---
 
 ## Services

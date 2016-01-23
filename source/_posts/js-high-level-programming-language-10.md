@@ -3,7 +3,6 @@ date: 2015-12-29 09:14:43
 description: "读《JavaScript高级程序设计 -- 第10章 DOM》主要各种节点类型和DOM操作技术"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## 节点层次

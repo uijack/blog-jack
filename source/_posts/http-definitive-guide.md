@@ -3,7 +3,6 @@ date: 2016-01-06 19:27:53
 description: "读《HTTP权威指南 -- 第1章 HTTP概述》主要有MIME"
 tags:
 - "HTTP"
-- "随笔"
 ---
 
 

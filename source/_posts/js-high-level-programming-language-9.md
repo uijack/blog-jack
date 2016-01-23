@@ -3,7 +3,6 @@ date: 2015-12-28 18:22:25
 description: "读《JavaScript高级程序设计 -- 第8章 客户端检测》主要介绍能力测试,用户代理检测"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## 能力检测

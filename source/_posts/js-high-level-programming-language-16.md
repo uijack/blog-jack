@@ -3,7 +3,6 @@ date: 2016-01-03 8:08:54
 description: "读《JavaScript高级程序设计 -- 第16章 HTML5脚本编程》介绍原生拖动,媒体元素和历史状态管理"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 

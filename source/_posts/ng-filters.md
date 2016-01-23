@@ -2,7 +2,7 @@ title: "AngularJS Filters详解"
 date: 2016-01-13 21:01:44
 description: "总结AngularJS Filters的使用和注意事项"
 tags:
-- "angular"
+- "angular1.x"
 ---
 
 过滤器用来格式化表达式中的值,经常用在视图模板(templates)、控制器(controllers)或者服务(services)中.

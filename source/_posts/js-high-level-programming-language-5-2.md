@@ -1,10 +1,8 @@
 title: "读《JavaScript高级程序设计》总结5-2"
 date: 2015-12-24 9:35:56
-description: "读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Date、RegExp、Function、基本包装类型、单体内置对象等"
+description: "读《JavaScript高级程序设计 -- 第5章 引用类型》总结, 详细介绍Date、RegExp、Function、window、基本包装类型、单体内置对象等"
 tags:
-- "js.Function"
-- "js.window"
-- "随笔"
+- "JavaScript"
 ---
 
 ## Date 类型

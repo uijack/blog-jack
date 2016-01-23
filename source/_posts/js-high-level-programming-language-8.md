@@ -3,7 +3,6 @@ date: 2015-12-28 06:35:38
 description: "读《JavaScript高级程序设计 -- 第8章 BOM》介绍Window,location,navigator,screen,history"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## Window对象

@@ -3,7 +3,6 @@ date: 2015-12-30 07:11:58
 description: "读《JavaScript高级程序设计 -- 第11章 DOM扩展》主要介绍选择符API,元素遍历，HTML5以及专有扩展"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## 选择符API

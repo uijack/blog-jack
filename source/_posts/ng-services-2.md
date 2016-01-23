@@ -2,7 +2,7 @@ title: "AngularJS Services详解(2)"
 date: 2016-01-19 07:10:14
 description: "介绍AngularJS Services创建组件服务"
 tags:
-- "angular"
+- "angular1.x"
 ---
 
 

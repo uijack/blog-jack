@@ -3,7 +3,6 @@ date: 2016-01-02 11:01:02
 description: "读《JavaScript高级程序设计 -- 第15章 使用Canvas绘图》主要介绍Canvas基本用法,上下文和WebGL"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 ## 基本用法

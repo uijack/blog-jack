@@ -3,7 +3,6 @@ date: 2016-01-04 21:51:35
 description: "读《JavaScript高级程序设计 -- 第19章 Ajax 与 Comet》介绍XMLHttpRequest,进度事件,跨源资源共享,其他跨域技术"
 tags:
 - "JavaScript"
-- "随笔"
 ---
 
 
