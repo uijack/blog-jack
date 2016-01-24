@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.uijack.com/2015/12/29/js-high-level-programming-language-23/</loc>
-    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+    <loc>http://blog.uijack.com/2016/01/13/ng-directives-1/</loc>
+    <lastmod>2016-01-24T23:09:28.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/</loc>
+    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-22/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
@@ -18,11 +18,6 @@
   
   <url>
     <loc>http://blog.uijack.com/2016/01/13/ng-filters/</loc>
-    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
@@ -87,22 +82,22 @@
   </url>
   
   <url>
+    <loc>http://blog.uijack.com/2015/12/29/js-high-level-programming-language-23/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.uijack.com/2016/01/12/ng-services/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-22/</loc>
+    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.uijack.com/2016/01/11/ng-tools-function/</loc>
-    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
@@ -162,13 +157,18 @@
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/06/http-definitive-guide/</loc>
+    <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/13/ng-directives/</loc>
-    <lastmod>2016-01-19T02:59:58.000Z</lastmod>
+    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/06/http-definitive-guide/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
