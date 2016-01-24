@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
 <meta property="og:image" content="http://blog.uijack.com/img/js-high-level-2-1.png">
-<meta property="og:updated_time" content="2016-01-21T06:16:15.000Z">
+<meta property="og:updated_time" content="2016-01-24T23:30:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《JavaScript高级程序设计》总结2">
 <meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第3章 基本概念》总结, 本章主要介绍语法、变量、数据类型、操作符函数等">
@@ -131,7 +131,7 @@
 <h2 id="u5173_u952E_u5B57_u548C_u4FDD_u7559_u5B57"><a href="#u5173_u952E_u5B57_u548C_u4FDD_u7559_u5B57" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h2><blockquote>
 <p>此处不做展示</p>
 </blockquote>
-<h2 id="u53D8_u91CF"><a href="#u53D8_u91CF" class="headerlink" title="变量"></a>变量</h2><p>ECMAScript 变量是<code>松散类型</code>，可以用来保存任何类型数据，仅仅是一个<code>占位符</code>而已，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> essage;  <span class="comment">//该值为 undefined</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="u53D8_u91CF"><a href="#u53D8_u91CF" class="headerlink" title="变量"></a>变量</h2><p>ECMAScript 变量是<code>松散类型</code>，可以用来保存任何类型数据，仅仅是一个<code>占位符</code>而已，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message;  <span class="comment">//该值为 undefined</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>省略var操作符声明的变量直接赋值，该变量则会变成<code>全局变量</code></p>
 </blockquote>
@@ -154,7 +154,7 @@
 <h3 id="Undefined__u7C7B_u578B"><a href="#Undefined__u7C7B_u578B" class="headerlink" title="Undefined 类型"></a>Undefined 类型</h3><blockquote>
 <p>只有唯一值 <code>undefined</code> ECMA-262第三版才引入，是为了正确区<code>空对象指针(null)</code>与<code>未初始化变量</code>。<br>不用显示声明 var ms = undefined; 默认就是<code>undefined</code>.</p>
 </blockquote>
-<p>使用var 声明变量但对其初始化赋值，这个变量就是<code>undefined</code></p>
+<p>使用var声明变量但未对其初始化赋值，这个变量就是<code>undefined</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ms;</span><br><span class="line">alert(ms == <span class="literal">undefined</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>注意：包含undefined值的变量与还未定义的变量不一样</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ms;  <span class="comment">// </span></span><br><span class="line"><span class="comment">// age 未声明</span></span><br><span class="line"></span><br><span class="line">alert(ms)   <span class="comment">// 'undefined'</span></span><br><span class="line">alert(age)  <span class="comment">// 产生错误</span></span><br></pre></td></tr></table></figure>
@@ -192,7 +192,7 @@
 </tr>
 <tr>
 <td>String</td>
-<td>任何非空字</td>
+<td>任何非空字符串</td>
 <td>“”(空字符串)</td>
 </tr>
 <tr>
@@ -251,7 +251,7 @@
 </blockquote>
 </li>
 </ul>
-<p>在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ ] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为1.</span><br><span class="line">[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。Number(字符串).Number('') = 0</span><br><span class="line">[ ] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。</span><br><span class="line">null 和 undefined比较遵循下列原则：</span><br><span class="line">[ ] null 和 undefined 是相等的。</span><br><span class="line">[ ] 要比较相等性之前，不能将null和undefined转化成其他任何值。</span><br><span class="line">[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.</span><br><span class="line">[ ] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。</span><br></pre></td></tr></table></figure></p>
+<p>在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ ] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为1.</span><br><span class="line">[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。Number(字符串),Number('') = 0</span><br><span class="line">[ ] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。</span><br><span class="line">null 和 undefined比较遵循下列原则：</span><br><span class="line">[ ] null 和 undefined 是相等的。</span><br><span class="line">[ ] 要比较相等性之前，不能将null和undefined转化成其他任何值。</span><br><span class="line">[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：即使两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.</span><br><span class="line">[ ] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。</span><br></pre></td></tr></table></figure></p>
 <p>下列列出一些特殊的情况集结果：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="code">       表达式        |    值     </span></span><br><span class="line"><span class="horizontal_rule">------------------- | --------  </span></span><br><span class="line">null == undefined   |   true    </span><br><span class="line"><span class="code">     "NaN" == NaN   |   false  </span></span><br><span class="line"><span class="code">         5 == NaN   |   false  </span></span><br><span class="line"><span class="code">       NaN == NaN   |   false  </span></span><br><span class="line"><span class="code">       NaN != NaN   |   true </span></span><br><span class="line"><span class="code">       false == 0   |   true </span></span><br><span class="line"><span class="code">        true == 1   |   true </span></span><br><span class="line"><span class="code">        true == 2   |   false </span></span><br><span class="line">   undefined == 0   |   false </span><br><span class="line"><span class="code">        null == 0   |   false </span></span><br><span class="line"><span class="code">         "5" == 5   |   true</span></span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>全等和全不等在比较之前不转换操作数</p>
