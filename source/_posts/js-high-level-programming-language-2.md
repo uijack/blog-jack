@@ -51,7 +51,7 @@ tags:
 
 ECMAScript 变量是`松散类型`，可以用来保存任何类型数据，仅仅是一个`占位符`而已，
 ```js
-var essage;  //该值为 undefined
+var message;  //该值为 undefined
 ```
 > 省略var操作符声明的变量直接赋值，该变量则会变成`全局变量`
 
@@ -102,7 +102,7 @@ alert(typeof 95) // 'number'
 > 只有唯一值 `undefined` ECMA-262第三版才引入，是为了正确区`空对象指针(null)`与`未初始化变量`。
 > 不用显示声明 var ms = undefined; 默认就是`undefined`.
 
-使用var 声明变量但对其初始化赋值，这个变量就是`undefined`
+使用var声明变量但未对其初始化赋值，这个变量就是`undefined`
 
 ```js
 var ms;
@@ -158,7 +158,7 @@ alert(null == undefined); // true
 数据类型   |  转化为 true 值  |   转化为 false 值
 --------- | -------------  | -------------
 Boolean   |      true      |      false
-String    |    任何非空字   |    ""(空字符串)
+String    |  任何非空字符串   |    ""(空字符串)
 Number    |   任何非零数字   |     0 和 NaN
 Object    |     任何对象    |       null
 Undefined |       n/a      |    undefined
@@ -251,12 +251,12 @@ var o = new Object;  //无参，不推荐
 在转换不同的数据类型时，相等和不相等操作遵循下列基本规则：
 ```markdown
 [ ] 如果有一个操作数是布尔值，则在比较相等性之前先将其转化为数值。 false为0，true为1.
-[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。Number(字符串).Number('') = 0
+[ ] 如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转化为数值。Number(字符串),Number('') = 0
 [ ] 如果操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面规则进行比较。
 null 和 undefined比较遵循下列原则：
 [ ] null 和 undefined 是相等的。
 [ ] 要比较相等性之前，不能将null和undefined转化成其他任何值。
-[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：及时两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.
+[ ] 有一个操作数是NaN, 则相等操作符返回false,而不相等操作符返回true.重要提示：即使两个操作数都是NaN,也返回false，因为按照规则NaN不等于NaN.
 [ ] 两个都是对象，则比较他们是不是同一个对象，两个操作数都指向同一个对象，则相等操作符返回true，否则返回false。
 ```
 

@@ -2,7 +2,7 @@ title: "AngularJS Directives详解(1)"
 date: 2016-01-13 07:12:06
 description: "总结AngularJS Directives的使用和注意事项"
 tags:
-- "angular"
+- "angular1.x"
 ---
 
 ## 创建自定义指令

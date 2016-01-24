@@ -122,7 +122,7 @@ alert( col.lenght ); // 0
 - unshift() 他能在数组前端添加任意个项并返回新数组长度.
 
 > 使用unshift() 和 pop() 可以从相反方向模拟队列,即在数组前端添加,数组末端移除.
-> IE7及以前调用unshify()总返回`undefined`而不是数组新长度,IE8在非兼容模式下返回正确新长度.
+> IE7及以前调用unshif()总返回`undefined`而不是数组新长度,IE8在非兼容模式下返回正确新长度.
 
 ### 重新排序 reverse() 和 sort()
 
