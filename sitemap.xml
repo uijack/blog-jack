@@ -2,13 +2,168 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.uijack.com/2015/12/29/js-high-level-programming-language-23/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/19/ng-services-2/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/13/ng-filters/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.uijack.com/2016/01/19/ng-directives-2/</loc>
-    <lastmod>2016-01-19T23:50:21.000Z</lastmod>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/13/ng-dependency-injection/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/12/ng-controller/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/28/js-high-level-programming-language-9/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/28/js-high-level-programming-language-8/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/27/js-high-level-programming-language-7/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/26/js-high-level-programming-language-6/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/24/js-high-level-programming-language-5-2/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-5-1/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-25/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-24/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.uijack.com/2016/01/12/ng-services/</loc>
-    <lastmod>2016-01-19T09:48:38.000Z</lastmod>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-22/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/11/ng-tools-function/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-18/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/03/js-high-level-programming-language-17/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/03/js-high-level-programming-language-16/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/02/js-high-level-programming-language-15/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/01/js-high-level-programming-language-14/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/31/js-high-level-programming-language-13/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2015/12/29/js-high-level-programming-language-10/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/06/http-definitive-guide/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
@@ -17,168 +172,13 @@
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/19/ng-services-2/</loc>
-    <lastmod>2016-01-19T02:55:33.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/11/ng-tools-function/</loc>
-    <lastmod>2016-01-13T14:30:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/13/ng-filters/</loc>
-    <lastmod>2016-01-13T10:07:12.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/13/ng-dependency-injection/</loc>
-    <lastmod>2016-01-13T07:16:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/12/ng-controller/</loc>
-    <lastmod>2016-01-13T05:47:42.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.uijack.com/2016/01/07/tcp-three-and-fourr-shake-hands/</loc>
     <lastmod>2016-01-08T01:38:04.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/06/http-definitive-guide/</loc>
-    <lastmod>2016-01-06T14:56:50.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/22/js-high-level-programming-language-2/</loc>
-    <lastmod>2016-01-06T13:32:23.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.uijack.com/2016/01/06/javascript-keng/</loc>
     <lastmod>2016-01-06T13:29:06.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/24/js-high-level-programming-language-5-2/</loc>
-    <lastmod>2016-01-05T09:20:12.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-25/</loc>
-    <lastmod>2016-01-05T05:11:01.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-24/</loc>
-    <lastmod>2016-01-05T02:10:52.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/05/js-high-level-programming-language-22/</loc>
-    <lastmod>2016-01-05T00:49:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-21/</loc>
-    <lastmod>2016-01-04T12:18:25.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-20/</loc>
-    <lastmod>2016-01-04T09:50:19.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-19/</loc>
-    <lastmod>2016-01-04T01:34:52.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/04/js-high-level-programming-language-18/</loc>
-    <lastmod>2016-01-04T01:24:22.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/03/js-high-level-programming-language-16/</loc>
-    <lastmod>2016-01-03T14:03:57.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/03/js-high-level-programming-language-17/</loc>
-    <lastmod>2016-01-03T14:03:09.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/02/js-high-level-programming-language-15/</loc>
-    <lastmod>2016-01-03T04:49:13.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/01/js-high-level-programming-language-14/</loc>
-    <lastmod>2016-01-03T00:59:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/31/js-high-level-programming-language-13/</loc>
-    <lastmod>2016-01-02T23:26:25.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-11/</loc>
-    <lastmod>2015-12-30T09:54:12.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/30/js-high-level-programming-language-12/</loc>
-    <lastmod>2015-12-30T09:54:01.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/28/js-high-level-programming-language-9/</loc>
-    <lastmod>2015-12-30T03:00:41.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/28/js-high-level-programming-language-8/</loc>
-    <lastmod>2015-12-30T03:00:36.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/27/js-high-level-programming-language-7/</loc>
-    <lastmod>2015-12-30T03:00:26.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/26/js-high-level-programming-language-6/</loc>
-    <lastmod>2015-12-30T03:00:16.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-5-1/</loc>
-    <lastmod>2015-12-30T02:59:54.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/23/js-high-level-programming-language-4/</loc>
-    <lastmod>2015-12-30T02:59:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/29/js-high-level-programming-language-23/</loc>
-    <lastmod>2015-12-30T02:59:21.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/29/js-high-level-programming-language-10/</loc>
-    <lastmod>2015-12-30T02:58:57.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
-    <lastmod>2015-12-30T02:58:47.000Z</lastmod>
   </url>
   
   <url>
