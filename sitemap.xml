@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.uijack.com/2016/01/26/javascript-skill-1/</loc>
+    <lastmod>2016-01-26T12:50:26.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/26/test/</loc>
+    <lastmod>2016-01-26T03:04:31.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.uijack.com/2016/01/25/window-onload/</loc>
     <lastmod>2016-01-25T13:02:23.000Z</lastmod>
   </url>
@@ -24,11 +34,6 @@
   <url>
     <loc>http://blog.uijack.com/2016/01/13/ng-directives-1/</loc>
     <lastmod>2016-01-24T23:09:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.uijack.com/2016/01/13/ng-filters/</loc>
-    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
@@ -77,12 +82,12 @@
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/11/ng-tools-function/</loc>
+    <loc>http://blog.uijack.com/2016/01/06/http-definitive-guide/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/12/ng-services/</loc>
+    <loc>http://blog.uijack.com/2016/01/11/ng-tools-function/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
@@ -107,7 +112,7 @@
   </url>
   
   <url>
-    <loc>http://blog.uijack.com/2016/01/06/http-definitive-guide/</loc>
+    <loc>http://blog.uijack.com/2016/01/12/ng-services/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   
@@ -173,6 +178,11 @@
   
   <url>
     <loc>http://blog.uijack.com/2015/12/21/js-high-level-programming-language-1/</loc>
+    <lastmod>2016-01-21T06:16:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.uijack.com/2016/01/13/ng-filters/</loc>
     <lastmod>2016-01-21T06:16:15.000Z</lastmod>
   </url>
   

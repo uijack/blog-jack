@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>读《JavaScript高级程序设计》总结18 | 千千哥</title>
+    <title>Web前端你应该了解的知识(1) | 千千哥</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jack Chan">
     
 
     
-    <meta name="description" content="读《JavaScript高级程序设计 -- 第18章 JavaScript 与 XML》介绍浏览器对XML DOM的支持,对XPath的支持，对XSLT的支持">
+    <meta name="description" content="收集作为前端开发人员应该知道的知识,分享.包括position,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《JavaScript高级程序设计》总结18">
-<meta property="og:url" content="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-18/index.html">
+<meta property="og:title" content="Web前端你应该了解的知识(1)">
+<meta property="og:url" content="http://blog.uijack.com/2016/01/26/javascript-skill-1/index.html">
 <meta property="og:site_name" content="千千哥">
-<meta property="og:description" content="读《JavaScript高级程序设计 -- 第18章 JavaScript 与 XML》介绍浏览器对XML DOM的支持,对XPath的支持，对XSLT的支持">
-<meta property="og:updated_time" content="2016-01-21T06:16:15.000Z">
+<meta property="og:description" content="收集作为前端开发人员应该知道的知识,分享.包括position,">
+<meta property="og:updated_time" content="2016-01-26T12:50:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《JavaScript高级程序设计》总结18">
-<meta name="twitter:description" content="读《JavaScript高级程序设计 -- 第18章 JavaScript 与 XML》介绍浏览器对XML DOM的支持,对XPath的支持，对XSLT的支持">
+<meta name="twitter:title" content="Web前端你应该了解的知识(1)">
+<meta name="twitter:description" content="收集作为前端开发人员应该知道的知识,分享.包括position,">
 
     
     <link rel="alternative" href="/atom.xml" title="千千哥" type="application/atom+xml">
@@ -75,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/04/js-high-level-programming-language-18/" title="读《JavaScript高级程序设计》总结18" itemprop="url">读《JavaScript高级程序设计》总结18</a>
+      <a href="/2016/01/26/javascript-skill-1/" title="Web前端你应该了解的知识(1)" itemprop="url">Web前端你应该了解的知识(1)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Jack Chan" target="_blank" itemprop="author">Jack Chan</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-03T23:41:22.000Z" itemprop="datePublished"> 发表于 2016-01-04 07:41:22</time>
+    <time datetime="2016-01-26T00:06:58.000Z" itemprop="datePublished"> 发表于 2016-01-26 08:06:58</time>
     
   </p>
 </header>
@@ -91,22 +91,33 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4F_u89C8_u5668_u5BF9XML_DOM_u7684_u652F_u6301"><span class="toc-number">1.</span> <span class="toc-text">浏览器对XML DOM的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2_u7EA7_u6838_u5FC3"><span class="toc-number">1.1.</span> <span class="toc-text">DOM2级核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOMParser__u7C7B_u578B"><span class="toc-number">1.2.</span> <span class="toc-text">DOMParser 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XMLSerializer__u7C7B_u578B"><span class="toc-number">1.3.</span> <span class="toc-text">XMLSerializer 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u5904_u7406XML"><span class="toc-number">1.4.</span> <span class="toc-text">跨浏览器处理XML</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4F_u89C8_u5668_u5BF9XPath_u7684_u652F_u6301"><span class="toc-number">2.</span> <span class="toc-text">浏览器对XPath的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E2D_u7684XPath"><span class="toc-number">2.1.</span> <span class="toc-text">IE中的XPath</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u4F7F_u7528XML"><span class="toc-number">2.2.</span> <span class="toc-text">跨浏览器使用XML</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4F_u89C8_u5668_u5BF9XSLT_u7684_u652F_u6301"><span class="toc-number">3.</span> <span class="toc-text">浏览器对XSLT的支持</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B9A_u4F4Dposition_u7684_u503C"><span class="toc-number">1.</span> <span class="toc-text">定位position的值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#position_4_u79CD_u503C_3A"><span class="toc-number">1.1.</span> <span class="toc-text">position 4种值:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D"><span class="toc-number">1.2.</span> <span class="toc-text">验证absolute的定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position_3Aabsolute_u548Cfloat_u5C5E_u6027_u7684_u5F02_u540C"><span class="toc-number">1.3.</span> <span class="toc-text">position:absolute和float属性的异同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFAAjax_u8FC7_u7A0B"><span class="toc-number">2.</span> <span class="toc-text">创建Ajax过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5BF9_u95ED_u5305_u7684_u7406_u89E3"><span class="toc-number">3.</span> <span class="toc-text">对闭包的理解</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="u6D4F_u89C8_u5668_u5BF9XML_DOM_u7684_u652F_u6301"><a href="#u6D4F_u89C8_u5668_u5BF9XML_DOM_u7684_u652F_u6301" class="headerlink" title="浏览器对XML DOM的支持"></a>浏览器对XML DOM的支持</h2><h3 id="DOM2_u7EA7_u6838_u5FC3"><a href="#DOM2_u7EA7_u6838_u5FC3" class="headerlink" title="DOM2级核心"></a>DOM2级核心</h3><p>在<code>documen.implementation中引入</code>createDocument()`方法。IE9+和其他浏览器都支持。<br>创建空白XML文档：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmldom = <span class="built_in">document</span>.implementation.createDocument(<span class="string">""</span>, <span class="string">"root"</span>, <span class="literal">null</span>);</span><br><span class="line">        </span><br><span class="line">alert(xmldom.documentElement.tagName);  <span class="comment">//"root"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = xmldom.createElement(<span class="string">"child"</span>);</span><br><span class="line">xmldom.documentElement.appendChild(child);</span><br></pre></td></tr></table></figure>
-<p>检测浏览器是否支持DOM2级XML：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasXmlDom = <span class="built_in">document</span>.implementation.hasFeature(<span class="string">'XML'</span>, <span class="string">'2.0'</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="DOMParser__u7C7B_u578B"><a href="#DOMParser__u7C7B_u578B" class="headerlink" title="DOMParser 类型"></a>DOMParser 类型</h3><p>解析XML</p>
-<h3 id="XMLSerializer__u7C7B_u578B"><a href="#XMLSerializer__u7C7B_u578B" class="headerlink" title="XMLSerializer 类型"></a>XMLSerializer 类型</h3><p>将DOM文档序列化为XML字符串。</p>
-<h3 id="u8DE8_u6D4F_u89C8_u5668_u5904_u7406XML"><a href="#u8DE8_u6D4F_u89C8_u5668_u5904_u7406XML" class="headerlink" title="跨浏览器处理XML"></a>跨浏览器处理XML</h3><h2 id="u6D4F_u89C8_u5668_u5BF9XPath_u7684_u652F_u6301"><a href="#u6D4F_u89C8_u5668_u5BF9XPath_u7684_u652F_u6301" class="headerlink" title="浏览器对XPath的支持"></a>浏览器对XPath的支持</h2><p>XPath是设计用来对DOM文档中查找节点的一种手段。XPath是在DOM3级才跻身推荐标准列。<br>检测浏览器是否支持DOM3级XML：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasXmlDom = <span class="built_in">document</span>.implementation.hasFeature(<span class="string">'XPath'</span>, <span class="string">'3.0'</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="IE_u4E2D_u7684XPath"><a href="#IE_u4E2D_u7684XPath" class="headerlink" title="IE中的XPath"></a>IE中的XPath</h3><h3 id="u8DE8_u6D4F_u89C8_u5668_u4F7F_u7528XML"><a href="#u8DE8_u6D4F_u89C8_u5668_u4F7F_u7528XML" class="headerlink" title="跨浏览器使用XML"></a>跨浏览器使用XML</h3><h2 id="u6D4F_u89C8_u5668_u5BF9XSLT_u7684_u652F_u6301"><a href="#u6D4F_u89C8_u5668_u5BF9XSLT_u7684_u652F_u6301" class="headerlink" title="浏览器对XSLT的支持"></a>浏览器对XSLT的支持</h2><p>略。。。 没有成为标准。只有IE支持。</p>
-<hr>
+		<h2 id="u5B9A_u4F4Dposition_u7684_u503C"><a href="#u5B9A_u4F4Dposition_u7684_u503C" class="headerlink" title="定位position的值"></a>定位position的值</h2><h3 id="position_4_u79CD_u503C_3A"><a href="#position_4_u79CD_u503C_3A" class="headerlink" title="position 4种值:"></a>position 4种值:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static: &#40664;&#35748;&#20540;,&#27809;&#26377;&#23450;&#20301;,&#20803;&#32032;&#27491;&#24120;&#20986;&#29616;&#22312;&#25991;&#26723;&#20013;&#10;relative: &#29983;&#25104;&#30456;&#23545;&#23450;&#20301;&#30340;&#20803;&#32032;,&#30456;&#23545;&#20110;&#20854;&#22312;&#26222;&#36890;&#27969;&#20013;&#30340;&#20301;&#32622;&#36827;&#34892;&#23450;&#20301;&#10;absolute: &#29983;&#25104;&#32477;&#23545;&#23450;&#20301;&#30340;&#20803;&#32032;,&#30456;&#23545;&#20110;&#26368;&#36817;&#19968;&#32423;&#30340;&#23450;&#20301;&#19981;&#26159;static&#30340;&#29238;&#20803;&#32032;&#26469;&#36827;&#34892;&#23450;&#20301;&#10;fixed: (&#32769;IE&#19981;&#25903;&#25345;&#65289;&#29983;&#25104;&#32477;&#23545;&#23450;&#20301;&#30340;&#20803;&#32032;&#65292;&#30456;&#23545;&#20110;&#27983;&#35272;&#22120;&#31383;&#21475;(html&#20803;&#32032;)&#36827;&#34892;&#23450;&#20301;&#12290;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>参考文档: <a href="http://www.ituring.com.cn/book/946" target="_blank" rel="external">JavaScript高级程序设计（第三版）</a><br>文章若有纰漏，请大家补充指正.<br>仅作为学习交流所用,不与商用.违者必究.<br><a href="http://blog.uijack.com/">转载请注明出处: http://blog.uijack.com/</a></p>
+<ol>
+<li><p>fixed固定定位在IE6,IE7(怪异(quirk)模式),IE8(怪异模式)浏览器下会将<code>fixed</code>值当做错误值处理.从而导致其position值为默认的<code>static</code>.</p>
+</li>
+<li><p>如果position的值fixed或absolute但没有设置top,bottom,left,right中的任何一个值.则该元素会在值为position:static的地方脱离文档流.如果有多个并列的fixed或absolute(都未设置),则会重叠在一起.后一个position值为static或relative的元素将会在向前占位</p>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position:relative;&#34;&#62;BBB&#60;/div&#62;&#10;  &#60;div style=&#34;position:fixed;&#34;&#62;III&#60;/div&#62;&#10;  &#60;div style=&#34;position:absolute;&#34;&#62;CCC&#60;/div&#62;&#10;  &#60;div style=&#34;position:absolute;&#34;&#62;DDD&#60;/div&#62;&#10;  &#60;div style=&#34;&#34;&#62;EEE&#60;/div&#62;&#10;  &#60;div style=&#34;position:absolute;&#34;&#62;GGG&#60;/div&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上排版结果为: AAA在第1行;BBB在第2行;III,CCC,DDD,EEE在第3行(EEE会向前占位),GGG在第4行.</p>
+</blockquote>
+<h3 id="u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D"><a href="#u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D" class="headerlink" title="验证absolute的定位"></a>验证absolute的定位</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position: fixed;top: 0;&#34;&#62;&#10;    &#60;div&#62;&#10;      WWW&#10;    &#60;/div&#62;&#10;    &#60;div style=&#34;position: absolute;top: 0;&#34;&#62;&#10;      XXX&#10;    &#60;/div&#62;&#10;  &#60;/div&#62;&#10;&#60;/body&#62;&#10;```plain&#10;&#10;&#62; &#32467;&#26524;&#26159;: WWW&#21644;XXX&#37325;&#21472;&#22312;&#19968;&#36215;,&#39030;&#30528;&#27983;&#35272;&#22120;;&#32780;AAA&#22312;&#36317;&#31163;&#39030;&#37096;100&#20687;&#32032;&#22788;.&#27492;&#26102;&#20803;&#32032;div&#30340;&#23485;&#24230;&#19981;&#20877;&#26159;&#21344;&#28385;&#19968;&#34892;,&#32780;&#26159;&#38543;&#20869;&#23481;&#25745;&#24320;,&#35774;&#32622;width:100%&#26080;&#25928;,&#38656;&#35201;&#32473;&#20803;&#32032;&#35774;&#32622;width&#23646;&#24615;&#21644;height&#23646;&#24615;.&#10;&#10;```plain&#10;&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position: absolute; left: 100px;top: 0;&#34;&#62;&#10;    &#60;div&#62;&#10;      WWW&#10;    &#60;/div&#62;&#10;    &#60;div style=&#34;position: absolute;left: 100px;top: 0&#34;&#62;&#10;      XXX&#10;    &#60;/div&#62;&#10;  &#60;/div&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时AAA,WWW,XXX在一行,WWW距离body左边100px, XXX距离WWW左边100px;上面对于absolute的描述是正确的.</p>
+</blockquote>
+<h3 id="position_3Aabsolute_u548Cfloat_u5C5E_u6027_u7684_u5F02_u540C"><a href="#position_3Aabsolute_u548Cfloat_u5C5E_u6027_u7684_u5F02_u540C" class="headerlink" title="position:absolute和float属性的异同"></a>position:absolute和float属性的异同</h3><p>共同点：对内联元素设置float和absolute属性，可以让元素脱离文档流，并且可以设置其宽高。<br>不同点：float仍会占据位置，position会覆盖文档流中的其他元素。</p>
+<h2 id="u521B_u5EFAAjax_u8FC7_u7A0B"><a href="#u521B_u5EFAAjax_u8FC7_u7A0B" class="headerlink" title="创建Ajax过程"></a>创建Ajax过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(1)&#21019;&#24314;XMLHttpRequest&#23545;&#35937;,&#20063;&#23601;&#26159;&#21019;&#24314;&#19968;&#20010;&#24322;&#27493;&#35843;&#29992;&#23545;&#35937;.&#10;&#10;(2)&#21019;&#24314;&#19968;&#20010;&#26032;&#30340;HTTP&#35831;&#27714;,&#24182;&#25351;&#23450;&#35813;HTTP&#35831;&#27714;&#30340;&#26041;&#27861;&#12289;URL&#21450;&#39564;&#35777;&#20449;&#24687;.&#10;&#10;(3)&#35774;&#32622;&#21709;&#24212;HTTP&#35831;&#27714;&#29366;&#24577;&#21464;&#21270;&#30340;&#20989;&#25968;.&#10;&#10;(4)&#21457;&#36865;HTTP&#35831;&#27714;.&#10;&#10;(5)&#33719;&#21462;&#24322;&#27493;&#35843;&#29992;&#36820;&#22238;&#30340;&#25968;&#25454;.&#10;&#10;(6)&#20351;&#29992;JavaScript&#21644;DOM&#23454;&#29616;&#23616;&#37096;&#21047;&#26032;.</span><br></pre></td></tr></table></figure>
+<h2 id="u5BF9_u95ED_u5305_u7684_u7406_u89E3"><a href="#u5BF9_u95ED_u5305_u7684_u7406_u89E3" class="headerlink" title="对闭包的理解"></a>对闭包的理解</h2><p>使用闭包主要是为了设计私有的方法和变量。闭包的优点是可以避免全局变量的污染，缺点是闭包会常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。</p>
+<p>闭包有三个特性：</p>
+<blockquote>
+<p>1.函数嵌套函数<br>2.函数内部可以引用外部的参数和变量<br>3.参数和变量不会被垃圾回收机制回收</p>
 </blockquote>
   
 	</div>
@@ -116,7 +127,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  <span></span> <a href="/tags/css/">css</a>
   </div>
 
 </div>
@@ -125,7 +136,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-18/" data-title="读《JavaScript高级程序设计》总结18 | 千千哥" data-tsina="Jcc2" class="share clearfix">
+	  <div data-url="http://blog.uijack.com/2016/01/26/javascript-skill-1/" data-title="Web前端你应该了解的知识(1) | 千千哥" data-tsina="Jcc2" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -139,18 +150,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/01/04/js-high-level-programming-language-19/" title="读《JavaScript高级程序设计》总结19">
+ <a href="/2016/01/26/test/" title="">
   <strong>上一篇：</strong><br/>
   <span>
-  读《JavaScript高级程序设计》总结19</span>
+  (no title)</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/01/03/js-high-level-programming-language-17/"  title="读《JavaScript高级程序设计》总结17">
+<a href="/2016/01/25/window-onload/"  title="window.onload与jQuery $(documen).ready()">
  <strong>下一篇：</strong><br/> 
- <span>读《JavaScript高级程序设计》总结17
+ <span>window.onload与jQuery $(documen).ready()
 </span>
 </a>
 </div>
@@ -159,7 +170,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/01/04/js-high-level-programming-language-18/" data-title="读《JavaScript高级程序设计》总结18" data-url="http://blog.uijack.com/2016/01/04/js-high-level-programming-language-18/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/26/javascript-skill-1/" data-title="Web前端你应该了解的知识(1)" data-url="http://blog.uijack.com/2016/01/26/javascript-skill-1/"></div>
 </section>
 
 
@@ -169,7 +180,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4F_u89C8_u5668_u5BF9XML_DOM_u7684_u652F_u6301"><span class="toc-number">1.</span> <span class="toc-text">浏览器对XML DOM的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2_u7EA7_u6838_u5FC3"><span class="toc-number">1.1.</span> <span class="toc-text">DOM2级核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOMParser__u7C7B_u578B"><span class="toc-number">1.2.</span> <span class="toc-text">DOMParser 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XMLSerializer__u7C7B_u578B"><span class="toc-number">1.3.</span> <span class="toc-text">XMLSerializer 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u5904_u7406XML"><span class="toc-number">1.4.</span> <span class="toc-text">跨浏览器处理XML</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4F_u89C8_u5668_u5BF9XPath_u7684_u652F_u6301"><span class="toc-number">2.</span> <span class="toc-text">浏览器对XPath的支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE_u4E2D_u7684XPath"><span class="toc-number">2.1.</span> <span class="toc-text">IE中的XPath</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u8DE8_u6D4F_u89C8_u5668_u4F7F_u7528XML"><span class="toc-number">2.2.</span> <span class="toc-text">跨浏览器使用XML</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u6D4F_u89C8_u5668_u5BF9XSLT_u7684_u652F_u6301"><span class="toc-number">3.</span> <span class="toc-text">浏览器对XSLT的支持</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u5B9A_u4F4Dposition_u7684_u503C"><span class="toc-number">1.</span> <span class="toc-text">定位position的值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#position_4_u79CD_u503C_3A"><span class="toc-number">1.1.</span> <span class="toc-text">position 4种值:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D"><span class="toc-number">1.2.</span> <span class="toc-text">验证absolute的定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position_3Aabsolute_u548Cfloat_u5C5E_u6027_u7684_u5F02_u540C"><span class="toc-number">1.3.</span> <span class="toc-text">position:absolute和float属性的异同</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u521B_u5EFAAjax_u8FC7_u7A0B"><span class="toc-number">2.</span> <span class="toc-text">创建Ajax过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u5BF9_u95ED_u5305_u7684_u7406_u89E3"><span class="toc-number">3.</span> <span class="toc-text">对闭包的理解</span></a></li></ol>
  
   </div>
 
