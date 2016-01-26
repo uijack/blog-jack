@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://blog.uijack.com/2016/01/26/javascript-skill-1/index.html">
 <meta property="og:site_name" content="千千哥">
 <meta property="og:description" content="收集作为前端开发人员应该知道的知识,分享.包括position,">
-<meta property="og:updated_time" content="2016-01-26T12:50:26.000Z">
+<meta property="og:updated_time" content="2016-01-26T12:53:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端你应该了解的知识(1)">
 <meta name="twitter:description" content="收集作为前端开发人员应该知道的知识,分享.包括position,">
@@ -108,7 +108,11 @@
 <blockquote>
 <p>以上排版结果为: AAA在第1行;BBB在第2行;III,CCC,DDD,EEE在第3行(EEE会向前占位),GGG在第4行.</p>
 </blockquote>
-<h3 id="u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D"><a href="#u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D" class="headerlink" title="验证absolute的定位"></a>验证absolute的定位</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position: fixed;top: 0;&#34;&#62;&#10;    &#60;div&#62;&#10;      WWW&#10;    &#60;/div&#62;&#10;    &#60;div style=&#34;position: absolute;top: 0;&#34;&#62;&#10;      XXX&#10;    &#60;/div&#62;&#10;  &#60;/div&#62;&#10;&#60;/body&#62;&#10;```plain&#10;&#10;&#62; &#32467;&#26524;&#26159;: WWW&#21644;XXX&#37325;&#21472;&#22312;&#19968;&#36215;,&#39030;&#30528;&#27983;&#35272;&#22120;;&#32780;AAA&#22312;&#36317;&#31163;&#39030;&#37096;100&#20687;&#32032;&#22788;.&#27492;&#26102;&#20803;&#32032;div&#30340;&#23485;&#24230;&#19981;&#20877;&#26159;&#21344;&#28385;&#19968;&#34892;,&#32780;&#26159;&#38543;&#20869;&#23481;&#25745;&#24320;,&#35774;&#32622;width:100%&#26080;&#25928;,&#38656;&#35201;&#32473;&#20803;&#32032;&#35774;&#32622;width&#23646;&#24615;&#21644;height&#23646;&#24615;.&#10;&#10;```plain&#10;&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position: absolute; left: 100px;top: 0;&#34;&#62;&#10;    &#60;div&#62;&#10;      WWW&#10;    &#60;/div&#62;&#10;    &#60;div style=&#34;position: absolute;left: 100px;top: 0&#34;&#62;&#10;      XXX&#10;    &#60;/div&#62;&#10;  &#60;/div&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D"><a href="#u9A8C_u8BC1absolute_u7684_u5B9A_u4F4D" class="headerlink" title="验证absolute的定位"></a>验证absolute的定位</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position: fixed;top: 0;&#34;&#62;&#10;    &#60;div&#62;&#10;      WWW&#10;    &#60;/div&#62;&#10;    &#60;div style=&#34;position: absolute;top: 0;&#34;&#62;&#10;      XXX&#10;    &#60;/div&#62;&#10;  &#60;/div&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果是: WWW和XXX重叠在一起,顶着浏览器;而AAA在距离顶部100像素处.此时元素div的宽度不再是占满一行,而是随内容撑开,设置width:100%无效,需要给元素设置width属性和height属性.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;body style=&#34;position: relative;margin-top:100px;&#34;&#62;&#10;  &#60;div&#62;AAA&#60;/div&#62;&#10;  &#60;div style=&#34;position: absolute; left: 100px;top: 0;&#34;&#62;&#10;    &#60;div&#62;&#10;      WWW&#10;    &#60;/div&#62;&#10;    &#60;div style=&#34;position: absolute;left: 100px;top: 0&#34;&#62;&#10;      XXX&#10;    &#60;/div&#62;&#10;  &#60;/div&#62;&#10;&#60;/body&#62;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>此时AAA,WWW,XXX在一行,WWW距离body左边100px, XXX距离WWW左边100px;上面对于absolute的描述是正确的.</p>
 </blockquote>
